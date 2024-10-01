@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:myschool/generals/controllers/user_controller.dart';
 import 'package:myschool/onboarding/intro_screen.dart';
+import 'package:myschool/generals/controllers/flipping_container_controller.dart';
 import 'package:myschool/test.dart';
 
 import 'generated/l10n.dart';
@@ -15,6 +16,9 @@ class MyApp extends StatelessWidget {
 
   final UserController userController = Get.put(UserController());
 
+  final FlippingContainerController containerController =
+      FlippingContainerController();
+
   @override
   Widget build(BuildContext context) {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
@@ -24,7 +28,6 @@ class MyApp extends StatelessWidget {
         userController.isSignedIn.value = true;
       }
     });
-
     return GetMaterialApp(
       debugShowCheckedModeBanner: true,
       localizationsDelegates: const [
@@ -38,8 +41,9 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: SAppTheme.getLightTheme(true),
       darkTheme: SAppTheme.getDarkTheme(true),
-      home: Obx(() =>
-          userController.isSignedIn.value ? const Test() : const IntroScreen()),
+      home: Obx(() => !userController.isSignedIn.value
+          ? const Test()
+          : const IntroScreen()),
     );
   }
 }

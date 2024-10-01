@@ -11,7 +11,8 @@ class SignInController extends GetxController {
 
   RxBool isSigningUp = false.obs;
 
-  switchSignIn() {
+  switchSignIn() async {
+    await Future.delayed(const Duration(milliseconds: 500));
     isSigningUp.value = !isSigningUp.value;
   }
 
