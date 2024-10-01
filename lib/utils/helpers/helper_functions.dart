@@ -4,6 +4,9 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:myschool/generals/widgets/check_dialog.dart';
+import 'package:myschool/utils/constants/colors.dart';
+import 'package:myschool/utils/constants/image_strings.dart';
 
 import '../local_storage/services/sharedpreferences_service.dart';
 
@@ -46,6 +49,19 @@ class SHelperFunctions {
     }
   }
 
+  static Future checkInternetConnection(BuildContext context) async {
+    if (!await isInternetConnected()) {
+      if (context.mounted) {
+        showDialog(
+            context: context,
+            builder: (context) => const CheckDialog(
+                title: "NO INTERNET CONNECTION",
+                imagePath: SImageString.noInternetAnimation,
+                color: SColors.primary));
+      }
+    }
+  }
+
   static formatDate(String timeStamp) {
     DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(
         int.parse(timeStamp) * 1000,
@@ -65,21 +81,6 @@ class SHelperFunctions {
     final isFirstRun = await SHelperFunctions.isFirstRun();
     if (isFirstRun) {
       await SharedPrefService.setBool('isFirstRun', false);
-      await SharedPrefService.setBool('fajr', true);
-      await SharedPrefService.setBool('chourouk', false);
-      await SharedPrefService.setBool('dhuhr', true);
-      await SharedPrefService.setBool('asr', true);
-      await SharedPrefService.setBool('maghrib', true);
-      await SharedPrefService.setBool('isha', true);
-      await SharedPrefService.setString('country', "");
-      await SharedPrefService.setString('state', "");
-      await SharedPrefService.setString('city', "");
-      await SharedPrefService.setString(
-          'adhan_sound_path', "assets/sounds/ahmad_alnafees.mp3");
-      await SharedPrefService.setString(
-          'adhan_sound_name', "أذان الشيخ النفيس");
-      await SharedPrefService.setInt('last_read_quran', 1);
-      await SharedPrefService.setString('quran_bookmark', "");
     }
   }
 
