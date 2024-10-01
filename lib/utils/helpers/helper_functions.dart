@@ -116,7 +116,7 @@ class SHelperFunctions {
             fontFamily: "Poppins", fontSize: 20, fontWeight: FontWeight.w700),
         title: title,
         messageTextStyle: const TextStyle(
-            fontFamily: "Poppins", fontSize: 14, fontWeight: FontWeight.w400),
+            fontFamily: "Poppins", fontSize: 14, fontWeight: FontWeight.w500),
         message: content,
         contentType: contentType,
       ),

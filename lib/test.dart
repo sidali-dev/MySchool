@@ -13,15 +13,12 @@ class Test extends StatelessWidget {
             onPressed: () async {
               await SHelperFunctions.checkInternetConnection(context);
               if (context.mounted) {
-                FirebaseAuthentication.signUp(
-                    email: "test@gmail.com",
-                    password: "1112121212121",
-                    context: context);
+                FirebaseAuthentication.signOut();
               }
             },
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.0),
-              child: Text("SIGN UP"),
+              child: Text("SIGN OUT"),
             )),
       ),
     );

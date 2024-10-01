@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:myschool/onboarding/controllers/sign_up_controller.dart';
+import 'package:myschool/onboarding/controllers/credentials_controller.dart';
 import 'package:myschool/onboarding/widgets/sign_in_dialog.dart';
 import 'package:myschool/utils/device/device_utility.dart';
 
@@ -11,7 +11,7 @@ import '../../utils/helpers/helper_functions.dart';
 class SignUp3Dialog extends StatelessWidget {
   SignUp3Dialog({super.key});
 
-  final SignUpController controller = Get.find();
+  final CredentialsController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

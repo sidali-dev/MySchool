@@ -18,10 +18,10 @@ class FirebaseAuthentication {
             color: SColors.primary, size: 56));
 
     try {
-      // final credential =
-      await FirebaseAuth.instance
+      final credential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
       Get.back();
+      return credential;
     } on FirebaseAuthException catch (e) {
       Get.back();
 
@@ -52,5 +52,88 @@ class FirebaseAuthentication {
             context: context);
       }
     }
+  }
+
+  static Future signIn(
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => LoadingAnimationWidget.halfTriangleDot(
+            color: SColors.primary, size: 56));
+
+    try {
+      final credential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      Get.back();
+      return credential;
+    } on FirebaseAuthException catch (e) {
+      Get.back();
+
+      if (e.code == 'invalid-email') {
+        if (context.mounted) {
+          SHelperFunctions.showAwesomeSnackBar(
+              title: "Invalid Email",
+              content: "The email you entered isn't valid",
+              contentType: ContentType.failure,
+              context: context);
+        }
+      } else if (e.code == 'user-disabled') {
+        if (context.mounted) {
+          SHelperFunctions.showAwesomeSnackBar(
+              title: "User Disabled",
+              content: "This user account is disabled",
+              contentType: ContentType.failure,
+              context: context);
+        }
+      } else if (e.code == 'user-not-found') {
+        if (context.mounted) {
+          SHelperFunctions.showAwesomeSnackBar(
+              title: "User Not Found",
+              content: "Try Creating a new account",
+              contentType: ContentType.failure,
+              context: context);
+        }
+      } else if (e.code == 'wrong-password') {
+        if (context.mounted) {
+          SHelperFunctions.showAwesomeSnackBar(
+              title: "Wrong Password",
+              content: "Try another password",
+              contentType: ContentType.failure,
+              context: context);
+        }
+      } else if (e.code == 'too-many-requests') {
+        if (context.mounted) {
+          SHelperFunctions.showAwesomeSnackBar(
+              title: "Too Many Request",
+              content: "Try again in a while",
+              contentType: ContentType.failure,
+              context: context);
+        }
+      } else if (e.code == 'network-request-failed') {
+        if (context.mounted) {
+          SHelperFunctions.showAwesomeSnackBar(
+              title: "Network Request Error",
+              content: "Try again in a while",
+              contentType: ContentType.failure,
+              context: context);
+        }
+      }
+    } catch (e) {
+      Get.back();
+      if (context.mounted) {
+        SHelperFunctions.showAwesomeSnackBar(
+            title: "ERROR",
+            content: "Something went wrong",
+            contentType: ContentType.failure,
+            context: context);
+      }
+    }
+  }
+
+  static Future signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 }

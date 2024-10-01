@@ -1,11 +1,9 @@
 import 'package:get/get.dart';
 
-class SignUpController extends GetxController {
+class CredentialsController extends GetxController {
   RxBool passwordIsVisible = true.obs;
 
   RxString name = "".obs;
-  RxString email = "".obs;
-  RxString password = "".obs;
 
   RxMap selectedLevel = {}.obs;
   RxMap selectedBranch = {}.obs;
@@ -54,9 +52,5 @@ class SignUpController extends GetxController {
 
   changeBranch(Map branch) {
     selectedBranch.value = branch;
-  }
-
-  switchvisibility() {
-    passwordIsVisible.value = !passwordIsVisible.value;
   }
 }

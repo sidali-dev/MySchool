@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:myschool/onboarding/controllers/sign_up_controller.dart';
+import 'package:myschool/onboarding/controllers/credentials_controller.dart';
 import 'package:myschool/onboarding/widgets/sign_in_dialog.dart';
 import 'package:myschool/utils/device/device_utility.dart';
 
 import '../../utils/constants/colors.dart';
 import '../../utils/helpers/helper_functions.dart';
-import 'sign_up_3_dialog.dart';
+import 'branch_dialog.dart';
 
 class SignUp2Dialog extends StatelessWidget {
   SignUp2Dialog({super.key});
 
-  final SignUpController controller = Get.find();
+  final CredentialsController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
     final double width = SDeviceUtils.getScreenWidth(context);
     final double height = SDeviceUtils.getScreenHeight(context);
+
+    final TextEditingController nameController = TextEditingController();
 
     final formKey = GlobalKey<FormState>();
 
@@ -62,6 +64,34 @@ class SignUp2Dialog extends StatelessWidget {
                               fontWeight: FontWeight.w600, fontSize: 40.0),
                         ),
                       ),
+
+                      const Text("Full Name",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 16)),
+                      SizedBox(height: height * 0.01),
+                      TextFormField(
+                        canRequestFocus: false,
+                        controller: nameController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your name';
+                          }
+                          if (!RegExp(r'^[a-zA-Z\s]+$').hasMatch(value)) {
+                            return 'Name should only contain letters';
+                          }
+
+                          if (value.length < 3) {
+                            return 'Name is too short';
+                          }
+                          return null;
+                        },
+                        keyboardType: TextInputType.name,
+                        decoration: const InputDecoration(
+                            prefixIcon:
+                                Icon(Icons.person, color: SColors.primary),
+                            hintText: "New User"),
+                      ),
+                      SizedBox(height: height * 0.02),
                       SizedBox(height: height * 0.02),
                       const Text("Level",
                           style: TextStyle(
@@ -97,6 +127,8 @@ class SignUp2Dialog extends StatelessWidget {
                       InkWell(
                         onTap: () async {
                           if (formKey.currentState!.validate()) {
+                            controller.name.value = nameController.text;
+
                             if (controller.selectedLevel['level'] < 10) {
                             } else if (controller.selectedLevel['level'] >=
                                 10) {

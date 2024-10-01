@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:myschool/utils/device/device_utility.dart';
 
-import '../../utils/constants/sizes.dart';
-import '../../utils/helpers/helper_functions.dart';
-
 class CheckDialog extends StatefulWidget {
   final String title;
   final String imagePath;
@@ -45,7 +42,6 @@ class _CheckDialogState extends State<CheckDialog>
 
   @override
   Widget build(BuildContext context) {
-    bool isRtl = SHelperFunctions.isRtl(context);
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       // elevation: 35,

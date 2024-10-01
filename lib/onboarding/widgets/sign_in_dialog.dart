@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -5,7 +6,6 @@ import 'package:myschool/onboarding/controllers/sign_in_controller.dart';
 import 'package:myschool/utils/device/device_utility.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
 import '../../utils/constants/colors.dart';
-import 'sign_up_1_dialog.dart';
 
 class SignInDialog extends StatelessWidget {
   SignInDialog({super.key});
@@ -120,73 +120,89 @@ class SignInDialog extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: height * 0.04),
-                      GestureDetector(
-                        onTap: () {
-                          if (_formKey.currentState!.validate()) {
-                            controller.email.value = emailController.text;
-                            controller.password.value = passwordController.text;
-                          }
-                          //REMOVE LATER
-                          else {
-                            print('Form is not valid');
-                          }
-                          //////////////////////
-                        },
-                        child: Container(
-                          height: 56,
-                          decoration: BoxDecoration(
-                              color: SColors.primary,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(Iconsax.arrow_right_3,
-                                  color: Colors.white, size: 32.0),
-                              SizedBox(width: width * 0.05),
-                              const Text(
-                                "SIGN IN",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(width: width * 0.06)
-                            ],
+                      Obx(
+                        () => GestureDetector(
+                          onTap: () async {
+                            if (_formKey.currentState!.validate()) {
+                              controller.email.value = emailController.text;
+                              controller.password.value =
+                                  passwordController.text;
+
+                              await SHelperFunctions.checkInternetConnection(
+                                  context);
+
+                              try {
+                                if (context.mounted) {
+                                  if (controller.isSigningUp.value) {
+                                    await controller.firebaseSignUp(context);
+                                  } else {
+                                    await controller.firebaseSignIn(context);
+                                  }
+                                }
+                                Get.back();
+                              } catch (_) {}
+                            }
+                          },
+                          child: Container(
+                            height: 56,
+                            decoration: BoxDecoration(
+                                color: SColors.primary,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(Iconsax.arrow_right_3,
+                                    color: Colors.white, size: 32.0),
+                                SizedBox(width: width * 0.05),
+                                Text(
+                                  controller.isSigningUp.value
+                                      ? "SIGN UP"
+                                      : "SIGN IN",
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                                SizedBox(width: width * 0.06)
+                              ],
+                            ),
                           ),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 24.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              "New Here?",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600, fontSize: 20),
-                            ),
-                            const SizedBox(width: 4.0),
-                            GestureDetector(
-                              onTap: () async {
-                                Get.back();
-                                await Future.delayed(
-                                        const Duration(milliseconds: 300))
-                                    .then(
-                                  (_) => SHelperFunctions.openDialogAnimation(
-                                      context,
-                                      SignUp1Dialog(),
-                                      "Sign Up Dialog"),
-                                );
-                              },
-                              child: const Text(
-                                "SIGN UP",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 20,
-                                    color: SColors.primary),
+                        child: Center(
+                          child: Column(
+                            children: [
+                              Obx(
+                                () => Text(
+                                  controller.isSigningUp.value
+                                      ? "Already Have an Account?"
+                                      : "New Here?",
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20),
+                                ),
                               ),
-                            )
-                          ],
+                              const SizedBox(width: 4.0),
+                              GestureDetector(
+                                onTap: () async {
+                                  controller.switchSignIn();
+                                },
+                                child: Obx(
+                                  () => Text(
+                                    controller.isSigningUp.value
+                                        ? "SIGN IN"
+                                        : "SIGN UP",
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 20,
+                                        color: SColors.primary),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       )
                     ],

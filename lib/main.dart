@@ -21,5 +21,5 @@ Future main() async {
   //     authOptions:
   //         const FlutterAuthClientOptions(authFlowType: AuthFlowType.pkce),
   //     storageOptions: const StorageClientOptions(retryAttempts: 10));
-  runApp(const MyApp());
+  runApp(MyApp());
 }

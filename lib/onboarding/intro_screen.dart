@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:myschool/utils/constants/colors.dart';
 import 'package:myschool/utils/device/device_utility.dart';
@@ -76,6 +77,11 @@ class IntroScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await FirebaseAuth.instance.signOut();
+        },
       ),
     );
   }
