@@ -1,0 +1,3 @@
+class SImageString {
+  SImageString._();
+}
