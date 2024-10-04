@@ -17,39 +17,46 @@ class FirebaseAuthentication {
         builder: (context) => LoadingAnimationWidget.halfTriangleDot(
             color: SColors.primary, size: 56));
 
-    try {
-      final credential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
-      Get.back();
-      return credential;
-    } on FirebaseAuthException catch (e) {
-      Get.back();
+    if (await SHelperFunctions.isInternetConnected()) {
+      try {
+        final credential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password);
+        Get.back();
+        return credential;
+      } on FirebaseAuthException catch (e) {
+        Get.back();
 
-      if (e.code == 'weak-password') {
-        if (context.mounted) {
-          SHelperFunctions.showAwesomeSnackBar(
-              title: "Weak Password",
-              content: "Try a stronger password",
-              contentType: ContentType.failure,
-              context: context);
+        if (e.code == 'weak-password') {
+          if (context.mounted) {
+            SHelperFunctions.showAwesomeSnackBar(
+                title: "Weak Password",
+                content: "Try a stronger password",
+                contentType: ContentType.failure,
+                context: context);
+          }
+        } else if (e.code == 'email-already-in-use') {
+          if (context.mounted) {
+            SHelperFunctions.showAwesomeSnackBar(
+                title: "Email In Use",
+                content: "An account already exists for this email",
+                contentType: ContentType.failure,
+                context: context);
+          }
         }
-      } else if (e.code == 'email-already-in-use') {
+      } catch (e) {
+        Get.back();
         if (context.mounted) {
           SHelperFunctions.showAwesomeSnackBar(
-              title: "Email In Use",
-              content: "An account already exists for this email",
+              title: "ERROR",
+              content: "Something went wrong",
               contentType: ContentType.failure,
               context: context);
         }
       }
-    } catch (e) {
+    } else {
       Get.back();
       if (context.mounted) {
-        SHelperFunctions.showAwesomeSnackBar(
-            title: "ERROR",
-            content: "Something went wrong",
-            contentType: ContentType.failure,
-            context: context);
+        await SHelperFunctions.checkInternetConnection(context);
       }
     }
   }
@@ -64,71 +71,78 @@ class FirebaseAuthentication {
         builder: (context) => LoadingAnimationWidget.halfTriangleDot(
             color: SColors.primary, size: 56));
 
-    try {
-      final credential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-      Get.back();
-      return credential;
-    } on FirebaseAuthException catch (e) {
-      Get.back();
+    if (await SHelperFunctions.isInternetConnected()) {
+      try {
+        final credential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: email, password: password);
+        Get.back();
+        return credential;
+      } on FirebaseAuthException catch (e) {
+        Get.back();
 
-      if (e.code == 'invalid-email') {
-        if (context.mounted) {
-          SHelperFunctions.showAwesomeSnackBar(
-              title: "Invalid Email",
-              content: "The email you entered isn't valid",
-              contentType: ContentType.failure,
-              context: context);
+        if (e.code == 'invalid-email') {
+          if (context.mounted) {
+            SHelperFunctions.showAwesomeSnackBar(
+                title: "Invalid Email",
+                content: "The email you entered isn't valid",
+                contentType: ContentType.failure,
+                context: context);
+          }
+        } else if (e.code == 'user-disabled') {
+          if (context.mounted) {
+            SHelperFunctions.showAwesomeSnackBar(
+                title: "User Disabled",
+                content: "This user account is disabled",
+                contentType: ContentType.failure,
+                context: context);
+          }
+        } else if (e.code == 'user-not-found') {
+          if (context.mounted) {
+            SHelperFunctions.showAwesomeSnackBar(
+                title: "User Not Found",
+                content: "Try Creating a new account",
+                contentType: ContentType.failure,
+                context: context);
+          }
+        } else if (e.code == 'wrong-password') {
+          if (context.mounted) {
+            SHelperFunctions.showAwesomeSnackBar(
+                title: "Wrong Password",
+                content: "Try another password",
+                contentType: ContentType.failure,
+                context: context);
+          }
+        } else if (e.code == 'too-many-requests') {
+          if (context.mounted) {
+            SHelperFunctions.showAwesomeSnackBar(
+                title: "Too Many Request",
+                content: "Try again in a while",
+                contentType: ContentType.failure,
+                context: context);
+          }
+        } else if (e.code == 'network-request-failed') {
+          if (context.mounted) {
+            SHelperFunctions.showAwesomeSnackBar(
+                title: "Network Request Error",
+                content: "Try again in a while",
+                contentType: ContentType.failure,
+                context: context);
+          }
         }
-      } else if (e.code == 'user-disabled') {
+      } catch (e) {
+        Get.back();
         if (context.mounted) {
           SHelperFunctions.showAwesomeSnackBar(
-              title: "User Disabled",
-              content: "This user account is disabled",
-              contentType: ContentType.failure,
-              context: context);
-        }
-      } else if (e.code == 'user-not-found') {
-        if (context.mounted) {
-          SHelperFunctions.showAwesomeSnackBar(
-              title: "User Not Found",
-              content: "Try Creating a new account",
-              contentType: ContentType.failure,
-              context: context);
-        }
-      } else if (e.code == 'wrong-password') {
-        if (context.mounted) {
-          SHelperFunctions.showAwesomeSnackBar(
-              title: "Wrong Password",
-              content: "Try another password",
-              contentType: ContentType.failure,
-              context: context);
-        }
-      } else if (e.code == 'too-many-requests') {
-        if (context.mounted) {
-          SHelperFunctions.showAwesomeSnackBar(
-              title: "Too Many Request",
-              content: "Try again in a while",
-              contentType: ContentType.failure,
-              context: context);
-        }
-      } else if (e.code == 'network-request-failed') {
-        if (context.mounted) {
-          SHelperFunctions.showAwesomeSnackBar(
-              title: "Network Request Error",
-              content: "Try again in a while",
+              title: "ERROR",
+              content: "Something went wrong",
               contentType: ContentType.failure,
               context: context);
         }
       }
-    } catch (e) {
+    } else {
       Get.back();
       if (context.mounted) {
-        SHelperFunctions.showAwesomeSnackBar(
-            title: "ERROR",
-            content: "Something went wrong",
-            contentType: ContentType.failure,
-            context: context);
+        await SHelperFunctions.checkInternetConnection(context);
       }
     }
   }

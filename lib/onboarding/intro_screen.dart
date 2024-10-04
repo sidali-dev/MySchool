@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:myschool/utils/constants/colors.dart';
 import 'package:myschool/utils/device/device_utility.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
+import 'package:myschool/utils/services/firebase_authentication.dart';
 
 import 'widgets/sign_in_dialog.dart';
 
@@ -80,7 +81,10 @@ class IntroScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await FirebaseAuth.instance.signOut();
+          await FirebaseAuthentication.signIn(
+              email: "sidali.dev@gmail.com",
+              password: "000000",
+              context: context);
         },
       ),
     );

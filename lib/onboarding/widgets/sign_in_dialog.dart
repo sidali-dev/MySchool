@@ -143,9 +143,6 @@ class SignInDialog extends StatelessWidget {
                                 controller.password.value =
                                     passwordController.text;
 
-                                await SHelperFunctions.checkInternetConnection(
-                                    context);
-
                                 try {
                                   if (context.mounted) {
                                     if (controller.isSigningUp.value) {

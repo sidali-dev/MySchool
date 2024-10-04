@@ -41,9 +41,8 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: SAppTheme.getLightTheme(true),
       darkTheme: SAppTheme.getDarkTheme(true),
-      home: Obx(() => !userController.isSignedIn.value
-          ? const Test()
-          : const IntroScreen()),
+      home: Obx(() =>
+          userController.isSignedIn.value ? const Test() : const IntroScreen()),
     );
   }
 }
