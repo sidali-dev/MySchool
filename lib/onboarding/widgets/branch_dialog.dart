@@ -8,8 +8,8 @@ import 'package:myschool/utils/device/device_utility.dart';
 import '../../utils/constants/colors.dart';
 import '../../utils/helpers/helper_functions.dart';
 
-class SignUp3Dialog extends StatelessWidget {
-  SignUp3Dialog({super.key});
+class BranchDialog extends StatelessWidget {
+  BranchDialog({super.key});
 
   final CredentialsController controller = Get.find();
 

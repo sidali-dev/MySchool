@@ -1,7 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import 'utils/helpers/helper_functions.dart';
+import 'package:myschool/utils/services/appwrite_provider.dart';
 
 class Test extends StatelessWidget {
   const Test({super.key});
@@ -14,7 +12,7 @@ class Test extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await FirebaseAuth.instance.signOut();
+          await AppwriteProvider().signOut(context);
         },
       ),
     );

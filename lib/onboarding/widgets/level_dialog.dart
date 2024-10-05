@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:myschool/onboarding/controllers/credentials_controller.dart';
+import 'package:myschool/onboarding/controllers/sign_in_controller.dart';
 import 'package:myschool/onboarding/widgets/sign_in_dialog.dart';
 import 'package:myschool/utils/device/device_utility.dart';
 
@@ -9,10 +10,10 @@ import '../../utils/constants/colors.dart';
 import '../../utils/helpers/helper_functions.dart';
 import 'branch_dialog.dart';
 
-class SignUp2Dialog extends StatelessWidget {
-  SignUp2Dialog({super.key});
+class LevelDialog extends StatelessWidget {
+  LevelDialog({super.key});
 
-  final CredentialsController controller = Get.find();
+  final CredentialsController controller = Get.put(CredentialsController());
 
   @override
   Widget build(BuildContext context) {
@@ -59,11 +60,13 @@ class SignUp2Dialog extends StatelessWidget {
                       SizedBox(height: height * 0.01),
                       const Center(
                         child: Text(
-                          'Sign up',
+                          'About You',
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                               fontWeight: FontWeight.w600, fontSize: 40.0),
                         ),
                       ),
+                      SizedBox(height: height * 0.02),
 
                       const Text("Full Name",
                           style: TextStyle(
@@ -91,7 +94,6 @@ class SignUp2Dialog extends StatelessWidget {
                                 Icon(Icons.person, color: SColors.primary),
                             hintText: "New User"),
                       ),
-                      SizedBox(height: height * 0.02),
                       SizedBox(height: height * 0.02),
                       const Text("Level",
                           style: TextStyle(
@@ -130,6 +132,7 @@ class SignUp2Dialog extends StatelessWidget {
                             controller.name.value = nameController.text;
 
                             if (controller.selectedLevel['level'] < 10) {
+                              Get.back();
                             } else if (controller.selectedLevel['level'] >=
                                 10) {
                               Get.back();
@@ -138,7 +141,7 @@ class SignUp2Dialog extends StatelessWidget {
                                   .then(
                                 (_) => SHelperFunctions.openDialogAnimation(
                                     context,
-                                    SignUp3Dialog(),
+                                    BranchDialog(),
                                     "Sign Up 3 Dialog"),
                               );
                             }

@@ -1,8 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../utils/services/firebase_authentication.dart';
+import 'package:myschool/utils/services/appwrite_provider.dart';
 
 class SignInController extends GetxController {
   RxBool passwordIsHidden = true.obs;
@@ -20,15 +18,15 @@ class SignInController extends GetxController {
     passwordIsHidden.value = !passwordIsHidden.value;
   }
 
-  firebaseSignUp(BuildContext context) async {
-    UserCredential credential = await FirebaseAuthentication.signUp(
-        email: email.value, password: password.value, context: context);
-    return credential;
+  appWriteSignIn(BuildContext context) async {
+    AppwriteProvider appwriteProvider = AppwriteProvider();
+    await appwriteProvider.signIn(
+        context: context, email: email.value, password: password.value);
   }
 
-  firebaseSignIn(BuildContext context) async {
-    UserCredential credential = await FirebaseAuthentication.signIn(
-        email: email.value, password: password.value, context: context);
-    return credential;
+  appWriteSignUp(BuildContext context) async {
+    AppwriteProvider appwriteProvider = AppwriteProvider();
+    await appwriteProvider.signUp(
+        context: context, email: email.value, password: password.value);
   }
 }

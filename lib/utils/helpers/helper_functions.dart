@@ -113,10 +113,10 @@ class SHelperFunctions {
       backgroundColor: Colors.transparent,
       content: AwesomeSnackbarContent(
         titleTextStyle: const TextStyle(
-            fontFamily: "Poppins", fontSize: 20, fontWeight: FontWeight.w700),
+            fontFamily: "Poppins", fontSize: 18, fontWeight: FontWeight.w700),
         title: title,
         messageTextStyle: const TextStyle(
-            fontFamily: "Poppins", fontSize: 14, fontWeight: FontWeight.w500),
+            fontFamily: "Poppins", fontSize: 12, fontWeight: FontWeight.w500),
         message: content,
         contentType: contentType,
       ),

@@ -5,9 +5,10 @@ import 'package:myschool/generals/controllers/flipping_container_controller.dart
 import 'package:myschool/generals/widgets/animated_changing_text.dart';
 import 'package:myschool/generals/widgets/flipping_container.dart';
 import 'package:myschool/onboarding/controllers/sign_in_controller.dart';
+import 'package:myschool/onboarding/widgets/level_dialog.dart';
 import 'package:myschool/utils/device/device_utility.dart';
-import 'package:myschool/utils/helpers/helper_functions.dart';
 import '../../utils/constants/colors.dart';
+import '../../utils/helpers/helper_functions.dart';
 
 class SignInDialog extends StatelessWidget {
   SignInDialog({super.key});
@@ -146,9 +147,16 @@ class SignInDialog extends StatelessWidget {
                                 try {
                                   if (context.mounted) {
                                     if (controller.isSigningUp.value) {
-                                      await controller.firebaseSignUp(context);
+                                      Get.back();
+                                      await Future.delayed(
+                                              const Duration(milliseconds: 200))
+                                          .then((_) => SHelperFunctions
+                                              .openDialogAnimation(
+                                                  context,
+                                                  LevelDialog(),
+                                                  "Level Dialog"));
                                     } else {
-                                      await controller.firebaseSignIn(context);
+                                      await controller.appWriteSignIn(context);
                                     }
                                   }
                                   Get.back();

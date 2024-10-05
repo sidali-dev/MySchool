@@ -1,8 +1,7 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:myschool/firebase_options.dart';
 // import 'package:supabase_flutter/supabase_flutter.dart';
+// import 'package:appwrite/appwrite.dart';
 
 import 'my_app.dart';
 
@@ -11,8 +10,6 @@ Future main() async {
 
   // WidgetsBinding binding =
   WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // await Supabase.initialize(
   //     url: dotenv.get("SUPABASE_URL"),

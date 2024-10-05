@@ -1,9 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myschool/generals/controllers/user_controller.dart';
+import 'package:myschool/onboarding/widgets/level_dialog.dart';
 import 'package:myschool/utils/constants/colors.dart';
 import 'package:myschool/utils/device/device_utility.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
-import 'package:myschool/utils/services/firebase_authentication.dart';
+import 'package:myschool/utils/services/appwrite_provider.dart';
 
 import 'widgets/sign_in_dialog.dart';
 
@@ -15,6 +17,9 @@ class IntroScreen extends StatelessWidget {
     final double height = SDeviceUtils.getScreenHeight(context);
     final double width = SDeviceUtils.getScreenWidth(context);
     final bool isDark = SHelperFunctions.isDarkMode(context);
+
+    final UserController userController = Get.find();
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -40,8 +45,13 @@ class IntroScreen extends StatelessWidget {
               InkWell(
                 borderRadius: BorderRadius.circular(24.0),
                 onTap: () {
-                  SHelperFunctions.openDialogAnimation(
-                      context, SignInDialog(), "Sign In Dialog");
+                  if (userController.isSignedIn.value) {
+                    SHelperFunctions.openDialogAnimation(
+                        context, LevelDialog(), "Level Dialog");
+                  } else {
+                    SHelperFunctions.openDialogAnimation(
+                        context, SignInDialog(), "Sign In Dialog");
+                  }
                 },
                 child: Stack(
                   children: [
@@ -81,10 +91,7 @@ class IntroScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await FirebaseAuthentication.signIn(
-              email: "sidali.dev@gmail.com",
-              password: "000000",
-              context: context);
+          await AppwriteProvider().signOut(context);
         },
       ),
     );
