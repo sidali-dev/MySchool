@@ -96,8 +96,8 @@ class SignInController extends GetxController
 
     //sign the user in
     int response = await authController.createEmailSession(
-      email: email,
-      password: password,
+      email: email.trim(),
+      password: password.trim(),
     );
 
     //close loading indicator
@@ -138,7 +138,7 @@ class SignInController extends GetxController
       (int value) async {
         if (value == 200) {
           int result = await authController.createEmailSession(
-              email: email, password: password);
+              email: email.trim(), password: password.trim());
           return result;
         } else {
           return value;

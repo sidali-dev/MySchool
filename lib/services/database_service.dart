@@ -1,6 +1,7 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:myschool/models/user_model.dart';
 import 'package:myschool/services/authentication_service.dart';
 
 class DatabaseService {
@@ -40,13 +41,17 @@ class DatabaseService {
     }
   }
 
-  Future<Document> getUser() async {
+  Future<UserModel> getUser() async {
     User currentUser = await account.get();
+    late final UserModel userModel;
+
     final response = await databases.getDocument(
         databaseId: dotenv.get("APPWRITE_DB_ID"),
         collectionId: dotenv.get("APPWRITE_DB_USERS"),
         documentId: currentUser.$id);
 
-    return response;
+    userModel = UserModel.fromMap(response.data);
+
+    return userModel;
   }
 }

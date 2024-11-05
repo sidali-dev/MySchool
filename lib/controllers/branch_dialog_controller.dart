@@ -110,8 +110,8 @@ class BranchDialogController extends GetxController
 
     //add user data to database
     DatabaseService databaseService = DatabaseService();
-    Document? document =
-        await databaseService.addUser(name: name, level: level, branch: branch);
+    Document? document = await databaseService.addUser(
+        name: name.trim(), level: level, branch: branch);
 
     //close loading indicator
     Get.back();
