@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:myschool/my_app.dart';
+import 'package:myschool/services/authentication_service.dart';
 // import 'package:supabase_flutter/supabase_flutter.dart';
 // import 'package:appwrite/appwrite.dart';
 
-import 'my_app.dart';
+// import 'my_app.dart';
 
 Future main() async {
   await dotenv.load();
@@ -11,12 +15,8 @@ Future main() async {
   // WidgetsBinding binding =
   WidgetsFlutterBinding.ensureInitialized();
 
-  // await Supabase.initialize(
-  //     url: dotenv.get("SUPABASE_URL"),
-  //     anonKey: dotenv.get("SUPABASE_ANNON_KEY"),
-  //     debug: true,
-  //     authOptions:
-  //         const FlutterAuthClientOptions(authFlowType: AuthFlowType.pkce),
-  //     storageOptions: const StorageClientOptions(retryAttempts: 10));
-  runApp(MyApp());
+  await GetStorage.init();
+  Get.put(AuthenticationService());
+
+  runApp(const MyApp());
 }

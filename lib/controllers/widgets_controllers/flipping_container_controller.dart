@@ -10,23 +10,20 @@ class FlippingContainerController extends GetxController
   void onInit() {
     super.onInit();
 
-    // Initialize the animation controller for 1 second
     flipController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
     );
 
-    // Define the Tween animation for a full rotation (2 * pi)
-    flipAnimation = Tween<double>(begin: 0, end: 1).animate(flipController)
-      ..addListener(() {
-        update(); // Rebuild GetBuilder on every tick
-      });
+    flipAnimation = Tween<double>(begin: 0, end: 1).animate(flipController);
   }
 
   // Trigger the full flip animation
   void triggerFullFlip() {
     if (flipController.isAnimating) return;
-    flipController.forward(from: 0); // Reset and start the animation
+    flipController
+      ..reset() // Reset the animation
+      ..forward(); // start the animation
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myschool/generals/controllers/flipping_container_controller.dart';
+import 'package:myschool/controllers/widgets_controllers/flipping_container_controller.dart';
+import 'dart:math' show pi;
 
 class FlippingContainer extends StatelessWidget {
   const FlippingContainer(
@@ -22,8 +23,8 @@ class FlippingContainer extends StatelessWidget {
               return Transform(
                 alignment: Alignment.center,
                 transform: Matrix4.identity()
-                  ..setEntry(3, 2, 0.001) // Perspective for 3D effect
-                  ..rotateY(flipValue * 2 * 3.1416), // Full 360-degree flip
+                  // ..setEntry(3, 2, 0.001) // Perspective for 3D effect
+                  ..rotateY(flipValue * 2 * pi), // Full 360-degree flip
                 child: widget,
               );
             },

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:myschool/generals/controllers/user_controller.dart';
-import 'package:myschool/onboarding/widgets/level_dialog.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:myschool/controllers/sign_in_controller.dart';
 import 'package:myschool/utils/constants/colors.dart';
 import 'package:myschool/utils/device/device_utility.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
-import 'package:myschool/utils/services/appwrite_provider.dart';
 
 import 'widgets/sign_in_dialog.dart';
 
@@ -17,8 +15,6 @@ class IntroScreen extends StatelessWidget {
     final double height = SDeviceUtils.getScreenHeight(context);
     final double width = SDeviceUtils.getScreenWidth(context);
     final bool isDark = SHelperFunctions.isDarkMode(context);
-
-    final UserController userController = Get.find();
 
     return Scaffold(
       body: Padding(
@@ -45,37 +41,48 @@ class IntroScreen extends StatelessWidget {
               InkWell(
                 borderRadius: BorderRadius.circular(24.0),
                 onTap: () {
-                  if (userController.isSignedIn.value) {
-                    SHelperFunctions.openDialogAnimation(
-                        context, LevelDialog(), "Level Dialog");
-                  } else {
-                    SHelperFunctions.openDialogAnimation(
-                        context, SignInDialog(), "Sign In Dialog");
-                  }
+                  showDialog(
+                    context: context,
+                    builder: (context) => SignInDialog(),
+                  );
                 },
-                child: Stack(
-                  children: [
-                    Container(
-                      height: height * 0.08,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: SColors.primary,
-                          borderRadius: BorderRadius.circular(24)),
-                      child: const Text(
-                        "START LEARNING !",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                    Positioned(
-                      right: 16,
-                      top: 10,
-                      child: Image.asset("assets/images/png/pen.png",
-                          height: height * 0.12),
-                    ),
+                child: Animate(
+                  delay: 1.seconds,
+                  onComplete: (controller) {
+                    if (context.mounted && !controller.isDismissed) {
+                      Future.delayed(5.seconds).then((_) => controller
+                        ..reset()
+                        ..forward());
+                    }
+                  },
+                  effects: [
+                    ShimmerEffect(duration: 1800.milliseconds),
+                    const ShakeEffect(hz: 2, curve: Curves.easeInOutCubic),
                   ],
+                  child: Stack(
+                    children: [
+                      Container(
+                        height: height * 0.08,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: SColors.primary,
+                            borderRadius: BorderRadius.circular(24)),
+                        child: const Text(
+                          "START LEARNING !",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                      Positioned(
+                        right: 16,
+                        top: 10,
+                        child: Image.asset("assets/images/png/pen.png",
+                            height: height * 0.12),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: height * 0.05),
@@ -91,7 +98,7 @@ class IntroScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await AppwriteProvider().signOut(context);
+          await SignInController().signOut(context: context);
         },
       ),
     );

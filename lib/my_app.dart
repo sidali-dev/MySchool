@@ -2,44 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:myschool/generals/controllers/user_controller.dart';
-import 'package:myschool/onboarding/intro_screen.dart';
+import 'package:myschool/generated/l10n.dart';
+import 'package:myschool/services/authentication_service.dart';
 import 'package:myschool/test.dart';
-
-import 'generated/l10n.dart';
-import 'utils/theme/theme.dart';
+import 'package:myschool/utils/theme/theme.dart';
+import 'package:myschool/views/intro_screen.dart';
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-
-  final UserController userController = Get.put(UserController());
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: userController.checkIsSignedIn(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        return GetMaterialApp(
-          debugShowCheckedModeBanner: true,
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate
-          ],
-          supportedLocales: S.delegate.supportedLocales,
-          locale: Locale(Intl.getCurrentLocale()),
-          themeMode: ThemeMode.light,
-          theme: SAppTheme.getLightTheme(true),
-          darkTheme: SAppTheme.getDarkTheme(true),
-          home: Obx(() => userController.isSignedIn.value
-              ? const Test()
-              : const IntroScreen()),
-        );
-      },
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: true,
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+      locale: Locale(Intl.getCurrentLocale()),
+      themeMode: ThemeMode.light,
+      theme: SAppTheme.getLightTheme(true),
+      darkTheme: SAppTheme.getDarkTheme(true),
+      home: GetBuilder<AuthenticationService>(
+        builder: (controller) {
+          if (controller.authStatus == AuthStatus.unauthenticated) {
+            return const IntroScreen();
+          } else if (controller.authStatus == AuthStatus.authenticated) {
+            return const Test();
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      ),
     );
   }
 }

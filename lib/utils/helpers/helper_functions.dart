@@ -1,14 +1,14 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:myschool/generals/widgets/check_dialog.dart';
+import 'package:myschool/views/widgets/check_dialog.dart';
 import 'package:myschool/utils/constants/colors.dart';
+import 'package:myschool/utils/constants/get_keys.dart';
 import 'package:myschool/utils/constants/image_strings.dart';
-
-import '../local_storage/services/sharedpreferences_service.dart';
 
 class SHelperFunctions {
   static bool isDarkMode(BuildContext context) {
@@ -73,17 +73,24 @@ class SHelperFunctions {
     return formattedDate;
   }
 
-  static Future<bool> isFirstRun() async {
-    return SharedPrefService.getBool('isFirstRun') ?? true;
+  static bool isFirstRun() {
+    final box = GetStorage();
+
+    return box.read(GetKeys.isFirstRun) ?? true;
   }
 
-  static Future<void> saveInitialValues() async {
-    final isFirstRun = await SHelperFunctions.isFirstRun();
+  static saveInitialValues() {
+    final box = GetStorage();
+
+    final isFirstRun = SHelperFunctions.isFirstRun();
+
     if (isFirstRun) {
-      await SharedPrefService.setBool('isFirstRun', false);
+      box.write(GetKeys.isFirstRun, false);
+      box.write(GetKeys.isCredentialsIn, false);
     }
   }
 
+//CONSIDER DELETING !!!!!
   static openDialogAnimation(
       BuildContext context, Widget dialog, String dialogLabel) {
     showGeneralDialog(
@@ -94,11 +101,12 @@ class SHelperFunctions {
       pageBuilder: (context, animation, secondaryAnimation) => const SizedBox(),
       transitionBuilder: (context, animation, secondaryAnimation, child) =>
           ScaleTransition(
-              scale: Tween<double>(begin: 0.5, end: 1.0).animate(animation),
-              child: FadeTransition(
-                opacity: Tween<double>(begin: 0.5, end: 1.0).animate(animation),
-                child: dialog,
-              )),
+        scale: Tween<double>(begin: 0.0, end: 1.0).animate(animation),
+        child: FadeTransition(
+          opacity: Tween<double>(begin: 0.0, end: 1.0).animate(animation),
+          child: dialog,
+        ),
+      ),
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myschool/utils/services/appwrite_provider.dart';
+
+import 'controllers/sign_in_controller.dart';
 
 class Test extends StatelessWidget {
   const Test({super.key});
@@ -12,7 +13,7 @@ class Test extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await AppwriteProvider().signOut(context);
+          await SignInController().signOut(context: context);
         },
       ),
     );
