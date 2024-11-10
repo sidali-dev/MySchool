@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:myschool/services/database_service.dart';
+import 'package:myschool/utils/constants/enums.dart';
 
 import '../utils/helpers/appwrite_helpers.dart';
 
@@ -14,24 +15,24 @@ class BranchDialogController extends GetxController
 
   Map<int, List<Map<String, String>>> branches = {
     10: [
-      {"branch": "Literature"},
-      {"branch": "Scientifique"}
+      {"branch": Branches.literature.name},
+      {"branch": Branches.scientifique.name}
     ],
     11: [
-      {"branch": "Philosophie"},
-      {"branch": "Langue"},
-      {"branch": "Gestion"},
-      {"branch": "Scientifique"},
-      {"branch": "Mathelam"},
-      {"branch": "Math-Technique"}
+      {"branch": Branches.philosophie.name},
+      {"branch": Branches.langue.name},
+      {"branch": Branches.gestion.name},
+      {"branch": Branches.scientifique.name},
+      {"branch": Branches.mathelam.name},
+      {"branch": Branches.mathTechnique.name}
     ],
     12: [
-      {"branch": "Philosophie"},
-      {"branch": "Langue"},
-      {"branch": "Gestion"},
-      {"branch": "Scientifique"},
-      {"branch": "Mathelam"},
-      {"branch": "Math-Technique"}
+      {"branch": Branches.philosophie.name},
+      {"branch": Branches.langue.name},
+      {"branch": Branches.gestion.name},
+      {"branch": Branches.scientifique.name},
+      {"branch": Branches.mathelam.name},
+      {"branch": Branches.mathTechnique.name}
     ]
   };
 

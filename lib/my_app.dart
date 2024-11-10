@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:myschool/generated/l10n.dart';
 import 'package:myschool/services/authentication_service.dart';
-import 'package:myschool/home_screen.dart';
+import 'package:myschool/views/home_screen.dart';
 import 'package:myschool/utils/theme/theme.dart';
 import 'package:myschool/views/intro_screen.dart';
 

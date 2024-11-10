@@ -26,6 +26,7 @@ dependencies:
   appwrite: ^13.0.0
   get_storage: ^2.1.1
   flutter_animate: ^4.5.0
+  page_transition: ^2.1.0
 
 
 dev_dependencies:
@@ -40,6 +41,8 @@ flutter:
   #------------- LOCAL ASSETS -------------#
   assets:
     - assets/images/png/
+    - assets/images/modules/
+    - assets/images/activities/
     - assets/lottie/
     - .env
 

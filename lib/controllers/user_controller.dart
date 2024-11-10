@@ -6,7 +6,7 @@ class UserController extends GetxController {
   Rx<UserModel?> user = Rx<UserModel?>(null);
 
   @override
-  void onInit() async {
+  Future onInit() async {
     super.onInit();
     await _getUser();
   }
