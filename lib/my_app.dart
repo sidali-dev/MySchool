@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      locale: Locale(Intl.getCurrentLocale()),
+      locale: Locale("fr"),
       themeMode: ThemeMode.light,
       theme: SAppTheme.getLightTheme(true),
       darkTheme: SAppTheme.getDarkTheme(true),
@@ -33,8 +33,10 @@ class MyApp extends StatelessWidget {
           } else if (controller.authStatus == AuthStatus.authenticated) {
             return HomeScreen();
           } else {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return const Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
             );
           }
         },

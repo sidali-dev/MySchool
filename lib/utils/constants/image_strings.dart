@@ -38,4 +38,9 @@ class SImageString {
   static const activityLesson = "assets/images/activities/lesson.png";
   static const activitySchoolBook = "assets/images/activities/school_book.png";
   static const activityVideos = "assets/images/activities/videos.png";
+
+  //number images
+  static const numberOne = "assets/images/numbers/one.png";
+  static const numberTwo = "assets/images/numbers/two.png";
+  static const numberThree = "assets/images/numbers/three.png";
 }

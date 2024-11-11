@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:myschool/controllers/sign_in_controller.dart';
+import 'package:myschool/generated/l10n.dart';
 import 'package:myschool/utils/constants/colors.dart';
 import 'package:myschool/utils/device/device_utility.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
@@ -67,9 +68,9 @@ class IntroScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: SColors.primary,
                             borderRadius: BorderRadius.circular(24)),
-                        child: const Text(
-                          "START LEARNING !",
-                          style: TextStyle(
+                        child: Text(
+                          S.of(context).start_learning,
+                          style: const TextStyle(
                               color: Colors.white,
                               fontSize: 24,
                               fontWeight: FontWeight.w700),

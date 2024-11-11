@@ -5,6 +5,7 @@ import 'package:myschool/controllers/branch_dialog_controller.dart';
 import 'package:myschool/views/widgets/level_dialog.dart';
 import 'package:myschool/utils/device/device_utility.dart';
 
+import '../../generated/l10n.dart';
 import '../../utils/constants/colors.dart';
 import '../../controllers/sign_in_controller.dart';
 
@@ -67,28 +68,28 @@ class BranchDialog extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(height: height * 0.01),
-                        const Center(
+                        Center(
                           child: Text(
-                            'Sign up',
-                            style: TextStyle(
+                            S.of(context).sign_up,
+                            style: const TextStyle(
                                 fontWeight: FontWeight.w600, fontSize: 40.0),
                           ),
                         ),
                         SizedBox(height: height * 0.02),
-                        const Text("Level",
-                            style: TextStyle(
+                        Text(S.of(context).level,
+                            style: const TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 16)),
                         SizedBox(height: height * 0.01),
                         DropdownButtonFormField(
                           validator: (value) {
                             if (value == null) {
-                              return "Please select a branch";
+                              return S.of(context).select_a_branch;
                             }
                             return null;
                           },
-                          decoration: const InputDecoration(
-                              prefixIcon: Icon(Icons.category),
-                              hintText: "Pick Your Branch"),
+                          decoration: InputDecoration(
+                              prefixIcon: const Icon(Icons.category),
+                              hintText: S.of(context).pick_your_branch),
                           items: controller.branches[level]!
                               .map(
                                 (Map e) => DropdownMenuItem(
@@ -158,9 +159,9 @@ class BranchDialog extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   SizedBox(width: width * 0.1),
-                                  const Text(
-                                    "FINSIH",
-                                    style: TextStyle(
+                                  Text(
+                                    S.of(context).finish,
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 24,
                                         fontWeight: FontWeight.w700),
@@ -179,9 +180,9 @@ class BranchDialog extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                const Text(
-                                  "Forgot Something?",
-                                  style: TextStyle(
+                                Text(
+                                  S.of(context).forgot_something,
+                                  style: const TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 20),
                                 ),
@@ -215,9 +216,9 @@ class BranchDialog extends StatelessWidget {
                                       );
                                     }
                                   },
-                                  child: const Text(
-                                    "GO BACK",
-                                    style: TextStyle(
+                                  child: Text(
+                                    S.of(context).go_back,
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 20,
                                         color: SColors.primary),

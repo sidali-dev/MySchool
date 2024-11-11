@@ -6,6 +6,7 @@ import 'package:myschool/views/widgets/animation/animated_changing_text.dart';
 import 'package:myschool/controllers/sign_in_controller.dart';
 import 'package:myschool/views/widgets/level_dialog.dart';
 import 'package:myschool/utils/device/device_utility.dart';
+import '../../generated/l10n.dart';
 import '../../utils/constants/colors.dart';
 
 class SignInDialog extends StatelessWidget {
@@ -67,14 +68,14 @@ class SignInDialog extends StatelessWidget {
                           child: AnimatedChangingText(
                               value: controller.isSigningUp.value,
                               duration: const Duration(milliseconds: 500),
-                              text1: "Sign up",
-                              text2: "Sign in",
+                              text1: S.of(context).sign_up,
+                              text2: S.of(context).sign_in,
                               textStyle: const TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 40.0)),
                         ),
                         SizedBox(height: height * 0.02),
-                        const Text("Email",
-                            style: TextStyle(
+                        Text(S.of(context).email,
+                            style: const TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 16)),
                         SizedBox(height: height * 0.01),
                         TextFormField(
@@ -87,19 +88,19 @@ class SignInDialog extends StatelessWidget {
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter your email';
+                              return S.of(context).enter_email;
                             }
                             if (!RegExp(r'^[^@]+@[^@]+\.[^@]+')
                                 .hasMatch(value)) {
-                              return 'Please enter a valid email';
+                              return S.of(context).valid_email;
                             }
                             return null;
                           },
                         ),
                         SizedBox(height: height * 0.02),
-                        const Text(
-                          "Password",
-                          style: TextStyle(
+                        Text(
+                          S.of(context).password,
+                          style: const TextStyle(
                               fontWeight: FontWeight.w700, fontSize: 16),
                         ),
                         SizedBox(height: height * 0.01),
@@ -120,10 +121,10 @@ class SignInDialog extends StatelessWidget {
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter your password';
+                              return S.of(context).enter_password;
                             }
                             if (value.length < 8) {
-                              return 'Password must be at least 8 characters';
+                              return S.of(context).password_at_least_8;
                             }
                             return null;
                           },
@@ -199,8 +200,8 @@ class SignInDialog extends StatelessWidget {
                                 AnimatedChangingText(
                                   value: controller.isSigningUp.value,
                                   duration: const Duration(milliseconds: 500),
-                                  text1: "SIGN UP",
-                                  text2: "SIGN IN",
+                                  text1: S.of(context).sign_up,
+                                  text2: S.of(context).sign_in,
                                   textStyle: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,
@@ -219,8 +220,8 @@ class SignInDialog extends StatelessWidget {
                                 AnimatedChangingText(
                                   value: controller.isSigningUp.value,
                                   duration: const Duration(milliseconds: 500),
-                                  text1: "Already Have an Account?",
-                                  text2: "New Here?",
+                                  text1: S.of(context).have_an_account,
+                                  text2: S.of(context).new_here,
                                   textStyle: const TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 20),
@@ -239,8 +240,8 @@ class SignInDialog extends StatelessWidget {
                                   child: AnimatedChangingText(
                                     value: controller.isSigningUp.value,
                                     duration: const Duration(milliseconds: 500),
-                                    text1: "SIGN IN",
-                                    text2: "SIGN UP",
+                                    text1: S.of(context).sign_in,
+                                    text2: S.of(context).sign_up,
                                     textStyle: const TextStyle(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 20,

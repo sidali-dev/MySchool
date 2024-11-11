@@ -16,7 +16,7 @@ class AutoScrollText extends StatefulWidget {
   });
 
   @override
-  _AutoScrollTextState createState() => _AutoScrollTextState();
+  State<AutoScrollText> createState() => _AutoScrollTextState();
 }
 
 class _AutoScrollTextState extends State<AutoScrollText> {

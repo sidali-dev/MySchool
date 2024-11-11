@@ -43,8 +43,9 @@ class _CheckDialogState extends State<CheckDialog>
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      // elevation: 35,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
       child: SizedBox(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:myschool/models/modules.dart';
 import 'package:myschool/utils/constants/image_strings.dart';
 
+import '../generated/l10n.dart';
 import '../utils/constants/enums.dart';
 
 class HomeController {
@@ -537,6 +539,57 @@ class HomeController {
         }
       default:
         return <Module>[];
+    }
+  }
+
+  getModuleTitle(BuildContext context, ModuleEnum moduleEnum) {
+    switch (moduleEnum) {
+      case ModuleEnum.accounting:
+        return S.of(context).accounting;
+      case ModuleEnum.arabic:
+        return S.of(context).arabic;
+      case ModuleEnum.civil:
+        return S.of(context).civil;
+      case ModuleEnum.civilEngineering:
+        return S.of(context).civil_engineering;
+      case ModuleEnum.computerScience:
+        return S.of(context).computer_science;
+      case ModuleEnum.economy:
+        return S.of(context).economy;
+      case ModuleEnum.electricalEngineering:
+        return S.of(context).electrical_engineering;
+      case ModuleEnum.english:
+        return S.of(context).english;
+      case ModuleEnum.french:
+        return S.of(context).french;
+      case ModuleEnum.geography:
+        return S.of(context).geography;
+      case ModuleEnum.german:
+        return S.of(context).german;
+      case ModuleEnum.history:
+        return S.of(context).history;
+      case ModuleEnum.italian:
+        return S.of(context).italian;
+      case ModuleEnum.law:
+        return S.of(context).law;
+      case ModuleEnum.maths:
+        return S.of(context).maths;
+      case ModuleEnum.mechanicalEngineering:
+        return S.of(context).mechanical_engineering;
+      case ModuleEnum.philosophy:
+        return S.of(context).philosophy;
+      case ModuleEnum.physics:
+        return S.of(context).physics;
+      case ModuleEnum.processEngineering:
+        return S.of(context).process_engineering;
+      case ModuleEnum.science:
+        return S.of(context).science;
+      case ModuleEnum.sharia:
+        return S.of(context).shariaa;
+      case ModuleEnum.spanish:
+        return S.of(context).spanish;
+      case ModuleEnum.technology:
+        return S.of(context).technology;
     }
   }
 }

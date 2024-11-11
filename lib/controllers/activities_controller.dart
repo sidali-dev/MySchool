@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myschool/controllers/user_controller.dart';
+import 'package:myschool/generated/l10n.dart';
 import 'package:myschool/models/activities.dart';
 import 'package:myschool/utils/constants/enums.dart';
 import 'package:myschool/utils/constants/image_strings.dart';
@@ -103,6 +105,23 @@ class ActivitiesController {
               activity: ActivityEnum.videos,
               imagePath: SImageString.activityVideos),
         ];
+    }
+  }
+
+  getActivitiesTitle(BuildContext context, ActivityEnum activity) {
+    switch (activity) {
+      case ActivityEnum.exams:
+        return S.of(context).exams;
+      case ActivityEnum.exercises:
+        return S.of(context).exercises;
+      case ActivityEnum.finals:
+        return S.of(context).finals;
+      case ActivityEnum.lessons:
+        return S.of(context).lessons;
+      case ActivityEnum.schoolBook:
+        return S.of(context).school_book;
+      case ActivityEnum.videos:
+        return S.of(context).videos;
     }
   }
 }

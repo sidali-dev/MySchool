@@ -2,21 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:myschool/controllers/activities_controller.dart';
+import 'package:myschool/generated/l10n.dart';
 import 'package:myschool/models/activities.dart';
 import 'package:myschool/models/modules.dart';
+import 'package:myschool/utils/constants/image_strings.dart';
+import 'package:myschool/utils/helpers/helper_functions.dart';
+import 'package:myschool/views/materials_screen.dart';
 import 'package:myschool/views/widgets/animation/auto_scrolling_text.dart';
 
 import '../utils/device/device_utility.dart';
 import 'widgets/bubble.dart';
+import 'widgets/numbers_card.dart';
 import 'widgets/squar_button.dart';
 
 class ActivitiesScreen extends StatelessWidget {
   final Module module;
   final String activityImage;
+  final String moduleTitle;
   const ActivitiesScreen({
     super.key,
     required this.module,
     required this.activityImage,
+    required this.moduleTitle,
   });
 
   @override
@@ -24,6 +31,7 @@ class ActivitiesScreen extends StatelessWidget {
     ActivitiesController controller = ActivitiesController();
     final double screenHeight = SDeviceUtils.getScreenHeight(context);
     final double screenWidth = SDeviceUtils.getScreenWidth(context);
+    final bool isRtl = SHelperFunctions.isRtl(context);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -75,10 +83,12 @@ class ActivitiesScreen extends StatelessWidget {
                   Row(
                     children: [
                       AutoScrollText(
-                          alignment: Alignment.centerLeft,
+                          alignment: isRtl
+                              ? Alignment.centerRight
+                              : Alignment.centerLeft,
                           duration: const Duration(seconds: 1),
                           text: Text(
-                            module.module.name.capitalizeFirst!,
+                            moduleTitle,
                             style: const TextStyle(
                                 fontWeight: FontWeight.w900, fontSize: 48),
                           ),
@@ -86,11 +96,6 @@ class ActivitiesScreen extends StatelessWidget {
                       Animate(
                         effects: const [
                           ShakeEffect(
-                            duration: Duration(milliseconds: 500),
-                          ),
-                          RotateEffect(
-                            begin: 0,
-                            end: .04,
                             duration: Duration(milliseconds: 500),
                           ),
                         ],
@@ -122,8 +127,141 @@ class ActivitiesScreen extends StatelessWidget {
                       final Activity activity = controller.activities[index];
                       return SquarButton(
                         image: activity.imagePath,
-                        title: activity.activity.name,
-                        onTap: () {},
+                        title: controller.getActivitiesTitle(
+                            context, activity.activity),
+                        onTap: () {
+                          Get.bottomSheet(
+                            BottomSheet(
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(36),
+                                ),
+                              ),
+                              enableDrag: false,
+                              onClosing: () {},
+                              builder: (context) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(24),
+                                  ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const SizedBox(height: 8),
+                                      AutoScrollText(
+                                        text: Text(
+                                          S.of(context).pick_trimester,
+                                          style: const TextStyle(
+                                            fontSize: 32,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        duration: const Duration(seconds: 1),
+                                        width: screenWidth * 0.7,
+                                        alignment: Alignment.center,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Animate(
+                                            effects: const [
+                                              FlipEffect(
+                                                begin: 1,
+                                                end: 2,
+                                                direction: Axis.horizontal,
+                                                delay: Duration(seconds: 0),
+                                                duration:
+                                                    Duration(milliseconds: 370),
+                                              )
+                                            ],
+                                            child: NumbersCard(
+                                              imagePath: SImageString.numberOne,
+                                              screenHeight: screenHeight,
+                                              screenWidth: screenWidth,
+                                              onTap: () async {
+                                                await openMaterialsScreen(
+                                                  module: module,
+                                                  activity: activity,
+                                                  trimester: 1,
+                                                  activityTitle: controller
+                                                      .getActivitiesTitle(
+                                                          context,
+                                                          activity.activity),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                          Animate(
+                                            effects: const [
+                                              FlipEffect(
+                                                begin: 1,
+                                                end: 2,
+                                                direction: Axis.horizontal,
+                                                delay:
+                                                    Duration(milliseconds: 100),
+                                                duration:
+                                                    Duration(milliseconds: 370),
+                                              )
+                                            ],
+                                            child: NumbersCard(
+                                              imagePath: SImageString.numberTwo,
+                                              screenHeight: screenHeight,
+                                              screenWidth: screenWidth,
+                                              onTap: () async {
+                                                await openMaterialsScreen(
+                                                  module: module,
+                                                  activity: activity,
+                                                  trimester: 2,
+                                                  activityTitle: controller
+                                                      .getActivitiesTitle(
+                                                          context,
+                                                          activity.activity),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                          Animate(
+                                            effects: const [
+                                              FlipEffect(
+                                                begin: 1,
+                                                end: 2,
+                                                direction: Axis.horizontal,
+                                                delay:
+                                                    Duration(milliseconds: 200),
+                                                duration:
+                                                    Duration(milliseconds: 370),
+                                              )
+                                            ],
+                                            child: NumbersCard(
+                                              imagePath:
+                                                  SImageString.numberThree,
+                                              screenHeight: screenHeight,
+                                              screenWidth: screenWidth,
+                                              onTap: () async {
+                                                await openMaterialsScreen(
+                                                  module: module,
+                                                  activity: activity,
+                                                  trimester: 3,
+                                                  activityTitle: controller
+                                                      .getActivitiesTitle(
+                                                          context,
+                                                          activity.activity),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 16)
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        },
                       );
                     },
                   )
@@ -133,6 +271,32 @@ class ActivitiesScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> openMaterialsScreen(
+      {required Module module,
+      required Activity activity,
+      required int trimester,
+      required String activityTitle}) async {
+    Get.back();
+    await Future.delayed(
+      const Duration(milliseconds: 200),
+    ).then(
+      (value) {
+        Get.to(
+          () => MaterialsScreen(
+            module: module,
+            activity: activity,
+            trimester: trimester,
+            activityTitle: activityTitle,
+          ),
+          transition: Transition.downToUp,
+          duration: const Duration(
+            milliseconds: 370,
+          ),
+        );
+      },
     );
   }
 }

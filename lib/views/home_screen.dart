@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myschool/controllers/home_controller.dart';
 import 'package:myschool/controllers/user_controller.dart';
+import 'package:myschool/generated/l10n.dart';
 import 'package:myschool/models/modules.dart';
 import 'package:myschool/utils/device/device_utility.dart';
 import 'package:myschool/views/activities_screen.dart';
 import 'package:myschool/views/widgets/bubble.dart';
 import 'package:myschool/views/widgets/squar_button.dart';
-import 'package:page_transition/page_transition.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -73,9 +73,9 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "Welcome",
-                        style: TextStyle(
+                      Text(
+                        S.of(context).welcome,
+                        style: const TextStyle(
                             fontWeight: FontWeight.w900, fontSize: 48),
                       ),
                       Text(
@@ -83,9 +83,9 @@ class HomeScreen extends StatelessWidget {
                         style: const TextStyle(
                             fontWeight: FontWeight.w900, fontSize: 48),
                       ),
-                      const Text(
-                        "What are we learning today?",
-                        style: TextStyle(
+                      Text(
+                        S.of(context).learning_today,
+                        style: const TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 22),
                       ),
                       GridView.builder(
@@ -102,17 +102,14 @@ class HomeScreen extends StatelessWidget {
                           final Module module = homeController.modules[index];
                           return SquarButton(
                             image: module.imagePath,
-                            title: module.module.name,
+                            title: homeController.getModuleTitle(
+                                context, module.module),
                             onTap: () {
                               Get.to(
-                                // PageTransition(
-                                //       type: PageTransitionType.rightToLeft,
-                                //       child: ActivitiesScreen(
-                                //           module: module,
-                                //           activityImage: module.imagePath))
-
                                 () => ActivitiesScreen(
                                     activityImage: module.imagePath,
+                                    moduleTitle: homeController.getModuleTitle(
+                                        context, module.module),
                                     module: module),
                                 transition: Transition.downToUp,
                                 duration: 370.milliseconds,
