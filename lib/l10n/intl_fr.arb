@@ -1,5 +1,4 @@
 {
-    
         "sign_up" : "S'inscrire",
         "level" : "Niveau",
         "select_a_branch" : "Veuillez sélectionner une branche",
@@ -57,7 +56,38 @@
         "exercises" : "Exercices",
         "finals" : "Finales",
         "lessons" : "Leçons",
-        "school_book" : "Manuel scolaire",
-        "videos" : "Vidéos"
-    }
+        "school_book" : "Livre scolaire",
+        "videos" : "Vidéos",        
+        "literature" : "Littérature",
+        "scientific" : "Scientifique",
+        "languages" : "Langues étrangères",
+        "philosophy_branch" : "Littérature et Philosophie",
+        "management" : "Gestion et Économie",
+        "math_technique" : "Math Techniques",
+        "ap1" : "1ère École Primaire",
+        "ap2" : "2ème École Primaire",
+        "3ap3" : "3ème École Primaire",
+        "ap4" : "4ème École Primaire",
+        "ap5" : "5ème École Primaire",
+        "cem1" : "1ère Collège",
+        "cem2" : "2ème Collège",
+        "cem3" : "3ème Collège",
+        "cem4" : "4ème Collège",
+        "lycee1" : "1ère Lycée",
+        "lycee2" : "2ème Lycée",
+        "lycee3" : "3ème Lycée",
+        "settings" : "Paramètres",
+        "profile" : "Profil",
+        "pick_a_level" : "Choisir un niveau",
+        "update_level" : "MISE À JOUR DU NIVEAU",
+        "pick_branch" : "Choisir une branche",
+        "update_branch" : "MISE À JOUR DE LA BRANCHE",
+        "branch" : "Branche",
+        "preferences" : "Préférences",
+        "language" : "Langues",
+        "dark_mode" : "Mode sombre",
+        "notifications" : "Notifications",
+        "log_out" : "Déconnexion"  
+        
+}
     

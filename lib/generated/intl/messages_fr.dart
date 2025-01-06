@@ -24,12 +24,22 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about_you": MessageLookupByLibrary.simpleMessage("À propos de vous"),
         "accounting": MessageLookupByLibrary.simpleMessage("Comptabilité"),
+        "ap1": MessageLookupByLibrary.simpleMessage("1ère École Primaire"),
+        "ap2": MessageLookupByLibrary.simpleMessage("2ème École Primaire"),
+        "ap4": MessageLookupByLibrary.simpleMessage("4ème École Primaire"),
+        "ap5": MessageLookupByLibrary.simpleMessage("5ème École Primaire"),
         "arabic": MessageLookupByLibrary.simpleMessage("Arabe"),
+        "branch": MessageLookupByLibrary.simpleMessage("Branche"),
+        "cem1": MessageLookupByLibrary.simpleMessage("1ère Collège"),
+        "cem2": MessageLookupByLibrary.simpleMessage("2ème Collège"),
+        "cem3": MessageLookupByLibrary.simpleMessage("3ème Collège"),
+        "cem4": MessageLookupByLibrary.simpleMessage("4ème Collège"),
         "civil": MessageLookupByLibrary.simpleMessage("Civil"),
         "civil_engineering":
             MessageLookupByLibrary.simpleMessage("Génie civil"),
         "computer_science":
             MessageLookupByLibrary.simpleMessage("Informatique"),
+        "dark_mode": MessageLookupByLibrary.simpleMessage("Mode sombre"),
         "economy": MessageLookupByLibrary.simpleMessage("Économie"),
         "electrical_engineering":
             MessageLookupByLibrary.simpleMessage("Génie électrique"),
@@ -56,11 +66,22 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Vous avez déjà un compte?"),
         "history": MessageLookupByLibrary.simpleMessage("Histoire"),
         "italian": MessageLookupByLibrary.simpleMessage("Italien"),
+        "language": MessageLookupByLibrary.simpleMessage("Langues"),
+        "languages": MessageLookupByLibrary.simpleMessage("Langues étrangères"),
         "law": MessageLookupByLibrary.simpleMessage("Droit"),
         "learning_today": MessageLookupByLibrary.simpleMessage(
             "Qu\'allons-nous apprendre aujourd\'hui?"),
         "lessons": MessageLookupByLibrary.simpleMessage("Leçons"),
         "level": MessageLookupByLibrary.simpleMessage("Niveau"),
+        "literature": MessageLookupByLibrary.simpleMessage("Littérature"),
+        "log_out": MessageLookupByLibrary.simpleMessage("Déconnexion"),
+        "lycee1": MessageLookupByLibrary.simpleMessage("1ère Lycée"),
+        "lycee2": MessageLookupByLibrary.simpleMessage("2ème Lycée"),
+        "lycee3": MessageLookupByLibrary.simpleMessage("3ème Lycée"),
+        "management":
+            MessageLookupByLibrary.simpleMessage("Gestion et Économie"),
+        "math_technique":
+            MessageLookupByLibrary.simpleMessage("Math Techniques"),
         "maths": MessageLookupByLibrary.simpleMessage("Mathématiques"),
         "mechanical_engineering":
             MessageLookupByLibrary.simpleMessage("Génie mécanique"),
@@ -73,11 +94,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "new_here": MessageLookupByLibrary.simpleMessage("Nouveau ici?"),
         "new_user": MessageLookupByLibrary.simpleMessage("Nouvel utilisateur"),
         "next": MessageLookupByLibrary.simpleMessage("SUIVANT"),
+        "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "password": MessageLookupByLibrary.simpleMessage("Mot de passe"),
         "password_at_least_8": MessageLookupByLibrary.simpleMessage(
             "Le mot de passe doit contenir au moins 8 caractères"),
         "philosophy": MessageLookupByLibrary.simpleMessage("Philosophie"),
+        "philosophy_branch":
+            MessageLookupByLibrary.simpleMessage("Littérature et Philosophie"),
         "physics": MessageLookupByLibrary.simpleMessage("Physique"),
+        "pick_a_level":
+            MessageLookupByLibrary.simpleMessage("Choisir un niveau"),
+        "pick_branch":
+            MessageLookupByLibrary.simpleMessage("Choisir une branche"),
         "pick_trimester":
             MessageLookupByLibrary.simpleMessage("Choisissez un trimestre"),
         "pick_your_branch":
@@ -86,12 +114,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Choisissez votre niveau"),
         "process_engineering":
             MessageLookupByLibrary.simpleMessage("Génie des procédés"),
-        "school_book": MessageLookupByLibrary.simpleMessage("Manuel scolaire"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profil"),
+        "school_book": MessageLookupByLibrary.simpleMessage("Livre scolaire"),
         "science": MessageLookupByLibrary.simpleMessage("Science"),
+        "scientific": MessageLookupByLibrary.simpleMessage("Scientifique"),
         "select_a_branch": MessageLookupByLibrary.simpleMessage(
             "Veuillez sélectionner une branche"),
         "select_a_level": MessageLookupByLibrary.simpleMessage(
             "Veuillez sélectionner un niveau"),
+        "settings": MessageLookupByLibrary.simpleMessage("Paramètres"),
         "shariaa": MessageLookupByLibrary.simpleMessage("Charia"),
         "sign_in": MessageLookupByLibrary.simpleMessage("SE CONNECTER"),
         "sign_up": MessageLookupByLibrary.simpleMessage("S\'inscrire"),
@@ -99,6 +130,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "start_learning":
             MessageLookupByLibrary.simpleMessage("COMMENCER À APPRENDRE !"),
         "technology": MessageLookupByLibrary.simpleMessage("Technologie"),
+        "update_branch":
+            MessageLookupByLibrary.simpleMessage("MISE À JOUR DE LA BRANCHE"),
+        "update_level":
+            MessageLookupByLibrary.simpleMessage("MISE À JOUR DU NIVEAU"),
         "valid_email": MessageLookupByLibrary.simpleMessage(
             "Veuillez entrer un email valide"),
         "videos": MessageLookupByLibrary.simpleMessage("Vidéos"),

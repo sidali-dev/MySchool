@@ -4,7 +4,12 @@ enum Languages {
   ar,
 }
 
-enum Branches {
+enum Role {
+  teacher,
+  student,
+}
+
+enum BranchesEnum {
   literature,
   scientifique,
   philosophie,

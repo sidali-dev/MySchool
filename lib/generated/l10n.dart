@@ -639,6 +639,306 @@ class S {
       args: [],
     );
   }
+
+  /// `Literature`
+  String get literature {
+    return Intl.message(
+      'Literature',
+      name: 'literature',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scientific`
+  String get scientific {
+    return Intl.message(
+      'Scientific',
+      name: 'scientific',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Foreign Languages`
+  String get languages {
+    return Intl.message(
+      'Foreign Languages',
+      name: 'languages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Literature & Philosophy`
+  String get philosophy_branch {
+    return Intl.message(
+      'Literature & Philosophy',
+      name: 'philosophy_branch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Management and Economics`
+  String get management {
+    return Intl.message(
+      'Management and Economics',
+      name: 'management',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Technical Maths`
+  String get math_technique {
+    return Intl.message(
+      'Technical Maths',
+      name: 'math_technique',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1 Primary School`
+  String get ap1 {
+    return Intl.message(
+      '1 Primary School',
+      name: 'ap1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2 Primary School`
+  String get ap2 {
+    return Intl.message(
+      '2 Primary School',
+      name: 'ap2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3 Primary School`
+  String get ap3 {
+    return Intl.message(
+      '3 Primary School',
+      name: 'ap3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `4 Primary School`
+  String get ap4 {
+    return Intl.message(
+      '4 Primary School',
+      name: 'ap4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `5 Primary School`
+  String get ap5 {
+    return Intl.message(
+      '5 Primary School',
+      name: 'ap5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1 Middle School`
+  String get cem1 {
+    return Intl.message(
+      '1 Middle School',
+      name: 'cem1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2 Middle School`
+  String get cem2 {
+    return Intl.message(
+      '2 Middle School',
+      name: 'cem2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3 Middle School`
+  String get cem3 {
+    return Intl.message(
+      '3 Middle School',
+      name: 'cem3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `4 Middle School`
+  String get cem4 {
+    return Intl.message(
+      '4 Middle School',
+      name: 'cem4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1 High School`
+  String get lycee1 {
+    return Intl.message(
+      '1 High School',
+      name: 'lycee1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2 High School`
+  String get lycee2 {
+    return Intl.message(
+      '2 High School',
+      name: 'lycee2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3 High School`
+  String get lycee3 {
+    return Intl.message(
+      '3 High School',
+      name: 'lycee3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get profile {
+    return Intl.message(
+      'Profile',
+      name: 'profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick a level`
+  String get pick_a_level {
+    return Intl.message(
+      'Pick a level',
+      name: 'pick_a_level',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `UPDATE LEVEL`
+  String get update_level {
+    return Intl.message(
+      'UPDATE LEVEL',
+      name: 'update_level',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick a branch`
+  String get pick_branch {
+    return Intl.message(
+      'Pick a branch',
+      name: 'pick_branch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `UPDATE BRANCH`
+  String get update_branch {
+    return Intl.message(
+      'UPDATE BRANCH',
+      name: 'update_branch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Branch`
+  String get branch {
+    return Intl.message(
+      'Branch',
+      name: 'branch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Prefernces`
+  String get prefernces {
+    return Intl.message(
+      'Prefernces',
+      name: 'prefernces',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Languages`
+  String get language {
+    return Intl.message(
+      'Languages',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark Mode`
+  String get dark_mode {
+    return Intl.message(
+      'Dark Mode',
+      name: 'dark_mode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notifications {
+    return Intl.message(
+      'Notifications',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log out`
+  String get log_out {
+    return Intl.message(
+      'Log out',
+      name: 'log_out',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

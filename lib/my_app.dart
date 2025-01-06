@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:myschool/controllers/language_controller.dart';
+import 'package:myschool/controllers/theme_controller.dart';
 import 'package:myschool/generated/l10n.dart';
 import 'package:myschool/services/authentication_service.dart';
-import 'package:myschool/views/home_screen.dart';
+import 'package:myschool/utils/constants/enums.dart';
+import 'package:myschool/views/student_home_screen.dart';
 import 'package:myschool/utils/theme/theme.dart';
 import 'package:myschool/views/intro_screen.dart';
+import 'package:myschool/views/teacher_home_screen.dart';
+
+import 'controllers/user_controller.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final ThemeController themeController = Get.find();
+  final LanguageController languageController = Get.find();
+  final UserController userController = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +31,9 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      locale: Locale("fr"),
-      themeMode: ThemeMode.light,
+      locale: Locale(languageController.getCurrentLanguage()),
+      themeMode:
+          themeController.isDarkMode() ? ThemeMode.dark : ThemeMode.light,
       theme: SAppTheme.getLightTheme(true),
       darkTheme: SAppTheme.getDarkTheme(true),
       home: GetBuilder<AuthenticationService>(
@@ -31,7 +41,30 @@ class MyApp extends StatelessWidget {
           if (controller.authStatus == AuthStatus.unauthenticated) {
             return const IntroScreen();
           } else if (controller.authStatus == AuthStatus.authenticated) {
-            return HomeScreen();
+            return Builder(
+              builder: (context) => FutureBuilder(
+                future: userController.loadUpUser(context),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasError) {
+                      print(snapshot.error);
+
+                      return TeacherHomeScreen(
+                          name: userController.user.value!.name);
+                    } else {
+                      return userController.user.value!.role == Role.student
+                          ? StudentHomeScreen()
+                          : TeacherHomeScreen(
+                              name: userController.user.value!.name);
+                    }
+                  }
+
+                  return const Center(child: CircularProgressIndicator());
+                },
+              ),
+            );
           } else {
             return const Scaffold(
               body: Center(

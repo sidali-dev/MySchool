@@ -9,7 +9,7 @@ class SElevatedButtonTheme {
   /* -- Light Theme -- */
   static final lightElevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      elevation: 0,
+      elevation: 10,
       foregroundColor: SColors.light,
       backgroundColor: SColors.primary,
       disabledForegroundColor: SColors.darkGrey,
@@ -17,7 +17,7 @@ class SElevatedButtonTheme {
       side: const BorderSide(color: SColors.primary),
       padding: const EdgeInsets.symmetric(vertical: SSizes.buttonHeight),
       textStyle: const TextStyle(
-          fontSize: 16, color: SColors.textWhite, fontWeight: FontWeight.w600),
+          fontSize: 18, color: SColors.textWhite, fontWeight: FontWeight.w600),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(SSizes.buttonRadius)),
     ),
@@ -26,7 +26,7 @@ class SElevatedButtonTheme {
   /* -- Dark Theme -- */
   static final darkElevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      elevation: 0,
+      elevation: 10,
       foregroundColor: SColors.light,
       backgroundColor: SColors.primary,
       disabledForegroundColor: SColors.darkGrey,
@@ -34,7 +34,7 @@ class SElevatedButtonTheme {
       side: const BorderSide(color: SColors.primary),
       padding: const EdgeInsets.symmetric(vertical: SSizes.buttonHeight),
       textStyle: const TextStyle(
-          fontSize: 16, color: SColors.textWhite, fontWeight: FontWeight.w600),
+          fontSize: 18, color: SColors.textWhite, fontWeight: FontWeight.w600),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(SSizes.buttonRadius)),
     ),

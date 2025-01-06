@@ -7,28 +7,14 @@ import 'package:myschool/utils/constants/enums.dart';
 
 import '../utils/helpers/appwrite_helpers.dart';
 
-class LevelDialogController extends GetxController
+class TeacherInfoDialogController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  RxMap selectedLevel = {}.obs;
-
   late AnimationController animationController;
 
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
 
-  List<Map<String, dynamic>> levels = [
-    {"level": 1, "title": "1 AP"},
-    {"level": 2, "title": "2 AP"},
-    {"level": 3, "title": "3 AP"},
-    {"level": 4, "title": "4 AP"},
-    {"level": 5, "title": "5 AP"},
-    {"level": 6, "title": "1 CEM"},
-    {"level": 7, "title": "2 CEM"},
-    {"level": 8, "title": "3 CEM"},
-    {"level": 9, "title": "4 CEM"},
-    {"level": 10, "title": "1 LYCEE"},
-    {"level": 11, "title": "2 LYCEE"},
-    {"level": 12, "title": "3 LYCEE"}
-  ];
+  RxInt charCount = 0.obs;
 
   RxList<Effect> effects = <Effect>[
     const SlideEffect(
@@ -42,6 +28,10 @@ class LevelDialogController extends GetxController
   onInit() {
     super.onInit();
 
+    descriptionController.addListener(() {
+      charCount.value = descriptionController.text.length;
+    });
+
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
@@ -52,6 +42,8 @@ class LevelDialogController extends GetxController
   onClose() {
     animationController.dispose();
     nameController.dispose();
+    descriptionController.dispose();
+
     super.onClose();
   }
 
@@ -85,14 +77,10 @@ class LevelDialogController extends GetxController
     ];
   }
 
-  changeLevel(Map level) {
-    selectedLevel.value = level;
-  }
-
-  Future<bool> addCredentials({
+  Future<bool> addTeacherCredentials({
     required BuildContext context,
     required String name,
-    required int level,
+    String? description,
   }) async {
     //start loading indicator
     showDialog(
@@ -106,15 +94,15 @@ class LevelDialogController extends GetxController
     //add user data to database
     DatabaseService databaseService = DatabaseService();
     Document? document = await databaseService
-        .addUser(name: name.trim(), role: Role.student)
+        .addUser(name: name.trim(), role: Role.teacher)
         .then((value) async {
       await Future.delayed(const Duration(seconds: 1));
       return value;
     }).then(
       (value) async {
-        return await databaseService.addStudentData(
+        return await databaseService.addTeacherData(
           userID: value!.$id,
-          level: level,
+          description: description,
         );
       },
     );

@@ -9,30 +9,29 @@ import '../utils/helpers/appwrite_helpers.dart';
 
 class BranchDialogController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  RxMap selectedBranch = {}.obs;
-
   late AnimationController animationController;
 
+  RxMap selectedBranch = {}.obs;
   Map<int, List<Map<String, String>>> branches = {
     10: [
-      {"branch": Branches.literature.name},
-      {"branch": Branches.scientifique.name}
+      {"branch": BranchesEnum.literature.name},
+      {"branch": BranchesEnum.scientifique.name}
     ],
     11: [
-      {"branch": Branches.philosophie.name},
-      {"branch": Branches.langue.name},
-      {"branch": Branches.gestion.name},
-      {"branch": Branches.scientifique.name},
-      {"branch": Branches.mathelam.name},
-      {"branch": Branches.mathTechnique.name}
+      {"branch": BranchesEnum.philosophie.name},
+      {"branch": BranchesEnum.langue.name},
+      {"branch": BranchesEnum.gestion.name},
+      {"branch": BranchesEnum.scientifique.name},
+      {"branch": BranchesEnum.mathelam.name},
+      {"branch": BranchesEnum.mathTechnique.name}
     ],
     12: [
-      {"branch": Branches.philosophie.name},
-      {"branch": Branches.langue.name},
-      {"branch": Branches.gestion.name},
-      {"branch": Branches.scientifique.name},
-      {"branch": Branches.mathelam.name},
-      {"branch": Branches.mathTechnique.name}
+      {"branch": BranchesEnum.philosophie.name},
+      {"branch": BranchesEnum.langue.name},
+      {"branch": BranchesEnum.gestion.name},
+      {"branch": BranchesEnum.scientifique.name},
+      {"branch": BranchesEnum.mathelam.name},
+      {"branch": BranchesEnum.mathTechnique.name}
     ]
   };
 
@@ -111,8 +110,15 @@ class BranchDialogController extends GetxController
 
     //add user data to database
     DatabaseService databaseService = DatabaseService();
-    Document? document = await databaseService.addUser(
-        name: name.trim(), level: level, branch: branch);
+    Document? document = await databaseService
+        .addUser(name: name.trim(), role: Role.student)
+        .then(
+          (value) async => await databaseService.addStudentData(
+            userID: value?.$id,
+            level: level,
+            branch: branch,
+          ),
+        );
 
     //close loading indicator
     Get.back();

@@ -1,31 +1,27 @@
+import 'package:myschool/utils/constants/enums.dart';
+
 class UserModel {
-  String id;
-  String name;
-  int level;
-  String? branch;
+  final String id;
+  final String name;
+  final Role role;
 
   UserModel({
     required this.id,
     required this.name,
-    required this.level,
-    this.branch,
+    required this.role,
   });
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      '\$id': id,
-      'name': name,
-      'level': level,
-      'branch': branch,
-    };
-  }
-
-  factory UserModel.fromMap(Map<String, dynamic> map) {
+  factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      id: map['\$id'] as String,
-      name: map['name'] as String,
-      level: map['level'] as int,
-      branch: map['branch'] as String?,
+      id: json['\$id'],
+      name: json['name'],
+      role: Role.values.byName(json['role']),
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        '\$id': id,
+        'name': name,
+        'role': role.name,
+      };
 }

@@ -14,12 +14,12 @@ class SImageString {
   static const moduleEnglish = "assets/images/modules/eng.png";
   static const moduleSpanish = "assets/images/modules/espagne.png";
   static const moduleFrench = "assets/images/modules/france.png";
-  static const moduleCivilEngineering = "assets/images/modules/gen_civ.png";
+  static const moduleCivilEngineering = "assets/images/modules/gen-civ.png";
   static const moduleElectricalEngineering =
-      "assets/images/modules/gen_elc.png";
+      "assets/images/modules/gen-elc.png";
   static const moduleMichanicalEngineering =
-      "assets/images/modules/gen_mic.png";
-  static const moduleProcessEngineering = "assets/images/modules/gen_pro.png";
+      "assets/images/modules/gen-mic.png";
+  static const moduleProcessEngineering = "assets/images/modules/gen-pro.png";
   static const moduleGeography = "assets/images/modules/geography.png";
   static const moduleHistory = "assets/images/modules/histoire.png";
   static const moduleComputerScience = "assets/images/modules/informatique.png";

@@ -18,7 +18,6 @@ class SquarButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final double width = (SDeviceUtils.getScreenWidth(context) / 2.5);
     return Card(
-      color: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
       ),
@@ -63,7 +62,6 @@ class SquarButton extends StatelessWidget {
               const SizedBox(height: 8),
               AutoScrollText(
                   alignment: Alignment.center,
-                  duration: const Duration(seconds: 2),
                   text: Text(
                     title,
                     style: const TextStyle(

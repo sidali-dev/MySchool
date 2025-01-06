@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:myschool/utils/constants/enums.dart';
 import 'package:myschool/views/widgets/animation/animated_changing_text.dart';
 import 'package:myschool/controllers/sign_in_controller.dart';
 import 'package:myschool/views/widgets/level_dialog.dart';
 import 'package:myschool/utils/device/device_utility.dart';
+import 'package:myschool/views/widgets/teacher_info_dialog.dart';
 import '../../generated/l10n.dart';
 import '../../utils/constants/colors.dart';
 
 class SignInDialog extends StatelessWidget {
   SignInDialog({
     super.key,
+    required this.role,
   });
-
+  final Role role;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -145,13 +148,25 @@ class SignInDialog extends StatelessWidget {
                                   ).then((value) => Get.back());
 
                                   if (context.mounted) {
-                                    showDialog(
+                                    if (role == Role.student) {
+                                      showDialog(
                                         context: context,
                                         builder: (context) => LevelDialog(
                                             email:
                                                 controller.emailController.text,
                                             password: controller
-                                                .passwordController.text));
+                                                .passwordController.text),
+                                      );
+                                    } else if (role == Role.teacher) {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => TeacherInfoDialog(
+                                            email:
+                                                controller.emailController.text,
+                                            password: controller
+                                                .passwordController.text),
+                                      );
+                                    }
                                   }
                                 } else {
                                   bool isSucceed =

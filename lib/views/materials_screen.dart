@@ -15,18 +15,21 @@ class MaterialsScreen extends StatelessWidget {
     required this.trimester,
     required this.module,
     required this.activityTitle,
+    required this.moduleTitle,
   });
 
   final String activityTitle;
   final Module module;
   final Activity activity;
   final int trimester;
+  final String moduleTitle;
 
   @override
   Widget build(BuildContext context) {
     final double screenHeight = SDeviceUtils.getScreenHeight(context);
     final double screenWidth = SDeviceUtils.getScreenWidth(context);
     final bool isRtl = SHelperFunctions.isRtl(context);
+    final bool isDark = SHelperFunctions.isDarkMode(context);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -37,33 +40,33 @@ class MaterialsScreen extends StatelessWidget {
               right: -100,
               width: 200,
               top: (screenHeight / 2) - 100,
-              child: const Bubble(
-                innerColor: Colors.white,
+              child: Bubble(
+                innerColor: isDark ? Colors.black : Colors.white,
                 outterColor: Colors.yellow,
                 radius: 200,
-                delay: Duration(milliseconds: 500),
+                delay: const Duration(milliseconds: 500),
               ),
             ),
-            const Positioned(
+            Positioned(
               left: -50,
               width: 300,
               top: -100,
               child: Bubble(
-                innerColor: Colors.white,
+                innerColor: isDark ? Colors.black : Colors.white,
                 outterColor: Colors.yellow,
                 radius: 300,
-                delay: Duration(seconds: 1),
+                delay: const Duration(seconds: 1),
               ),
             ),
-            const Positioned(
+            Positioned(
               left: 50,
               width: 250,
               bottom: -100,
               child: Bubble(
-                innerColor: Colors.white,
+                innerColor: isDark ? Colors.black : Colors.white,
                 outterColor: Colors.yellow,
                 radius: 250,
-                delay: Duration(milliseconds: 1500),
+                delay: const Duration(milliseconds: 1500),
               ),
             ),
             SizedBox(width: SDeviceUtils.getScreenWidth(context)),
@@ -79,7 +82,6 @@ class MaterialsScreen extends StatelessWidget {
                           alignment: isRtl
                               ? Alignment.centerRight
                               : Alignment.centerLeft,
-                          duration: const Duration(seconds: 1),
                           text: Text(
                             activityTitle,
                             style: const TextStyle(
@@ -105,7 +107,7 @@ class MaterialsScreen extends StatelessWidget {
                               left: isRtl ? -50 : null,
                               bottom: 0,
                               child: Hero(
-                                tag: module.module.name,
+                                tag: moduleTitle,
                                 child: Image.asset(
                                   module.imagePath,
                                   width: screenWidth / 5,
@@ -113,7 +115,7 @@ class MaterialsScreen extends StatelessWidget {
                               ),
                             ),
                             Hero(
-                              tag: activity.activity.name,
+                              tag: activityTitle,
                               child: Image.asset(
                                 activity.imagePath,
                                 width: screenWidth / 3.5,

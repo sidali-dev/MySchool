@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:myschool/models/modules.dart';
 import 'package:myschool/utils/constants/image_strings.dart';
 
 import '../generated/l10n.dart';
 import '../utils/constants/enums.dart';
 
-class HomeController {
-  late List<Module> modules;
+class HomeController extends GetxController {
+  RxList<Module> modules = <Module>[].obs;
+  RxInt level = 0.obs;
+  RxString branch = "".obs;
 
-  HomeController({required int level, String? branch}) {
-    modules = getUserModules(level: level, branch: branch);
+  void updateUserModules({required int level, String? branch}) {
+    this.level.value = level;
+    this.branch.value = branch ?? "";
+    modules.value = getUserModules(level: level, branch: branch);
   }
 
   List<Module> getUserModules({required int level, String? branch}) {
     switch (level) {
       case 12:
         {
-          if (branch == Branches.gestion.name) {
+          if (branch == BranchesEnum.gestion.name) {
             return <Module>[
               Module(
                   module: ModuleEnum.accounting,
@@ -53,7 +58,7 @@ class HomeController {
                   module: ModuleEnum.philosophy,
                   imagePath: SImageString.modulePhilosophy),
             ];
-          } else if (branch == Branches.langue.name) {
+          } else if (branch == BranchesEnum.langue.name) {
             return <Module>[
               Module(
                   module: ModuleEnum.arabic,
@@ -89,7 +94,7 @@ class HomeController {
                   module: ModuleEnum.spanish,
                   imagePath: SImageString.moduleSpanish),
             ];
-          } else if (branch == Branches.philosophie.name) {
+          } else if (branch == BranchesEnum.philosophie.name) {
             return <Module>[
               Module(
                   module: ModuleEnum.arabic,
@@ -116,7 +121,7 @@ class HomeController {
                   module: ModuleEnum.sharia,
                   imagePath: SImageString.moduleShariaa),
             ];
-          } else if (branch == Branches.mathTechnique.name) {
+          } else if (branch == BranchesEnum.mathTechnique.name) {
             return <Module>[
               Module(
                   module: ModuleEnum.arabic,
@@ -195,7 +200,7 @@ class HomeController {
         }
       case 11:
         {
-          if (branch == Branches.gestion.name) {
+          if (branch == BranchesEnum.gestion.name) {
             return <Module>[
               Module(
                   module: ModuleEnum.english,
@@ -226,7 +231,7 @@ class HomeController {
                   imagePath: SImageString.moduleEconomy),
               Module(module: ModuleEnum.law, imagePath: SImageString.moduleLaw),
             ];
-          } else if (branch == Branches.langue.name) {
+          } else if (branch == BranchesEnum.langue.name) {
             return <Module>[
               Module(
                   module: ModuleEnum.english,
@@ -259,7 +264,7 @@ class HomeController {
                   module: ModuleEnum.spanish,
                   imagePath: SImageString.moduleSpanish),
             ];
-          } else if (branch == Branches.philosophie.name) {
+          } else if (branch == BranchesEnum.philosophie.name) {
             return <Module>[
               Module(
                   module: ModuleEnum.english,
@@ -292,7 +297,7 @@ class HomeController {
                   module: ModuleEnum.physics,
                   imagePath: SImageString.modulePhysics),
             ];
-          } else if (branch == Branches.mathTechnique.name) {
+          } else if (branch == BranchesEnum.mathTechnique.name) {
             return <Module>[
               Module(
                   module: ModuleEnum.english,
@@ -399,21 +404,7 @@ class HomeController {
                 imagePath: SImageString.moduleComputerScience),
           ];
         }
-      // else {
-      //   return <ModuleEnum>[
-      //     ModuleEnum.arabic,
-      //     ModuleEnum.english,
-      //     ModuleEnum.french,
-      //     ModuleEnum.geography,
-      //     ModuleEnum.history,
-      //     ModuleEnum.maths,
-      //     ModuleEnum.physics,
-      //     ModuleEnum.science,
-      //     ModuleEnum.sharia,
-      //     ModuleEnum.computerScience,
-      //   ];
-      // }
-      // }
+
       case 9 || 8 || 7 || 6:
         {
           return <Module>[
@@ -456,6 +447,9 @@ class HomeController {
             Module(
                 module: ModuleEnum.french,
                 imagePath: SImageString.moduleFrench),
+            Module(
+                module: ModuleEnum.english,
+                imagePath: SImageString.moduleEnglish),
             Module(
                 module: ModuleEnum.sharia,
                 imagePath: SImageString.moduleShariaa),
@@ -542,7 +536,7 @@ class HomeController {
     }
   }
 
-  getModuleTitle(BuildContext context, ModuleEnum moduleEnum) {
+  String getModuleTitle(BuildContext context, ModuleEnum moduleEnum) {
     switch (moduleEnum) {
       case ModuleEnum.accounting:
         return S.of(context).accounting;

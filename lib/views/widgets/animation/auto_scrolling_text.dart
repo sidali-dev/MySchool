@@ -4,14 +4,13 @@ import 'package:flutter/material.dart';
 
 class AutoScrollText extends StatefulWidget {
   final Text text;
-  final double width;
-  final Duration duration;
+  final double? width;
   final Alignment alignment;
+
   const AutoScrollText({
     super.key,
     required this.text,
-    required this.width,
-    required this.duration,
+    this.width,
     required this.alignment,
   });
 
@@ -32,20 +31,25 @@ class _AutoScrollTextState extends State<AutoScrollText> {
   }
 
   void _startAutoScroll() {
-    _scrollTimer = Timer.periodic(widget.duration, (_) {
+    int baseTimePerCharacter = 50; // Adjust this for speed
+    int textLength = widget.text.data?.length ?? 0;
+    Duration dynamicDuration =
+        Duration(milliseconds: baseTimePerCharacter * textLength);
+
+    _scrollTimer = Timer.periodic(dynamicDuration, (_) {
       double maxScrollExtent = _scrollController.position.maxScrollExtent;
       double currentScrollPosition = _scrollController.offset;
 
       if (_scrollForward && currentScrollPosition < maxScrollExtent) {
         _scrollController.animateTo(
           maxScrollExtent,
-          duration: widget.duration,
+          duration: dynamicDuration,
           curve: Curves.linear,
         );
       } else if (!_scrollForward && currentScrollPosition > 0) {
         _scrollController.animateTo(
           0,
-          duration: widget.duration,
+          duration: dynamicDuration,
           curve: Curves.linear,
         );
       } else {

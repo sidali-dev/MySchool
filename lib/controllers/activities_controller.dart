@@ -16,7 +16,7 @@ class ActivitiesController {
   }
 
   List<Activity> getActivities() {
-    switch (userController.user.value!.level) {
+    switch (userController.student.value!.level) {
       case 12:
         {
           return <Activity>[

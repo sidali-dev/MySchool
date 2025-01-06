@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:myschool/controllers/level_dialog_controller.dart';
 import 'package:myschool/controllers/sign_in_controller.dart';
+import 'package:myschool/controllers/teacher_info_dialog_controller.dart';
 import 'package:myschool/utils/constants/enums.dart';
 import 'package:myschool/views/widgets/sign_in_dialog.dart';
 import 'package:myschool/utils/device/device_utility.dart';
 
 import '../../generated/l10n.dart';
 import '../../utils/constants/colors.dart';
-import 'branch_dialog.dart';
 
-class LevelDialog extends StatelessWidget {
+class TeacherInfoDialog extends StatelessWidget {
   final String email;
   final String password;
-  LevelDialog({
+  TeacherInfoDialog({
     super.key,
     required this.email,
     required this.password,
@@ -28,8 +26,8 @@ class LevelDialog extends StatelessWidget {
     final double width = SDeviceUtils.getScreenWidth(context);
     final double height = SDeviceUtils.getScreenHeight(context);
 
-    return GetX<LevelDialogController>(
-      init: LevelDialogController(),
+    return GetX<TeacherInfoDialogController>(
+      init: TeacherInfoDialogController(),
       builder: (controller) => Animate(
         effects: controller.effects,
         controller: controller.animationController,
@@ -109,30 +107,42 @@ class LevelDialog extends StatelessWidget {
                           },
                         ),
                         SizedBox(height: height * 0.02),
-                        Text(S.of(context).level,
-                            style: const TextStyle(
+                        const Text("Description",
+                            style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 16)),
                         SizedBox(height: height * 0.01),
-                        DropdownButtonFormField(
+                        TextFormField(
+                          controller: controller.descriptionController,
+                          keyboardType: TextInputType.multiline,
+                          maxLines: 5,
+                          minLines: 1,
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(
+                              Icons.description_outlined,
+                              color: SColors.primary,
+                            ),
+                            hintText: "Tell us about yourself",
+                            alignLabelWithHint: true,
+                            counter: Obx(
+                              () => Text(
+                                '${controller.charCount.value}/150',
+                                style: TextStyle(
+                                  color: controller.charCount.value > 150
+                                      ? Colors.red
+                                      : Colors.grey,
+                                ),
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          maxLength: 150,
                           validator: (value) {
-                            if (value == null) {
-                              return S.of(context).select_a_level;
+                            if (value == null || value.isEmpty) {
+                              return "Tell us about yourself";
                             }
                             return null;
-                          },
-                          decoration: InputDecoration(
-                              prefixIcon: const Icon(Iconsax.layer),
-                              hintText: S.of(context).pick_your_level),
-                          items: controller.levels
-                              .map(
-                                (Map e) => DropdownMenuItem(
-                                  value: e,
-                                  child: Text(e["title"]),
-                                ),
-                              )
-                              .toList(),
-                          onChanged: (value) {
-                            controller.changeLevel(value!);
                           },
                         ),
                         SizedBox(height: height * 0.02),
@@ -141,47 +151,33 @@ class LevelDialog extends StatelessWidget {
                           builder: (signInController) => InkWell(
                             onTap: () async {
                               if (_formKey.currentState!.validate()) {
-                                if (controller.selectedLevel['level'] < 10) {
-                                  bool isSuccess = await signInController
-                                      .appWriteSignUp(
-                                          context: context,
-                                          email: email,
-                                          password: password)
-                                      .then(
-                                    (bool isSuccess) async {
-                                      if (isSuccess) {
-                                        final response =
-                                            await controller.addCredentials(
-                                          context: context,
-                                          name: controller.nameController.text,
-                                          level:
-                                              controller.selectedLevel['level'],
-                                        );
-                                        return response;
-                                      } else {
-                                        controller.errorDialogAnimtion();
-                                        controller.animationController
-                                          ..reset()
-                                          ..forward();
-                                        return false;
-                                      }
-                                    },
-                                  );
+                                bool isSuccess = await signInController
+                                    .appWriteSignUp(
+                                        context: context,
+                                        email: email,
+                                        password: password)
+                                    .then(
+                                  (bool isSuccess) async {
+                                    if (isSuccess) {
+                                      final response = await controller
+                                          .addTeacherCredentials(
+                                        context: context,
+                                        name: controller.nameController.text,
+                                        description: controller
+                                            .descriptionController.text,
+                                      );
+                                      return response;
+                                    } else {
+                                      controller.errorDialogAnimtion();
+                                      controller.animationController
+                                        ..reset()
+                                        ..forward();
+                                      return false;
+                                    }
+                                  },
+                                );
 
-                                  if (isSuccess) {
-                                    controller.closeDialogAnimtion();
-                                    controller.animationController
-                                      ..reset()
-                                      ..forward();
-
-                                    await Future.delayed(
-                                      const Duration(milliseconds: 500),
-                                    ).then(
-                                      (_) => Get.back(),
-                                    );
-                                  }
-                                } else if (controller.selectedLevel['level'] >=
-                                    10) {
+                                if (isSuccess) {
                                   controller.closeDialogAnimtion();
                                   controller.animationController
                                     ..reset()
@@ -192,19 +188,6 @@ class LevelDialog extends StatelessWidget {
                                   ).then(
                                     (_) => Get.back(),
                                   );
-
-                                  if (context.mounted) {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => BranchDialog(
-                                        name: controller.nameController.text,
-                                        level:
-                                            controller.selectedLevel['level'],
-                                        email: email,
-                                        password: password,
-                                      ),
-                                    );
-                                  }
                                 }
                               } else {
                                 controller.errorDialogAnimtion();
@@ -218,37 +201,21 @@ class LevelDialog extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: SColors.primary,
                                   borderRadius: BorderRadius.circular(20)),
-                              child: Obx(
-                                () => Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(width: width * 0.1),
-                                    Text(
-                                      controller.selectedLevel['level'] == null
-                                          ? S.of(context).next
-                                          : controller.selectedLevel['level'] >=
-                                                  10
-                                              ? S.of(context).next
-                                              : S.of(context).finish,
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                    SizedBox(width: width * 0.03),
-                                    Icon(
-                                        controller.selectedLevel['level'] ==
-                                                null
-                                            ? Iconsax.arrow_right_3
-                                            : controller.selectedLevel[
-                                                        'level'] >=
-                                                    10
-                                                ? Iconsax.arrow_right_3
-                                                : Icons.check,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(width: width * 0.1),
+                                  Text(
+                                    S.of(context).finish,
+                                    style: const TextStyle(
                                         color: Colors.white,
-                                        size: 32.0),
-                                  ],
-                                ),
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  SizedBox(width: width * 0.03),
+                                  const Icon(Icons.check,
+                                      color: Colors.white, size: 32.0),
+                                ],
                               ),
                             ),
                           ),

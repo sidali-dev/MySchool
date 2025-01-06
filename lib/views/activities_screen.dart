@@ -29,9 +29,11 @@ class ActivitiesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ActivitiesController controller = ActivitiesController();
+
     final double screenHeight = SDeviceUtils.getScreenHeight(context);
     final double screenWidth = SDeviceUtils.getScreenWidth(context);
     final bool isRtl = SHelperFunctions.isRtl(context);
+    final bool isDark = SHelperFunctions.isDarkMode(context);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -44,33 +46,33 @@ class ActivitiesScreen extends StatelessWidget {
               right: -100,
               width: 200,
               top: (screenHeight / 2) - 100,
-              child: const Bubble(
-                innerColor: Colors.white,
-                outterColor: Colors.green,
+              child: Bubble(
+                innerColor: isDark ? Colors.black : Colors.white,
+                outterColor: Colors.red,
                 radius: 200,
-                delay: Duration(milliseconds: 500),
+                delay: const Duration(milliseconds: 500),
               ),
             ),
-            const Positioned(
+            Positioned(
               left: -50,
               width: 300,
               top: -100,
               child: Bubble(
-                innerColor: Colors.white,
-                outterColor: Colors.green,
+                innerColor: isDark ? Colors.black : Colors.white,
+                outterColor: Colors.red,
                 radius: 300,
-                delay: Duration(seconds: 1),
+                delay: const Duration(seconds: 1),
               ),
             ),
-            const Positioned(
+            Positioned(
               left: 50,
               width: 250,
               bottom: -100,
               child: Bubble(
-                innerColor: Colors.white,
-                outterColor: Colors.green,
+                innerColor: isDark ? Colors.black : Colors.white,
+                outterColor: Colors.red,
                 radius: 250,
-                delay: Duration(milliseconds: 1500),
+                delay: const Duration(milliseconds: 1500),
               ),
             ),
             SizedBox(width: SDeviceUtils.getScreenWidth(context)),
@@ -86,7 +88,6 @@ class ActivitiesScreen extends StatelessWidget {
                           alignment: isRtl
                               ? Alignment.centerRight
                               : Alignment.centerLeft,
-                          duration: const Duration(seconds: 1),
                           text: Text(
                             moduleTitle,
                             style: const TextStyle(
@@ -100,7 +101,7 @@ class ActivitiesScreen extends StatelessWidget {
                           ),
                         ],
                         child: Hero(
-                          tag: module.module.name,
+                          tag: moduleTitle,
                           child: Image.asset(
                             activityImage,
                             width: screenWidth / 3.5,
@@ -156,7 +157,6 @@ class ActivitiesScreen extends StatelessWidget {
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
-                                        duration: const Duration(seconds: 1),
                                         width: screenWidth * 0.7,
                                         alignment: Alignment.center,
                                       ),
@@ -290,6 +290,7 @@ class ActivitiesScreen extends StatelessWidget {
             activity: activity,
             trimester: trimester,
             activityTitle: activityTitle,
+            moduleTitle: moduleTitle,
           ),
           transition: Transition.downToUp,
           duration: const Duration(

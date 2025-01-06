@@ -157,28 +157,4 @@ class SignInController extends GetxController
       return true;
     }
   }
-
-// SIGN OUT
-  Future signOut({required BuildContext context}) async {
-    AuthenticationService authController = Get.find<AuthenticationService>();
-
-    //start loading indicator
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (context) => const Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-
-    int response = await authController.signOut();
-
-    //close loading indicator
-    Get.back();
-
-    //handle possible errors
-    if (response != 200 && context.mounted) {
-      AppwriteHelpers.handleAppwriteExceptions(response, context);
-    }
-  }
 }

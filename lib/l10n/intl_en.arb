@@ -57,6 +57,39 @@
     "finals" : "Finals",
     "lessons" : "Lessons",
     "school_book" : "School Book",
-    "videos" : "Videos"
+    "videos" : "Videos",
+    "literature" : "Literature",
+    "scientific" : "Scientific",
+    "languages" : "Foreign Languages",
+    "philosophy_branch" : "Literature & Philosophy",
+    "management" : "Management and Economics",
+    "math_technique" : "Technical Maths",
+    "ap1" : "1 Primary School",
+    "ap2" : "2 Primary School",
+    "ap3" : "3 Primary School",
+    "ap4" : "4 Primary School",
+    "ap5" : "5 Primary School",
+    "cem1" : "1 Middle School",
+    "cem2" : "2 Middle School",
+    "cem3" : "3 Middle School",
+    "cem4" : "4 Middle School",
+    "lycee1" : "1 High School",
+    "lycee2" : "2 High School",
+    "lycee3" : "3 High School",
+    "settings" : "Settings",
+    "profile" : "Profile",
+    "pick_a_level" : "Pick a level",
+    "update_level" : "UPDATE LEVEL",
+    "pick_branch" : "Pick a branch",
+    "update_branch" : "UPDATE BRANCH",
+    "branch" : "Branch",
+    "prefernces" : "Prefernces",
+    "language" : "Languages",
+    "dark_mode" : "Dark Mode",
+    "notifications" : "Notifications",
+    "log_out" : "Log out"
+
+
+
 
 }
