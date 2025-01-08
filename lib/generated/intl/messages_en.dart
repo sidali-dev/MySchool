@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cem2": MessageLookupByLibrary.simpleMessage("2 Middle School"),
         "cem3": MessageLookupByLibrary.simpleMessage("3 Middle School"),
         "cem4": MessageLookupByLibrary.simpleMessage("4 Middle School"),
+        "choose_level": MessageLookupByLibrary.simpleMessage("CHOOSE A LEVEL"),
         "civil": MessageLookupByLibrary.simpleMessage("Civil"),
         "civil_engineering":
             MessageLookupByLibrary.simpleMessage("Civil Engineering"),
@@ -52,8 +53,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please enter your password"),
         "enter_your_name":
             MessageLookupByLibrary.simpleMessage("Please enter your name"),
+        "exam": MessageLookupByLibrary.simpleMessage("EXAM"),
         "exams": MessageLookupByLibrary.simpleMessage("Exams"),
+        "exercise": MessageLookupByLibrary.simpleMessage("EXERCISE"),
         "exercises": MessageLookupByLibrary.simpleMessage("Exercises"),
+        "file_added": MessageLookupByLibrary.simpleMessage("File Added"),
+        "file_added_successfully": MessageLookupByLibrary.simpleMessage(
+            "File has been added successfully"),
         "finals": MessageLookupByLibrary.simpleMessage("Finals"),
         "finish": MessageLookupByLibrary.simpleMessage("FINISH"),
         "forgot_something":
@@ -72,8 +78,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "law": MessageLookupByLibrary.simpleMessage("Law"),
         "learning_today":
             MessageLookupByLibrary.simpleMessage("What are we learning today?"),
+        "lesson": MessageLookupByLibrary.simpleMessage("LESSON"),
+        "lesson_title": MessageLookupByLibrary.simpleMessage("Lesson\'s Title"),
         "lessons": MessageLookupByLibrary.simpleMessage("Lessons"),
         "level": MessageLookupByLibrary.simpleMessage("Level"),
+        "link": MessageLookupByLibrary.simpleMessage("Link"),
         "literature": MessageLookupByLibrary.simpleMessage("Literature"),
         "log_out": MessageLookupByLibrary.simpleMessage("Log out"),
         "lycee1": MessageLookupByLibrary.simpleMessage("1 High School"),
@@ -103,6 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "philosophy_branch":
             MessageLookupByLibrary.simpleMessage("Literature & Philosophy"),
         "physics": MessageLookupByLibrary.simpleMessage("Physics"),
+        "pick_a_file": MessageLookupByLibrary.simpleMessage("Pick a file"),
         "pick_a_level": MessageLookupByLibrary.simpleMessage("Pick a level"),
         "pick_branch": MessageLookupByLibrary.simpleMessage("Pick a branch"),
         "pick_trimester":
@@ -111,6 +121,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pick Your Branch"),
         "pick_your_level":
             MessageLookupByLibrary.simpleMessage("Pick Your Level"),
+        "please_enter_link":
+            MessageLookupByLibrary.simpleMessage("Please enter a link"),
+        "please_enter_title":
+            MessageLookupByLibrary.simpleMessage("Please enter a title"),
+        "please_enter_valid_title":
+            MessageLookupByLibrary.simpleMessage("Please enter a valid title"),
+        "please_enter_valid_youtube_link": MessageLookupByLibrary.simpleMessage(
+            "Please enter a valid youtube link"),
         "prefernces": MessageLookupByLibrary.simpleMessage("Prefernces"),
         "process_engineering":
             MessageLookupByLibrary.simpleMessage("Process Engineering"),
@@ -126,15 +144,33 @@ class MessageLookup extends MessageLookupByLibrary {
         "shariaa": MessageLookupByLibrary.simpleMessage("Shariaa"),
         "sign_in": MessageLookupByLibrary.simpleMessage("SIGN IN"),
         "sign_up": MessageLookupByLibrary.simpleMessage("Sign up"),
+        "solution_included": MessageLookupByLibrary.simpleMessage(
+            "The solution to this file is included within"),
         "spanish": MessageLookupByLibrary.simpleMessage("Spanish"),
         "start_learning":
             MessageLookupByLibrary.simpleMessage("START LEARNING !"),
+        "success": MessageLookupByLibrary.simpleMessage("Success"),
         "technology": MessageLookupByLibrary.simpleMessage("Technology"),
+        "title": MessageLookupByLibrary.simpleMessage("Title"),
+        "trimester": MessageLookupByLibrary.simpleMessage("Trimester"),
         "update_branch": MessageLookupByLibrary.simpleMessage("UPDATE BRANCH"),
         "update_level": MessageLookupByLibrary.simpleMessage("UPDATE LEVEL"),
+        "upload_file": MessageLookupByLibrary.simpleMessage("Upload File"),
+        "upload_new_exam":
+            MessageLookupByLibrary.simpleMessage("UPLOAD A NEW EXAM"),
+        "upload_new_exercise":
+            MessageLookupByLibrary.simpleMessage("UPLOAD A NEW EXERCISE"),
+        "upload_new_video":
+            MessageLookupByLibrary.simpleMessage("UPLOAD A NEW VIDEO"),
+        "uploads_new_lesson":
+            MessageLookupByLibrary.simpleMessage("UPLOAD A NEW LESSON"),
         "valid_email":
             MessageLookupByLibrary.simpleMessage("Please enter a valid email"),
+        "video": MessageLookupByLibrary.simpleMessage("VIDEO"),
+        "video_link": MessageLookupByLibrary.simpleMessage("Video Link"),
         "videos": MessageLookupByLibrary.simpleMessage("Videos"),
-        "welcome": MessageLookupByLibrary.simpleMessage("Welcome")
+        "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
+        "what_are_you_sharing": MessageLookupByLibrary.simpleMessage(
+            "What will you be sharing today?")
       };
 }

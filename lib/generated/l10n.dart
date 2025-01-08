@@ -939,6 +939,256 @@ class S {
       args: [],
     );
   }
+
+  /// `What will you be sharing today?`
+  String get what_are_you_sharing {
+    return Intl.message(
+      'What will you be sharing today?',
+      name: 'what_are_you_sharing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `UPLOAD A NEW LESSON`
+  String get uploads_new_lesson {
+    return Intl.message(
+      'UPLOAD A NEW LESSON',
+      name: 'uploads_new_lesson',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `LESSON`
+  String get lesson {
+    return Intl.message(
+      'LESSON',
+      name: 'lesson',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `UPLOAD A NEW EXERCISE`
+  String get upload_new_exercise {
+    return Intl.message(
+      'UPLOAD A NEW EXERCISE',
+      name: 'upload_new_exercise',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `EXERCISE`
+  String get exercise {
+    return Intl.message(
+      'EXERCISE',
+      name: 'exercise',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `UPLOAD A NEW EXAM`
+  String get upload_new_exam {
+    return Intl.message(
+      'UPLOAD A NEW EXAM',
+      name: 'upload_new_exam',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `EXAM`
+  String get exam {
+    return Intl.message(
+      'EXAM',
+      name: 'exam',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `UPLOAD A NEW VIDEO`
+  String get upload_new_video {
+    return Intl.message(
+      'UPLOAD A NEW VIDEO',
+      name: 'upload_new_video',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `VIDEO`
+  String get video {
+    return Intl.message(
+      'VIDEO',
+      name: 'video',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trimester`
+  String get trimester {
+    return Intl.message(
+      'Trimester',
+      name: 'trimester',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CHOOSE A LEVEL`
+  String get choose_level {
+    return Intl.message(
+      'CHOOSE A LEVEL',
+      name: 'choose_level',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lesson's Title`
+  String get lesson_title {
+    return Intl.message(
+      'Lesson\'s Title',
+      name: 'lesson_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a title`
+  String get please_enter_title {
+    return Intl.message(
+      'Please enter a title',
+      name: 'please_enter_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid title`
+  String get please_enter_valid_title {
+    return Intl.message(
+      'Please enter a valid title',
+      name: 'please_enter_valid_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Title`
+  String get title {
+    return Intl.message(
+      'Title',
+      name: 'title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video Link`
+  String get video_link {
+    return Intl.message(
+      'Video Link',
+      name: 'video_link',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a link`
+  String get please_enter_link {
+    return Intl.message(
+      'Please enter a link',
+      name: 'please_enter_link',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid youtube link`
+  String get please_enter_valid_youtube_link {
+    return Intl.message(
+      'Please enter a valid youtube link',
+      name: 'please_enter_valid_youtube_link',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Link`
+  String get link {
+    return Intl.message(
+      'Link',
+      name: 'link',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `File Added`
+  String get file_added {
+    return Intl.message(
+      'File Added',
+      name: 'file_added',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick a file`
+  String get pick_a_file {
+    return Intl.message(
+      'Pick a file',
+      name: 'pick_a_file',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The solution to this file is included within`
+  String get solution_included {
+    return Intl.message(
+      'The solution to this file is included within',
+      name: 'solution_included',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Success`
+  String get success {
+    return Intl.message(
+      'Success',
+      name: 'success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `File has been added successfully`
+  String get file_added_successfully {
+    return Intl.message(
+      'File has been added successfully',
+      name: 'file_added_successfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload File`
+  String get upload_file {
+    return Intl.message(
+      'Upload File',
+      name: 'upload_file',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -87,7 +87,31 @@
         "language" : "Langues",
         "dark_mode" : "Mode sombre",
         "notifications" : "Notifications",
-        "log_out" : "Déconnexion"  
-        
+        "log_out" : "Déconnexion",
+        "what_are_you_sharing" : "Que partagerez-vous aujourd'hui ?",
+        "uploads_new_lesson" : "TÉLÉCHARGER UNE NOUVELLE LEÇON",
+        "lesson" : "LEÇON",
+        "upload_new_exercise" : "TÉLÉCHARGER UN NOUVEL EXERCICE",
+        "exercise" : "EXERCICE",
+        "upload_new_exam" : "TÉLÉCHARGER UN NOUVEL EXAMEN",
+        "exam" : "EXAMEN",
+        "upload_new_video" : "TÉLÉCHARGER UNE NOUVELLE VIDÉO",
+        "video" : "VIDÉO",
+        "trimester" : "Trimestre",
+        "choose_level" : "CHOISIR UN NIVEAU",
+        "lesson_title" : "Titre de la leçon",
+        "please_enter_title" : "Veuillez entrer un titre",
+        "please_enter_valid_title" : "Veuillez entrer un titre valide",
+        "title" : "Titre",
+        "video_link" : "Lien vidéo",
+        "please_enter_link" : "Veuillez entrer un lien",
+        "please_enter_valid_youtube_link" : "Veuillez entrer un lien YouTube valide",
+        "link"  : "Lien",
+        "file_added" : "Fichier ajouté",
+        "pick_a_file" : "Choisir un fichier",
+        "solution_included" : "La solution de ce fichier est incluse",
+        "success" : "Succès",
+        "file_added_successfully" : "Le fichier a été ajouté avec succès",
+        "upload_file" : "Télécharger le fichier"
 }
     

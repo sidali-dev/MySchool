@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:myschool/utils/constants/colors.dart';
 import 'package:myschool/views/settings_screen.dart';
 
+import '../generated/l10n.dart';
 import '../utils/device/device_utility.dart';
 import '../utils/helpers/helper_functions.dart';
 import 'upload_screen.dart';
@@ -65,9 +66,10 @@ class TeacherHomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Welcome",
-                    style: TextStyle(fontWeight: FontWeight.w900, fontSize: 48),
+                  Text(
+                    S.of(context).welcome,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w900, fontSize: 48),
                   ),
                   Text(
                     name.capitalizeFirst!,
@@ -76,9 +78,10 @@ class TeacherHomeScreen extends StatelessWidget {
                     style: const TextStyle(
                         fontWeight: FontWeight.w900, fontSize: 48),
                   ),
-                  const Text(
-                    "What will you be sharing today?",
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 22),
+                  Text(
+                    S.of(context).what_are_you_sharing,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w600, fontSize: 22),
                   ),
                   const SizedBox(height: 48),
                   ElevatedButton(
@@ -86,13 +89,13 @@ class TeacherHomeScreen extends StatelessWidget {
                       Get.to(
                           () => UploadScreen(
                                 canHaveSolution: false,
-                                title: "UPLOAD A NEW LESSON",
+                                title: S.of(context).uploads_new_lesson,
                                 themeColor: Colors.greenAccent,
                               ),
                           transition: Transition.rightToLeft);
                     },
-                    child: const Center(
-                      child: Text("LESSON"),
+                    child: Center(
+                      child: Text(S.of(context).lesson),
                     ),
                   ),
                   const SizedBox(height: 48),
@@ -101,13 +104,13 @@ class TeacherHomeScreen extends StatelessWidget {
                       Get.to(
                           () => UploadScreen(
                                 canHaveSolution: true,
-                                title: "UPLOAD A NEW EXERCISE",
+                                title: S.of(context).upload_new_exercise,
                                 themeColor: Colors.purpleAccent,
                               ),
                           transition: Transition.rightToLeft);
                     },
-                    child: const Center(
-                      child: Text("EXERCISE"),
+                    child: Center(
+                      child: Text(S.of(context).exercise),
                     ),
                   ),
                   const SizedBox(height: 48),
@@ -116,13 +119,13 @@ class TeacherHomeScreen extends StatelessWidget {
                       Get.to(
                           () => UploadScreen(
                                 canHaveSolution: true,
-                                title: "UPLOAD A NEW TEST",
+                                title: S.of(context).upload_new_exam,
                                 themeColor: Colors.yellow,
                               ),
                           transition: Transition.rightToLeft);
                     },
-                    child: const Center(
-                      child: Text("TEST"),
+                    child: Center(
+                      child: Text(S.of(context).exam),
                     ),
                   ),
                   const SizedBox(height: 48),
@@ -131,13 +134,13 @@ class TeacherHomeScreen extends StatelessWidget {
                       Get.to(
                           () => UploadScreen(
                                 canHaveSolution: false,
-                                title: "UPLOAD A NEW VIDEO",
+                                title: S.of(context).upload_new_video,
                                 themeColor: Colors.redAccent,
                               ),
                           transition: Transition.rightToLeft);
                     },
-                    child: const Center(
-                      child: Text("VIDEO"),
+                    child: Center(
+                      child: Text(S.of(context).video),
                     ),
                   ),
                   const SizedBox(height: 32),

@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../controllers/upload_screen_controller.dart';
+import '../generated/l10n.dart';
 import '../services/database_service.dart';
 import '../utils/constants/colors.dart';
 import '../utils/constants/enums.dart';
@@ -98,10 +99,10 @@ class UploadScreen extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: screenHeight * 0.05),
-                    const Text(
-                      "Trimester",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
+                    Text(
+                      S.of(context).trimester,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w600, fontSize: 24),
                     ),
                     const SizedBox(height: 16),
                     GetBuilder<UploadScreenController>(
@@ -151,10 +152,10 @@ class UploadScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 24),
-                    const Text(
-                      "Level",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
+                    Text(
+                      S.of(context).level,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w600, fontSize: 24),
                     ),
                     const SizedBox(height: 16),
                     GetBuilder<UploadScreenController>(
@@ -176,7 +177,7 @@ class UploadScreen extends StatelessWidget {
                               ),
                             ),
                             prefixIcon: Icon(Iconsax.layer, color: themeColor),
-                            hintText: "CHOOSE A LEVEL"),
+                            hintText: S.of(context).choose_level),
                         items: controller.levels
                             .map(
                               (e) => DropdownMenuItem(
@@ -198,9 +199,9 @@ class UploadScreen extends StatelessWidget {
                           return Column(
                             children: [
                               const SizedBox(height: 24),
-                              const Text(
-                                "Branch",
-                                style: TextStyle(
+                              Text(
+                                S.of(context).branch,
+                                style: const TextStyle(
                                     fontWeight: FontWeight.w600, fontSize: 24),
                               ),
                               const SizedBox(height: 16),
@@ -258,10 +259,10 @@ class UploadScreen extends StatelessWidget {
                       },
                     ),
                     const SizedBox(height: 32),
-                    const Text(
-                      "Lesson's Title",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
+                    Text(
+                      S.of(context).lesson_title,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w600, fontSize: 24),
                     ),
                     const SizedBox(height: 16),
                     GetBuilder<UploadScreenController>(
@@ -269,15 +270,15 @@ class UploadScreen extends StatelessWidget {
                         controller: controller.titleController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Please enter a title";
+                            return S.of(context).please_enter_title;
                           } else if (value.length < 10) {
-                            return "Please enter a valid title";
+                            return S.of(context).please_enter_valid_title;
                           }
                           return null;
                         },
                         autofocus: false,
                         decoration: InputDecoration(
-                          hintText: "Title",
+                          hintText: S.of(context).title,
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(16),
                             borderSide: BorderSide(color: themeColor),
@@ -296,9 +297,9 @@ class UploadScreen extends StatelessWidget {
                         visible: themeColor != Colors.redAccent,
                         replacement: Column(
                           children: [
-                            const Text(
-                              "Video Link",
-                              style: TextStyle(
+                            Text(
+                              S.of(context).video_link,
+                              style: const TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 24),
                             ),
                             const SizedBox(height: 16),
@@ -306,18 +307,20 @@ class UploadScreen extends StatelessWidget {
                               controller: controller.videoLinkController,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return "Please enter a URL.";
+                                  return S.of(context).please_enter_link;
                                 }
                                 if (!RegExp(
                                         r'^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/(watch\?v=|embed\/|v\/)?[\w-]{11}$')
                                     .hasMatch(value)) {
-                                  return "Please enter a valid YouTube URL.";
+                                  return S
+                                      .of(context)
+                                      .please_enter_valid_youtube_link;
                                 }
                                 return null;
                               },
                               autofocus: false,
                               decoration: InputDecoration(
-                                hintText: "Link",
+                                hintText: S.of(context).link,
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(16),
                                   borderSide: BorderSide(color: themeColor),
@@ -376,8 +379,8 @@ class UploadScreen extends StatelessWidget {
                                   const SizedBox(height: 8),
                                   Text(
                                     controller.isFileSelected.value == true
-                                        ? "File Added"
-                                        : "Pick a file",
+                                        ? S.of(context).file_added
+                                        : S.of(context).pick_a_file,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 20,
@@ -402,8 +405,7 @@ class UploadScreen extends StatelessWidget {
                                 AutoScrollText(
                                   alignment: Alignment.centerLeft,
                                   width: screenWidth * 0.7,
-                                  text: const Text(
-                                      'The solution to this file is included within'),
+                                  text: Text(S.of(context).solution_included),
                                 ),
                                 const Spacer(),
                                 Switch(
@@ -438,9 +440,9 @@ class UploadScreen extends StatelessWidget {
                               if (isSucces) {
                                 if (context.mounted) {
                                   SHelperFunctions.showAwesomeSnackBar(
-                                      title: "SUCCESS",
+                                      title: S.of(context).success,
                                       content:
-                                          "File has been added successfully",
+                                          S.of(context).file_added_successfully,
                                       contentType: ContentType.success,
                                       context: context);
 
@@ -450,10 +452,10 @@ class UploadScreen extends StatelessWidget {
                             }
                           }
                         },
-                        child: const Center(
+                        child: Center(
                           child: Text(
-                            "UPLOAD FILE",
-                            style: TextStyle(
+                            S.of(context).upload_file,
+                            style: const TextStyle(
                                 fontWeight: FontWeight.w600, fontSize: 24),
                           ),
                         ),

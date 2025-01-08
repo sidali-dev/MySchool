@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cem2": MessageLookupByLibrary.simpleMessage("السنة الثانية متوسط"),
         "cem3": MessageLookupByLibrary.simpleMessage("السنة الثالثة متوسط"),
         "cem4": MessageLookupByLibrary.simpleMessage("السنة الرابعة متوسط"),
+        "choose_level": MessageLookupByLibrary.simpleMessage("اختر مستوى"),
         "civil": MessageLookupByLibrary.simpleMessage("مدنية"),
         "civil_engineering":
             MessageLookupByLibrary.simpleMessage("الهندسة المدنية"),
@@ -51,8 +52,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("يرجى إدخال كلمة المرور"),
         "enter_your_name":
             MessageLookupByLibrary.simpleMessage("يرجى إدخال اسمك"),
+        "exam": MessageLookupByLibrary.simpleMessage("امتحان"),
         "exams": MessageLookupByLibrary.simpleMessage("الامتحانات"),
+        "exercise": MessageLookupByLibrary.simpleMessage("تمرين"),
         "exercises": MessageLookupByLibrary.simpleMessage("التمارين"),
+        "file_added": MessageLookupByLibrary.simpleMessage("تمت إضافة الملف"),
+        "file_added_successfully":
+            MessageLookupByLibrary.simpleMessage("تمت إضافة الملف بنجاح"),
         "finals": MessageLookupByLibrary.simpleMessage("النهائيات"),
         "finish": MessageLookupByLibrary.simpleMessage("إنهاء"),
         "forgot_something":
@@ -71,8 +77,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "law": MessageLookupByLibrary.simpleMessage("القانون"),
         "learning_today":
             MessageLookupByLibrary.simpleMessage("ماذا سنتعلم اليوم؟"),
+        "lesson": MessageLookupByLibrary.simpleMessage("درس"),
+        "lesson_title": MessageLookupByLibrary.simpleMessage("عنوان الدرس"),
         "lessons": MessageLookupByLibrary.simpleMessage("الدروس"),
         "level": MessageLookupByLibrary.simpleMessage("المستوى"),
+        "link": MessageLookupByLibrary.simpleMessage("رابط"),
         "literature": MessageLookupByLibrary.simpleMessage("أدب"),
         "log_out": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
         "lycee1": MessageLookupByLibrary.simpleMessage("السنة الأولى ثانوي"),
@@ -98,12 +107,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "philosophy": MessageLookupByLibrary.simpleMessage("الفلسفة"),
         "philosophy_branch": MessageLookupByLibrary.simpleMessage("أدب وفلسفة"),
         "physics": MessageLookupByLibrary.simpleMessage("الفيزياء"),
+        "pick_a_file": MessageLookupByLibrary.simpleMessage("اختر ملفًا"),
         "pick_a_level": MessageLookupByLibrary.simpleMessage("اختر مستوى"),
         "pick_branch": MessageLookupByLibrary.simpleMessage("اختر شعبة"),
         "pick_trimester":
             MessageLookupByLibrary.simpleMessage("اختر الفصل الدراسي"),
         "pick_your_branch": MessageLookupByLibrary.simpleMessage("اختر شعبة"),
         "pick_your_level": MessageLookupByLibrary.simpleMessage("اختر مستواك"),
+        "please_enter_link":
+            MessageLookupByLibrary.simpleMessage("يرجى إدخال رابط"),
+        "please_enter_title":
+            MessageLookupByLibrary.simpleMessage("يرجى إدخال عنوان"),
+        "please_enter_valid_title":
+            MessageLookupByLibrary.simpleMessage("يرجى إدخال عنوان صالح"),
+        "please_enter_valid_youtube_link":
+            MessageLookupByLibrary.simpleMessage("يرجى إدخال رابط يوتيوب صالح"),
         "process_engineering":
             MessageLookupByLibrary.simpleMessage("هندسة الطرائق"),
         "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
@@ -118,14 +136,32 @@ class MessageLookup extends MessageLookupByLibrary {
         "shariaa": MessageLookupByLibrary.simpleMessage("الشريعة"),
         "sign_in": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "sign_up": MessageLookupByLibrary.simpleMessage("التسجيل"),
+        "solution_included":
+            MessageLookupByLibrary.simpleMessage("الحل مضمن في هذا الملف"),
         "spanish": MessageLookupByLibrary.simpleMessage("الإسبانية"),
         "start_learning": MessageLookupByLibrary.simpleMessage("ابدأ التعلم!"),
+        "success": MessageLookupByLibrary.simpleMessage("نجاح"),
         "technology": MessageLookupByLibrary.simpleMessage("التكنولوجيا"),
+        "title": MessageLookupByLibrary.simpleMessage("عنوان"),
+        "trimester": MessageLookupByLibrary.simpleMessage("ثلاثي"),
         "update_branch": MessageLookupByLibrary.simpleMessage("تحديث الشعبة"),
         "update_level": MessageLookupByLibrary.simpleMessage("تحديث المستوى"),
+        "upload_file": MessageLookupByLibrary.simpleMessage("تحميل الملف"),
+        "upload_new_exam":
+            MessageLookupByLibrary.simpleMessage("تحميل امتحان جديد"),
+        "upload_new_exercise":
+            MessageLookupByLibrary.simpleMessage("تحميل تمرين جديد"),
+        "upload_new_video":
+            MessageLookupByLibrary.simpleMessage("تحميل فيديو جديد"),
+        "uploads_new_lesson":
+            MessageLookupByLibrary.simpleMessage("تحميل درس جديد"),
         "valid_email": MessageLookupByLibrary.simpleMessage(
             "يرجى إدخال بريد إلكتروني صالح"),
+        "video": MessageLookupByLibrary.simpleMessage("فيديو"),
+        "video_link": MessageLookupByLibrary.simpleMessage("رابط الفيديو"),
         "videos": MessageLookupByLibrary.simpleMessage("فيديوهات"),
-        "welcome": MessageLookupByLibrary.simpleMessage("مرحبًا")
+        "welcome": MessageLookupByLibrary.simpleMessage("مرحبًا"),
+        "what_are_you_sharing":
+            MessageLookupByLibrary.simpleMessage("ماذا ستشارك اليوم؟")
       };
 }
