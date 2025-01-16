@@ -112,7 +112,13 @@
     "solution_included" : "The solution to this file is included within",
     "success" : "Success",
     "file_added_successfully" : "File has been added successfully",
-    "upload_file" : "Upload File"
+    "upload_file" : "Upload File",
+    "description" : "Description",
+    "add_description" : "Add a description",
+    "update_description" : "UPDATE DESCRIPTION",
+    "my_uploads" : "My Uploads",
+    "upload" : "Upload",
+    "uploads" : "Uploads"
 
 
 

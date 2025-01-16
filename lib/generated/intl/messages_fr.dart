@@ -24,6 +24,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about_you": MessageLookupByLibrary.simpleMessage("À propos de vous"),
         "accounting": MessageLookupByLibrary.simpleMessage("Comptabilité"),
+        "add_description":
+            MessageLookupByLibrary.simpleMessage("Ajouter une description"),
         "ap1": MessageLookupByLibrary.simpleMessage("1ère École Primaire"),
         "ap2": MessageLookupByLibrary.simpleMessage("2ème École Primaire"),
         "ap4": MessageLookupByLibrary.simpleMessage("4ème École Primaire"),
@@ -42,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "computer_science":
             MessageLookupByLibrary.simpleMessage("Informatique"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("Mode sombre"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
         "economy": MessageLookupByLibrary.simpleMessage("Économie"),
         "electrical_engineering":
             MessageLookupByLibrary.simpleMessage("Génie électrique"),
@@ -96,6 +99,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "maths": MessageLookupByLibrary.simpleMessage("Mathématiques"),
         "mechanical_engineering":
             MessageLookupByLibrary.simpleMessage("Génie mécanique"),
+        "my_uploads":
+            MessageLookupByLibrary.simpleMessage("Mes téléchargements"),
         "name_is_long":
             MessageLookupByLibrary.simpleMessage("Le nom est trop long"),
         "name_is_short":
@@ -133,6 +138,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Veuillez entrer un titre valide"),
         "please_enter_valid_youtube_link": MessageLookupByLibrary.simpleMessage(
             "Veuillez entrer un lien YouTube valide"),
+        "prefernces": MessageLookupByLibrary.simpleMessage("Préférences"),
         "process_engineering":
             MessageLookupByLibrary.simpleMessage("Génie des procédés"),
         "profile": MessageLookupByLibrary.simpleMessage("Profil"),
@@ -158,8 +164,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "trimester": MessageLookupByLibrary.simpleMessage("Trimestre"),
         "update_branch":
             MessageLookupByLibrary.simpleMessage("MISE À JOUR DE LA BRANCHE"),
+        "update_description": MessageLookupByLibrary.simpleMessage(
+            "METTRE À JOUR LA DESCRIPTION"),
         "update_level":
             MessageLookupByLibrary.simpleMessage("MISE À JOUR DU NIVEAU"),
+        "upload": MessageLookupByLibrary.simpleMessage("Télécharger"),
         "upload_file":
             MessageLookupByLibrary.simpleMessage("Télécharger le fichier"),
         "upload_new_exam": MessageLookupByLibrary.simpleMessage(
@@ -168,6 +177,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "TÉLÉCHARGER UN NOUVEL EXERCICE"),
         "upload_new_video": MessageLookupByLibrary.simpleMessage(
             "TÉLÉCHARGER UNE NOUVELLE VIDÉO"),
+        "uploads": MessageLookupByLibrary.simpleMessage("Téléchargements"),
         "uploads_new_lesson": MessageLookupByLibrary.simpleMessage(
             "TÉLÉCHARGER UNE NOUVELLE LEÇON"),
         "valid_email": MessageLookupByLibrary.simpleMessage(

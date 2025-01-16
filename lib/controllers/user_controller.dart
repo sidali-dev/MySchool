@@ -107,6 +107,14 @@ class UserController extends GetxController {
     }
   }
 
+  updateTeacherLocally(TeacherModel teacherModel) {
+    teacher.value = teacherModel;
+    "=================================".printInfo();
+    teacher.value!.uploadsCount.printInfo();
+    teacherModel.uploadsCount.printInfo();
+    update();
+  }
+
 // SIGN OUT
   Future<int> signOut({required BuildContext context}) async {
     AuthenticationService authController = Get.find<AuthenticationService>();
@@ -123,7 +131,8 @@ class UserController extends GetxController {
     int response = await authController.signOut().then(
       (value) {
         if (value == 200) {
-          Get.delete<UserController>();
+          authController.loadUser();
+          // Get.delete<UserController>();
           Get.back();
           return 200;
         } else {

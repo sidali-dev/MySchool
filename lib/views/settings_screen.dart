@@ -31,7 +31,7 @@ class SettingsScreen extends StatelessWidget {
     final double screenheight = SDeviceUtils.getScreenHeight(context);
     final bool isRtl = SHelperFunctions.isRtl(context);
     final TextEditingController descriptionController = TextEditingController(
-        text: userController.teacher.value!.description ?? "");
+        text: userController.teacher.value?.description ?? "");
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -108,12 +108,12 @@ class SettingsScreen extends StatelessWidget {
                       children: [
                         SettingsOptionsRow(
                           icon: Icons.description_outlined,
-                          title: "Description",
+                          title: S.of(context).description,
                           trailingTitle: userController
-                                  .teacher.value!.description
+                                  .teacher.value?.description
                                   ?.split("\n")
                                   .first ??
-                              "Add a description",
+                              S.of(context).add_description,
                           userController: userController,
                           onTap: () {
                             Get.bottomSheet(
@@ -132,9 +132,9 @@ class SettingsScreen extends StatelessWidget {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           const SizedBox(height: 16),
-                                          const Text(
-                                            "Description",
-                                            style: TextStyle(
+                                          Text(
+                                            S.of(context).description,
+                                            style: const TextStyle(
                                                 fontWeight: FontWeight.w600,
                                                 fontSize: 24),
                                           ),
@@ -146,9 +146,10 @@ class SettingsScreen extends StatelessWidget {
                                               maxLines: 5,
                                               minLines: 1,
                                               controller: descriptionController,
-                                              decoration: const InputDecoration(
-                                                  hintText:
-                                                      "Add a description"),
+                                              decoration: InputDecoration(
+                                                  hintText: S
+                                                      .of(context)
+                                                      .add_description),
                                             ),
                                           ),
                                           const SizedBox(height: 32),
@@ -164,9 +165,11 @@ class SettingsScreen extends StatelessWidget {
                                                             descriptionController
                                                                 .text);
                                               },
-                                              child: const Center(
+                                              child: Center(
                                                 child: Text(
-                                                  "Update Description",
+                                                  S
+                                                      .of(context)
+                                                      .update_description,
                                                 ),
                                               ),
                                             ),
@@ -184,15 +187,20 @@ class SettingsScreen extends StatelessWidget {
                           screenWidth: screenWidth,
                         ),
                         const SizedBox(height: 16),
-                        SettingsOptionsRow(
-                          icon: Icons.history,
-                          title: "My Uploads",
-                          trailingTitle:
-                              "${userController.teacher.value!.uploadsCount} Uploads",
-                          userController: userController,
-                          onTap: () {},
-                          isRtl: isRtl,
-                          screenWidth: screenWidth,
+                        Obx(
+                          () => SettingsOptionsRow(
+                            icon: Icons.history,
+                            title: S.of(context).my_uploads,
+                            trailingTitle: userController
+                                    .teacher.value!.uploadsCount
+                                    .isEqual(1)
+                                ? "${userController.teacher.value!.uploadsCount} ${S.of(context).upload}"
+                                : "${userController.teacher.value!.uploadsCount} ${S.of(context).uploads}",
+                            userController: userController,
+                            onTap: () {},
+                            isRtl: isRtl,
+                            screenWidth: screenWidth,
+                          ),
                         ),
                       ],
                     ),
@@ -320,9 +328,7 @@ class SettingsScreen extends StatelessWidget {
                         fontSize: 22),
                   ),
                 ),
-                const SizedBox(
-                  height: 16,
-                ),
+                const SizedBox(height: 16),
                 SettingsOptionsRow(
                   userController: userController,
                   icon: Icons.translate,

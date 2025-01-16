@@ -3,13 +3,17 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:appwrite/models.dart' as appwrite;
+import 'package:myschool/models/asset_model.dart';
 
+import '../models/teacher_model.dart';
 import '../services/database_service.dart';
 import '../utils/constants/enums.dart';
 import '../utils/helpers/appwrite_helpers.dart';
 
 class UploadScreenController extends GetxController {
   File? file;
+  AssetModel? assetModel;
+
   RxBool isFileSelected = false.obs;
   RxBool fileHasSolution = false.obs;
 
@@ -21,6 +25,8 @@ class UploadScreenController extends GetxController {
 
   RxInt selectedTrimester = 1.obs;
   List<int> trimesters = [1, 2, 3];
+
+  RxString selectedModule = "".obs;
 
   RxList<int> selectedBranches = <int>[].obs;
   Map<int, List<Map<String, BranchesEnum>>> branches = {
@@ -72,7 +78,41 @@ class UploadScreenController extends GetxController {
     update();
   }
 
-  Future<bool> uploadFile({
+  changeModule(String module) {
+    selectedModule.value = module;
+    update();
+  }
+
+  getFirstSelectedBranch() {
+    if (selectedBranches.isNotEmpty && selectedLevel.value >= 10) {
+      return branches[selectedLevel.value]![selectedBranches.first]["branch"]!
+          .name;
+    } else {
+      return null;
+    }
+  }
+
+  void loadAsset(
+    String fileLink,
+    ActivityEnum documentType,
+    ModuleEnum module,
+    TeacherModel teacher,
+  ) {
+    assetModel = AssetModel(
+        fileLink: fileLink,
+        title: titleController.text,
+        trimester: selectedTrimester.value.toString(),
+        hasSolution: fileHasSolution.value,
+        documentType: documentType,
+        module: module,
+        level: selectedLevel.value.toString(),
+        branch: selectedBranches
+            .map((index) => branches[selectedLevel.value]![index]['branch']!)
+            .toList(),
+        teacher: teacher);
+  }
+
+  Future<appwrite.File?> uploadFile({
     required String filePath,
     required String fileName,
     required BuildContext context,
@@ -88,8 +128,8 @@ class UploadScreenController extends GetxController {
 
     //start uploading the file
     DatabaseService databaseService = DatabaseService();
-    appwrite.File? file =
-        await databaseService.addFile(filePath: filePath, fileName: fileName);
+    appwrite.File? file = await databaseService.uploadFile(
+        filePath: filePath, fileName: fileName);
 
     //close loading indicator
     Get.back();
@@ -97,9 +137,37 @@ class UploadScreenController extends GetxController {
     //handle possible errors
     if (file == null && context.mounted) {
       AppwriteHelpers.showSomethingWentWorng(context);
-      return false;
+      return file;
     } else {
-      return true;
+      return file;
+    }
+  }
+
+  Future<appwrite.Document?> addFile({
+    required BuildContext context,
+  }) async {
+    //start loading indicator
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+
+    //start adding the file to DB
+    DatabaseService databaseService = DatabaseService();
+    appwrite.Document? document = await databaseService.addFile(assetModel!);
+
+    //close loading indicator
+    Get.back();
+
+    //handle possible errors
+    if (file == null && context.mounted) {
+      AppwriteHelpers.showSomethingWentWorng(context);
+      return document;
+    } else {
+      return document;
     }
   }
 

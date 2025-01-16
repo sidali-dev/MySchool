@@ -1,6 +1,7 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:myschool/models/asset_model.dart';
 import 'package:myschool/models/student_model.dart';
 import 'package:myschool/models/teacher_model.dart';
 import 'package:myschool/models/user_model.dart';
@@ -201,7 +202,7 @@ class DatabaseService {
     return teacherModel;
   }
 
-  Future<File?> addFile(
+  Future<File?> uploadFile(
       {required String filePath, required String fileName}) async {
     try {
       File result = await _storage.createFile(
@@ -213,6 +214,38 @@ class DatabaseService {
     } catch (e) {
       File? file;
       return file;
+    }
+  }
+
+  Future<Document?> addFile(AssetModel asset) async {
+    Document? document;
+    try {
+      document = await _databases.createDocument(
+        databaseId: dotenv.get("APPWRITE_DB_ID"),
+        collectionId: dotenv.get("APPWRITE_DB_ASSETS"),
+        documentId: ID.unique(),
+        data: {
+          "file_link": asset.fileLink,
+          "title": asset.title,
+          "trimester": asset.trimester,
+          "has_solution": asset.hasSolution,
+          "document_type": asset.documentType.name,
+          "module": asset.module.name,
+          "level": asset.level,
+          "branch": asset.branch?.map((e) => e.name).toList(),
+          "teacher": asset.teacher.id,
+        },
+      );
+      print(document.data);
+      return document;
+    } catch (e) {
+      print("================================");
+      print(asset.trimester);
+      print(asset.trimester.runtimeType);
+      print(e);
+      print("================================");
+
+      return document;
     }
   }
 }

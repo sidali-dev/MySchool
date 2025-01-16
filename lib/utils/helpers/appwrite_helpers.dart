@@ -1,5 +1,6 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
 
 class AppwriteHelpers {
@@ -68,5 +69,9 @@ class AppwriteHelpers {
         content: "Try again later",
         contentType: ContentType.failure,
         context: context);
+  }
+
+  static String getFileUrl(String fileId) {
+    return '${dotenv.get("APPWRITE_ENDPOINT")}/storage/buckets/${dotenv.get("APPWRITE_STORAGE_BUCKET")}/files/$fileId/view?project=${dotenv.get("APPWRITE_PROJECT")}';
   }
 }

@@ -24,6 +24,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about_you": MessageLookupByLibrary.simpleMessage("About You"),
         "accounting": MessageLookupByLibrary.simpleMessage("Accounting"),
+        "add_description":
+            MessageLookupByLibrary.simpleMessage("Add a description"),
         "ap1": MessageLookupByLibrary.simpleMessage("1 Primary School"),
         "ap2": MessageLookupByLibrary.simpleMessage("2 Primary School"),
         "ap3": MessageLookupByLibrary.simpleMessage("3 Primary School"),
@@ -42,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "computer_science":
             MessageLookupByLibrary.simpleMessage("Computer Science"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
         "economy": MessageLookupByLibrary.simpleMessage("Economy"),
         "electrical_engineering":
             MessageLookupByLibrary.simpleMessage("Electrical Engineering"),
@@ -95,6 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maths": MessageLookupByLibrary.simpleMessage("Maths"),
         "mechanical_engineering":
             MessageLookupByLibrary.simpleMessage("Mechanical Engineering"),
+        "my_uploads": MessageLookupByLibrary.simpleMessage("My Uploads"),
         "name_is_long":
             MessageLookupByLibrary.simpleMessage("Name is too long"),
         "name_is_short":
@@ -154,7 +158,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "title": MessageLookupByLibrary.simpleMessage("Title"),
         "trimester": MessageLookupByLibrary.simpleMessage("Trimester"),
         "update_branch": MessageLookupByLibrary.simpleMessage("UPDATE BRANCH"),
+        "update_description":
+            MessageLookupByLibrary.simpleMessage("UPDATE DESCRIPTION"),
         "update_level": MessageLookupByLibrary.simpleMessage("UPDATE LEVEL"),
+        "upload": MessageLookupByLibrary.simpleMessage("Upload"),
         "upload_file": MessageLookupByLibrary.simpleMessage("Upload File"),
         "upload_new_exam":
             MessageLookupByLibrary.simpleMessage("UPLOAD A NEW EXAM"),
@@ -162,6 +169,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("UPLOAD A NEW EXERCISE"),
         "upload_new_video":
             MessageLookupByLibrary.simpleMessage("UPLOAD A NEW VIDEO"),
+        "uploads": MessageLookupByLibrary.simpleMessage("Uploads"),
         "uploads_new_lesson":
             MessageLookupByLibrary.simpleMessage("UPLOAD A NEW LESSON"),
         "valid_email":

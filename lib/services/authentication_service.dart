@@ -67,6 +67,7 @@ class AuthenticationService extends GetxController {
       );
       return 200;
     } on AppwriteException catch (e) {
+      print(e.message);
       return e.code!;
     } finally {
       update();

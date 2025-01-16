@@ -112,6 +112,12 @@
         "solution_included" : "La solution de ce fichier est incluse",
         "success" : "Succès",
         "file_added_successfully" : "Le fichier a été ajouté avec succès",
-        "upload_file" : "Télécharger le fichier"
+        "upload_file" : "Télécharger le fichier",
+        "description": "Description",
+        "add_description": "Ajouter une description",
+        "update_description": "METTRE À JOUR LA DESCRIPTION",
+        "my_uploads": "Mes téléchargements",
+        "upload": "Télécharger",
+        "uploads": "Téléchargements"
 }
     

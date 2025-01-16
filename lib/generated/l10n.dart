@@ -1189,6 +1189,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add a description`
+  String get add_description {
+    return Intl.message(
+      'Add a description',
+      name: 'add_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `UPDATE DESCRIPTION`
+  String get update_description {
+    return Intl.message(
+      'UPDATE DESCRIPTION',
+      name: 'update_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Uploads`
+  String get my_uploads {
+    return Intl.message(
+      'My Uploads',
+      name: 'my_uploads',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload`
+  String get upload {
+    return Intl.message(
+      'Upload',
+      name: 'upload',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Uploads`
+  String get uploads {
+    return Intl.message(
+      'Uploads',
+      name: 'uploads',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

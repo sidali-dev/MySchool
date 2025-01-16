@@ -48,7 +48,7 @@ class IntroScreen extends StatelessWidget {
               backgroundColor: SColors.primary,
               role: Role.student,
               title: "Start Learning",
-              textColor: isDark ? Colors.white : SColors.primary,
+              textColor: SColors.white,
             ),
             SizedBox(height: height * 0.05),
             IntroButton(
@@ -109,9 +109,7 @@ class IntroButton extends StatelessWidget {
           onTap: () {
             showDialog(
               context: context,
-              builder: (context) => SignInDialog(
-                role: role,
-              ),
+              builder: (context) => SignInDialog(role: role),
             );
           },
           child: Material(

@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about_you": MessageLookupByLibrary.simpleMessage("معلومات عنك"),
         "accounting": MessageLookupByLibrary.simpleMessage("المحاسبة"),
+        "add_description": MessageLookupByLibrary.simpleMessage("إضافة وصف"),
         "ap1": MessageLookupByLibrary.simpleMessage("السنة الأولى ابتدائي"),
         "ap2": MessageLookupByLibrary.simpleMessage("السنة الثانية ابتدائي"),
         "ap3": MessageLookupByLibrary.simpleMessage("السنة الثالثة ابتدائي"),
@@ -41,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("الهندسة المدنية"),
         "computer_science": MessageLookupByLibrary.simpleMessage("إعلام آلي"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
+        "description": MessageLookupByLibrary.simpleMessage("الوصف"),
         "economy": MessageLookupByLibrary.simpleMessage("الاقتصاد"),
         "electrical_engineering":
             MessageLookupByLibrary.simpleMessage("الهندسة الكهربائية"),
@@ -92,6 +94,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maths": MessageLookupByLibrary.simpleMessage("الرياضيات"),
         "mechanical_engineering":
             MessageLookupByLibrary.simpleMessage("الهندسة الميكانيكية"),
+        "my_uploads": MessageLookupByLibrary.simpleMessage("ملفاتي"),
         "name_is_long": MessageLookupByLibrary.simpleMessage("الاسم طويل جدًا"),
         "name_is_short":
             MessageLookupByLibrary.simpleMessage("الاسم قصير جدًا"),
@@ -122,6 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("يرجى إدخال عنوان صالح"),
         "please_enter_valid_youtube_link":
             MessageLookupByLibrary.simpleMessage("يرجى إدخال رابط يوتيوب صالح"),
+        "prefernces": MessageLookupByLibrary.simpleMessage("التفضيلات"),
         "process_engineering":
             MessageLookupByLibrary.simpleMessage("هندسة الطرائق"),
         "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
@@ -143,9 +147,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "success": MessageLookupByLibrary.simpleMessage("نجاح"),
         "technology": MessageLookupByLibrary.simpleMessage("التكنولوجيا"),
         "title": MessageLookupByLibrary.simpleMessage("عنوان"),
-        "trimester": MessageLookupByLibrary.simpleMessage("ثلاثي"),
+        "trimester": MessageLookupByLibrary.simpleMessage("الثلاثي"),
         "update_branch": MessageLookupByLibrary.simpleMessage("تحديث الشعبة"),
+        "update_description":
+            MessageLookupByLibrary.simpleMessage("تحديث الوصف"),
         "update_level": MessageLookupByLibrary.simpleMessage("تحديث المستوى"),
+        "upload": MessageLookupByLibrary.simpleMessage("رفع"),
         "upload_file": MessageLookupByLibrary.simpleMessage("تحميل الملف"),
         "upload_new_exam":
             MessageLookupByLibrary.simpleMessage("تحميل امتحان جديد"),
@@ -153,6 +160,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تحميل تمرين جديد"),
         "upload_new_video":
             MessageLookupByLibrary.simpleMessage("تحميل فيديو جديد"),
+        "uploads": MessageLookupByLibrary.simpleMessage("ملفات مرفوعة"),
         "uploads_new_lesson":
             MessageLookupByLibrary.simpleMessage("تحميل درس جديد"),
         "valid_email": MessageLookupByLibrary.simpleMessage(

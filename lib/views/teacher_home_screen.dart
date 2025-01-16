@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:myschool/utils/constants/colors.dart';
+import 'package:myschool/utils/constants/enums.dart';
 import 'package:myschool/views/settings_screen.dart';
 
 import '../generated/l10n.dart';
@@ -88,6 +89,7 @@ class TeacherHomeScreen extends StatelessWidget {
                     onPressed: () {
                       Get.to(
                           () => UploadScreen(
+                                activityEnum: ActivityEnum.lessons,
                                 canHaveSolution: false,
                                 title: S.of(context).uploads_new_lesson,
                                 themeColor: Colors.greenAccent,
@@ -103,6 +105,7 @@ class TeacherHomeScreen extends StatelessWidget {
                     onPressed: () {
                       Get.to(
                           () => UploadScreen(
+                                activityEnum: ActivityEnum.exercises,
                                 canHaveSolution: true,
                                 title: S.of(context).upload_new_exercise,
                                 themeColor: Colors.purpleAccent,
@@ -118,6 +121,7 @@ class TeacherHomeScreen extends StatelessWidget {
                     onPressed: () {
                       Get.to(
                           () => UploadScreen(
+                                activityEnum: ActivityEnum.exams,
                                 canHaveSolution: true,
                                 title: S.of(context).upload_new_exam,
                                 themeColor: Colors.yellow,
@@ -133,6 +137,7 @@ class TeacherHomeScreen extends StatelessWidget {
                     onPressed: () {
                       Get.to(
                           () => UploadScreen(
+                                activityEnum: ActivityEnum.videos,
                                 canHaveSolution: false,
                                 title: S.of(context).upload_new_video,
                                 themeColor: Colors.redAccent,
@@ -158,6 +163,7 @@ class TeacherHomeScreen extends StatelessWidget {
                 child: InkWell(
                   onTap: () => Get.to(() => SettingsScreen(),
                       transition: Transition.leftToRight),
+                  borderRadius: BorderRadius.circular(100),
                   child: Container(
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(

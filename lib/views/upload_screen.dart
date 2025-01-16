@@ -5,6 +5,12 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:appwrite/models.dart' as appwrite;
+import 'package:myschool/controllers/home_controller.dart';
+import 'package:myschool/controllers/user_controller.dart';
+import 'package:myschool/models/asset_model.dart';
+import 'package:myschool/models/modules.dart';
+import 'package:myschool/utils/helpers/appwrite_helpers.dart';
 
 import '../controllers/upload_screen_controller.dart';
 import '../generated/l10n.dart';
@@ -22,12 +28,14 @@ class UploadScreen extends StatelessWidget {
     required this.canHaveSolution,
     required this.title,
     required this.themeColor,
+    required this.activityEnum,
   });
 
   final DatabaseService databaseService = DatabaseService();
   final bool canHaveSolution;
   final String title;
   final Color themeColor;
+  final ActivityEnum activityEnum;
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
@@ -74,40 +82,40 @@ class UploadScreen extends StatelessWidget {
                 delay: 1500.milliseconds,
               ),
             ),
-            Form(
-              key: _formKey,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(height: screenHeight * 0.15),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Iconsax.document_upload),
-                        const SizedBox(width: 8),
-                        AutoScrollText(
-                          alignment: Alignment.center,
-                          width: screenWidth * 0.8,
-                          text: Text(
-                            title,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 28),
+            GetBuilder<UploadScreenController>(
+              init: UploadScreenController(),
+              builder: (controller) => Form(
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(height: screenHeight * 0.15),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Iconsax.document_upload),
+                          const SizedBox(width: 8),
+                          AutoScrollText(
+                            alignment: Alignment.center,
+                            width: screenWidth * 0.8,
+                            text: Text(
+                              title,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w700, fontSize: 28),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: screenHeight * 0.05),
-                    Text(
-                      S.of(context).trimester,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w600, fontSize: 24),
-                    ),
-                    const SizedBox(height: 16),
-                    GetBuilder<UploadScreenController>(
-                      init: UploadScreenController(),
-                      builder: (controller) => Row(
+                        ],
+                      ),
+                      SizedBox(height: screenHeight * 0.05),
+                      Text(
+                        S.of(context).trimester,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 24),
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: controller.trimesters
                             .map(
@@ -150,16 +158,14 @@ class UploadScreen extends StatelessWidget {
                             )
                             .toList(),
                       ),
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      S.of(context).level,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w600, fontSize: 24),
-                    ),
-                    const SizedBox(height: 16),
-                    GetBuilder<UploadScreenController>(
-                      builder: (controller) => DropdownButtonFormField(
+                      const SizedBox(height: 24),
+                      Text(
+                        S.of(context).level,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 24),
+                      ),
+                      const SizedBox(height: 16),
+                      DropdownButtonFormField(
                         value: controller.selectedLevel.value,
                         decoration: InputDecoration(
                             focusColor: themeColor,
@@ -192,86 +198,139 @@ class UploadScreen extends StatelessWidget {
                           controller.changeLevel(value!);
                         },
                       ),
-                    ),
-                    GetBuilder<UploadScreenController>(
-                      builder: (controller) {
-                        if (controller.selectedLevel.value >= 10) {
-                          return Column(
-                            children: [
-                              const SizedBox(height: 24),
-                              Text(
-                                S.of(context).branch,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w600, fontSize: 24),
-                              ),
-                              const SizedBox(height: 16),
-                              SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: controller
-                                      .branches[controller.selectedLevel.value]!
-                                      .asMap()
-                                      .entries
-                                      .map(
-                                    (entry) {
-                                      final int index = entry.key;
-                                      final Map<String, BranchesEnum> branch =
-                                          entry.value;
+                      if (controller.selectedLevel.value >= 10)
+                        Column(
+                          children: [
+                            const SizedBox(height: 24),
+                            Text(
+                              S.of(context).branch,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w600, fontSize: 24),
+                            ),
+                            const SizedBox(height: 16),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: controller
+                                    .branches[controller.selectedLevel.value]!
+                                    .asMap()
+                                    .entries
+                                    .map(
+                                  (entry) {
+                                    final int index = entry.key;
+                                    final Map<String, BranchesEnum> branch =
+                                        entry.value;
 
-                                      return Card(
-                                        color: controller.selectedBranches
-                                                .contains(index)
-                                            ? themeColor
-                                            : Colors.white,
-                                        child: InkWell(
-                                          onTap: () {
-                                            controller.changeBranches(index);
-                                          },
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 24,
-                                              vertical: 16,
-                                            ),
-                                            child: Text(
-                                              branch["branch"]!.name,
-                                              style: TextStyle(
-                                                color: controller
-                                                        .selectedBranches
-                                                        .contains(index)
-                                                    ? Colors.white
-                                                    : Colors.black,
-                                              ),
+                                    return Card(
+                                      color: controller.selectedBranches
+                                              .contains(index)
+                                          ? themeColor
+                                          : isDark
+                                              ? SColors.darkerGrey
+                                              : Colors.white,
+                                      child: InkWell(
+                                        onTap: () {
+                                          controller.changeBranches(index);
+                                        },
+                                        borderRadius: BorderRadius.circular(12),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 24,
+                                            vertical: 16,
+                                          ),
+                                          child: Text(
+                                            branch["branch"]!.name,
+                                            style: TextStyle(
+                                              color: controller.selectedBranches
+                                                      .contains(index)
+                                                  ? isDark
+                                                      ? Colors.black
+                                                      : Colors.white
+                                                  : isDark
+                                                      ? Colors.white
+                                                      : Colors.black,
                                             ),
                                           ),
                                         ),
-                                      );
-                                    },
-                                  ).toList(),
-                                ),
+                                      ),
+                                    );
+                                  },
+                                ).toList(),
                               ),
-                            ],
-                          );
-                        } else {
-                          return const SizedBox();
-                        }
-                      },
-                    ),
-                    const SizedBox(height: 32),
-                    Text(
-                      S.of(context).lesson_title,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w600, fontSize: 24),
-                    ),
-                    const SizedBox(height: 16),
-                    GetBuilder<UploadScreenController>(
-                      builder: (controller) => TextFormField(
+                            ),
+                          ],
+                        ),
+                      const SizedBox(height: 32),
+                      const Text(
+                        "Module",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 24),
+                      ),
+                      const SizedBox(height: 16),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: HomeController()
+                              .getUserModules(
+                                  level: controller.selectedLevel.value,
+                                  branch: controller.getFirstSelectedBranch())
+                              .asMap()
+                              .entries
+                              .map(
+                            (entry) {
+                              final Module module = entry.value;
+
+                              return Card(
+                                color: controller.selectedModule.value ==
+                                        module.module.name
+                                    ? themeColor
+                                    : isDark
+                                        ? SColors.darkerGrey
+                                        : Colors.white,
+                                child: InkWell(
+                                  onTap: () {
+                                    controller.changeModule(module.module.name);
+                                  },
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 24,
+                                      vertical: 16,
+                                    ),
+                                    child: Text(
+                                      module.module.name,
+                                      style: TextStyle(
+                                        color:
+                                            controller.selectedModule.value ==
+                                                    module.module.name
+                                                ? isDark
+                                                    ? Colors.black
+                                                    : Colors.white
+                                                : isDark
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ).toList(),
+                        ),
+                      ),
+                      const SizedBox(height: 32),
+                      Text(
+                        S.of(context).lesson_title,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 24),
+                      ),
+                      const SizedBox(height: 16),
+                      TextFormField(
                         controller: controller.titleController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return S.of(context).please_enter_title;
-                          } else if (value.length < 10) {
+                          } else if (value.trim().length < 10) {
                             return S.of(context).please_enter_valid_title;
                           }
                           return null;
@@ -290,10 +349,8 @@ class UploadScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 32),
-                    GetBuilder<UploadScreenController>(
-                      builder: (controller) => Visibility(
+                      const SizedBox(height: 32),
+                      Visibility(
                         visible: themeColor != Colors.redAccent,
                         replacement: Column(
                           children: [
@@ -342,14 +399,6 @@ class UploadScreen extends StatelessWidget {
                             if (result != null) {
                               controller.file = File(result.files.single.path!);
                               controller.fileIsSelected();
-
-                              // if (context.mounted) {
-                              //   // bool isSucces =
-                              //   await controller.uploadFile(
-                              //       filePath: controller.file!.path,
-                              //       fileName: "fileName",
-                              //       context: context);
-                              // }
                             } else {
                               // User canceled the picker
                             }
@@ -396,73 +445,115 @@ class UploadScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 32),
-                    GetBuilder<UploadScreenController>(
-                      builder: (controller) => canHaveSolution
-                          ? Row(
-                              children: [
-                                AutoScrollText(
-                                  alignment: Alignment.centerLeft,
-                                  width: screenWidth * 0.7,
-                                  text: Text(S.of(context).solution_included),
-                                ),
-                                const Spacer(),
-                                Switch(
-                                  activeColor: themeColor,
-                                  value: controller.fileHasSolution.value,
-                                  onChanged: (value) {
-                                    controller.switchFileHasSolution();
-                                  },
-                                )
-                              ],
+                      const SizedBox(height: 32),
+                      if (canHaveSolution)
+                        Row(
+                          children: [
+                            AutoScrollText(
+                              alignment: Alignment.centerLeft,
+                              width: screenWidth * 0.7,
+                              text: Text(S.of(context).solution_included),
+                            ),
+                            const Spacer(),
+                            Switch(
+                              activeColor: themeColor,
+                              value: controller.fileHasSolution.value,
+                              onChanged: (value) {
+                                controller.switchFileHasSolution();
+                              },
                             )
-                          : const SizedBox(),
-                    ),
-                    const SizedBox(height: 32),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: themeColor,
-                          side: BorderSide(color: themeColor),
+                          ],
                         ),
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            if (context.mounted) {
-                              UploadScreenController controller = Get.find();
+                      const SizedBox(height: 32),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: themeColor,
+                            side: BorderSide(color: themeColor),
+                          ),
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              if (context.mounted) {
+                                String fileUrl = '';
+                                if (activityEnum == ActivityEnum.videos) {
+                                  fileUrl = controller.videoLinkController.text;
+                                } else if (controller.isFileSelected.value) {
+                                  appwrite.File? uploadedFile =
+                                      await controller.uploadFile(
+                                          filePath: controller.file!.path,
+                                          fileName:
+                                              controller.titleController.text,
+                                          context: context);
 
-                              bool isSucces = await controller.uploadFile(
-                                  filePath: controller.file!.path,
-                                  fileName: "fileName",
-                                  context: context);
+                                  if (uploadedFile != null) {
+                                    fileUrl = AppwriteHelpers.getFileUrl(
+                                        uploadedFile.$id);
+                                  } else {
+                                    if (context.mounted) {
+                                      AppwriteHelpers.showSomethingWentWorng(
+                                          context);
+                                    }
+                                    return;
+                                  }
+                                }
 
-                              if (isSucces) {
-                                if (context.mounted) {
-                                  SHelperFunctions.showAwesomeSnackBar(
-                                      title: S.of(context).success,
-                                      content:
-                                          S.of(context).file_added_successfully,
-                                      contentType: ContentType.success,
-                                      context: context);
+                                if (fileUrl.isNotEmpty) {
+                                  UserController userController = Get.find();
+                                  controller.loadAsset(
+                                      fileUrl,
+                                      activityEnum,
+                                      ModuleEnum.values.firstWhere(
+                                        (element) =>
+                                            element.name ==
+                                            controller.selectedModule.value,
+                                      ),
+                                      userController.teacher.value!);
 
-                                  Get.back();
+                                  if (context.mounted) {
+                                    appwrite.Document? document =
+                                        await controller.addFile(
+                                            context: context);
+
+                                    if (document != null) {
+                                      UserController userController =
+                                          Get.find();
+
+                                      AssetModel asset =
+                                          AssetModel.fromMap(document.data);
+
+                                      userController
+                                          .updateTeacherLocally(asset.teacher);
+
+                                      if (context.mounted) {
+                                        SHelperFunctions.showAwesomeSnackBar(
+                                            title: S.of(context).success,
+                                            content: S
+                                                .of(context)
+                                                .file_added_successfully,
+                                            contentType: ContentType.success,
+                                            context: context);
+                                      }
+
+                                      Get.back();
+                                    }
+                                  }
                                 }
                               }
                             }
-                          }
-                        },
-                        child: Center(
-                          child: Text(
-                            S.of(context).upload_file,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 24),
+                          },
+                          child: Center(
+                            child: Text(
+                              S.of(context).upload_file,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w600, fontSize: 24),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 32),
-                  ],
+                      const SizedBox(height: 32),
+                    ],
+                  ),
                 ),
               ),
             ),

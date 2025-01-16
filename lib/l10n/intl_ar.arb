@@ -97,7 +97,7 @@
     "exam" : "امتحان",
     "upload_new_video" : "تحميل فيديو جديد",
     "video" : "فيديو",
-    "trimester" : "ثلاثي",
+    "trimester" : "الثلاثي",
     "choose_level" : "اختر مستوى",
     "lesson_title" : "عنوان الدرس",
     "please_enter_title" : "يرجى إدخال عنوان",
@@ -112,5 +112,11 @@
     "solution_included" : "الحل مضمن في هذا الملف",
     "success" : "نجاح",
     "file_added_successfully" : "تمت إضافة الملف بنجاح",
-    "upload_file" : "تحميل الملف"
+    "upload_file" : "تحميل الملف",
+    "description": "الوصف",
+    "add_description": "إضافة وصف",
+    "update_description": "تحديث الوصف",
+    "my_uploads": "ملفاتي",
+    "upload": "رفع",
+    "uploads": "ملفات مرفوعة"
 }
