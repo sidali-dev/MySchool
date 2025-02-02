@@ -3,6 +3,7 @@ class SImageString {
 
   //lottie animations
   static const noInternetAnimation = "assets/lottie/no_internet.json";
+  static const emptyScreenAnimation = "assets/lottie/empty.json";
 
   //modules images
   static const moduleGerman = "assets/images/modules/allmend.png";

@@ -107,11 +107,17 @@ class UserController extends GetxController {
     }
   }
 
-  updateTeacherLocally(TeacherModel teacherModel) {
-    teacher.value = teacherModel;
-    "=================================".printInfo();
-    teacher.value!.uploadsCount.printInfo();
-    teacherModel.uploadsCount.printInfo();
+  incrementTeacherUploads() {
+    teacher.value!.uploadsCount++;
+    print("INCREMENTED");
+
+    update();
+  }
+
+  decrementTeacherUploads() {
+    teacher.value!.uploadsCount--;
+    print("DECREMENTED");
+
     update();
   }
 

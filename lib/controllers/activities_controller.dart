@@ -108,7 +108,7 @@ class ActivitiesController {
     }
   }
 
-  getActivitiesTitle(BuildContext context, ActivityEnum activity) {
+  static getActivitiesTitle(BuildContext context, ActivityEnum activity) {
     switch (activity) {
       case ActivityEnum.exams:
         return S.of(context).exams;

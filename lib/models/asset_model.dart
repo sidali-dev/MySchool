@@ -12,6 +12,7 @@ class AssetModel {
   String level;
   List<BranchesEnum>? branch;
   TeacherModel teacher;
+  DateTime? createdAt;
 
   AssetModel({
     this.id,
@@ -24,6 +25,7 @@ class AssetModel {
     this.branch,
     required this.teacher,
     required this.title,
+    this.createdAt,
   });
 
   factory AssetModel.fromMap(Map<String, dynamic> map) {
@@ -45,6 +47,8 @@ class AssetModel {
               orElse: () => throw ArgumentError('Invalid branch value')))
           .toList(),
       teacher: TeacherModel.fromMap(map['teacher'] as Map<String, dynamic>),
+      createdAt: map["\$createdAt"] =
+          DateTime.parse(map["\$createdAt"] as String),
     );
   }
 }

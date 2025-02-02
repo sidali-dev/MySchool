@@ -24,8 +24,11 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about_you": MessageLookupByLibrary.simpleMessage("About You"),
         "accounting": MessageLookupByLibrary.simpleMessage("Accounting"),
+        "activity": MessageLookupByLibrary.simpleMessage("Activity"),
         "add_description":
             MessageLookupByLibrary.simpleMessage("Add a description"),
+        "already_downloaded":
+            MessageLookupByLibrary.simpleMessage("ALREADY DOWNLOADED"),
         "ap1": MessageLookupByLibrary.simpleMessage("1 Primary School"),
         "ap2": MessageLookupByLibrary.simpleMessage("2 Primary School"),
         "ap3": MessageLookupByLibrary.simpleMessage("3 Primary School"),
@@ -33,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ap5": MessageLookupByLibrary.simpleMessage("5 Primary School"),
         "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
         "branch": MessageLookupByLibrary.simpleMessage("Branch"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cem1": MessageLookupByLibrary.simpleMessage("1 Middle School"),
         "cem2": MessageLookupByLibrary.simpleMessage("2 Middle School"),
         "cem3": MessageLookupByLibrary.simpleMessage("3 Middle School"),
@@ -44,7 +48,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "computer_science":
             MessageLookupByLibrary.simpleMessage("Computer Science"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "delete_all_caps": MessageLookupByLibrary.simpleMessage("DELETE"),
+        "delete_file": MessageLookupByLibrary.simpleMessage("Delete File"),
+        "delete_file_confirmation": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete this file?"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "download": MessageLookupByLibrary.simpleMessage("DOWNLOAD"),
+        "downloading": MessageLookupByLibrary.simpleMessage("Downloading..."),
         "economy": MessageLookupByLibrary.simpleMessage("Economy"),
         "electrical_engineering":
             MessageLookupByLibrary.simpleMessage("Electrical Engineering"),
@@ -72,6 +83,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "geography": MessageLookupByLibrary.simpleMessage("Geography"),
         "german": MessageLookupByLibrary.simpleMessage("German"),
         "go_back": MessageLookupByLibrary.simpleMessage("GO BACK"),
+        "has_solution":
+            MessageLookupByLibrary.simpleMessage("Solution Included"),
         "have_an_account":
             MessageLookupByLibrary.simpleMessage("Already Have an Account?"),
         "history": MessageLookupByLibrary.simpleMessage("History"),
@@ -108,6 +121,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "new_here": MessageLookupByLibrary.simpleMessage("New Here?"),
         "new_user": MessageLookupByLibrary.simpleMessage("New User"),
         "next": MessageLookupByLibrary.simpleMessage("NEXT"),
+        "no": MessageLookupByLibrary.simpleMessage("No"),
+        "no_branch": MessageLookupByLibrary.simpleMessage("No Branch"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "password_at_least_8": MessageLookupByLibrary.simpleMessage(
@@ -151,6 +166,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "solution_included": MessageLookupByLibrary.simpleMessage(
             "The solution to this file is included within"),
         "spanish": MessageLookupByLibrary.simpleMessage("Spanish"),
+        "start_download":
+            MessageLookupByLibrary.simpleMessage("Starting download..."),
         "start_learning":
             MessageLookupByLibrary.simpleMessage("START LEARNING !"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
@@ -162,6 +179,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("UPDATE DESCRIPTION"),
         "update_level": MessageLookupByLibrary.simpleMessage("UPDATE LEVEL"),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
+        "upload_date": MessageLookupByLibrary.simpleMessage("Upload Date"),
         "upload_file": MessageLookupByLibrary.simpleMessage("Upload File"),
         "upload_new_exam":
             MessageLookupByLibrary.simpleMessage("UPLOAD A NEW EXAM"),
@@ -177,8 +195,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "video": MessageLookupByLibrary.simpleMessage("VIDEO"),
         "video_link": MessageLookupByLibrary.simpleMessage("Video Link"),
         "videos": MessageLookupByLibrary.simpleMessage("Videos"),
+        "view_all_caps": MessageLookupByLibrary.simpleMessage("VIEW"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
         "what_are_you_sharing": MessageLookupByLibrary.simpleMessage(
-            "What will you be sharing today?")
+            "What will you be sharing today?"),
+        "yes": MessageLookupByLibrary.simpleMessage("Yes")
       };
 }

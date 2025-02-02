@@ -118,7 +118,24 @@
     "update_description" : "UPDATE DESCRIPTION",
     "my_uploads" : "My Uploads",
     "upload" : "Upload",
-    "uploads" : "Uploads"
+    "uploads" : "Uploads",
+    "downloading" : "Downloading...",
+    "start_download" : "Starting download...",
+    "already_downloaded" : "ALREADY DOWNLOADED",
+    "download" : "DOWNLOAD",
+    "no_branch" : "No Branch",
+    "upload_date" : "Upload Date",
+    "activity" : "Activity",
+    "has_solution" : "Solution Included",
+    "delete_file" : "Delete File",
+    "delete_file_confirmation" : "Are you sure you want to delete this file?",
+    "cancel" : "Cancel",
+    "delete" : "Delete",
+    "delete_all_caps" : "DELETE",
+    "view_all_caps" : "VIEW",
+    "yes" : "Yes",
+    "no" : "No"
+
 
 
 

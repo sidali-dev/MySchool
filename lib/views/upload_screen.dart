@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart' as animation;
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:appwrite/models.dart' as appwrite;
 import 'package:myschool/controllers/home_controller.dart';
 import 'package:myschool/controllers/user_controller.dart';
-import 'package:myschool/models/asset_model.dart';
 import 'package:myschool/models/modules.dart';
 import 'package:myschool/utils/helpers/appwrite_helpers.dart';
 
@@ -57,7 +58,7 @@ class UploadScreen extends StatelessWidget {
                 innerColor: isDark ? Colors.black : Colors.white,
                 outterColor: themeColor,
                 radius: 200,
-                delay: 500.milliseconds,
+                delay: const Duration(milliseconds: 500),
               ),
             ),
             Positioned(
@@ -68,7 +69,7 @@ class UploadScreen extends StatelessWidget {
                 innerColor: isDark ? Colors.black : Colors.white,
                 outterColor: themeColor,
                 radius: 300,
-                delay: 1.seconds,
+                delay: const Duration(milliseconds: 1000),
               ),
             ),
             Positioned(
@@ -79,7 +80,7 @@ class UploadScreen extends StatelessWidget {
                 innerColor: isDark ? Colors.black : Colors.white,
                 outterColor: themeColor,
                 radius: 250,
-                delay: 1500.milliseconds,
+                delay: const Duration(milliseconds: 1500),
               ),
             ),
             GetBuilder<UploadScreenController>(
@@ -391,55 +392,70 @@ class UploadScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        child: GestureDetector(
-                          onTap: () async {
-                            FilePickerResult? result =
-                                await FilePicker.platform.pickFiles();
-
-                            if (result != null) {
-                              controller.file = File(result.files.single.path!);
-                              controller.fileIsSelected();
-                            } else {
-                              // User canceled the picker
-                            }
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: controller.isFileSelected.value == true
-                                  ? themeColor
-                                  : null,
-                              border: Border.all(color: themeColor, width: 3),
-                              borderRadius: BorderRadius.circular(24),
+                        child: animation.Animate(
+                          controller: controller.animationController,
+                          autoPlay: false,
+                          effects: const [
+                            ShakeEffect(
+                              duration: Duration(milliseconds: 370),
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Center(
-                                child: Column(children: [
-                                  Icon(
-                                    controller.isFileSelected.value == true
-                                        ? Icons.check_circle_outline_outlined
-                                        : Iconsax.add_circle,
-                                    size: 32,
-                                    color:
+                          ],
+                          child: GestureDetector(
+                            onTap: () async {
+                              FilePickerResult? result =
+                                  await FilePicker.platform.pickFiles();
+
+                              if (result != null) {
+                                controller.file =
+                                    File(result.files.single.path!);
+                                controller.fileIsSelected();
+                              } else {
+                                // User canceled the picker
+                              }
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: controller.isFileSelected.value == true
+                                    ? themeColor
+                                    : null,
+                                border: Border.all(color: themeColor, width: 3),
+                                borderRadius: BorderRadius.circular(24),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: Column(
+                                    children: [
+                                      Icon(
                                         controller.isFileSelected.value == true
-                                            ? Colors.white
-                                            : themeColor,
+                                            ? Icons
+                                                .check_circle_outline_outlined
+                                            : Iconsax.add_circle,
+                                        size: 32,
+                                        color:
+                                            controller.isFileSelected.value ==
+                                                    true
+                                                ? Colors.white
+                                                : themeColor,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        controller.isFileSelected.value == true
+                                            ? S.of(context).file_added
+                                            : S.of(context).pick_a_file,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 20,
+                                          color:
+                                              controller.isFileSelected.value ==
+                                                      true
+                                                  ? Colors.white
+                                                  : themeColor,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    controller.isFileSelected.value == true
-                                        ? S.of(context).file_added
-                                        : S.of(context).pick_a_file,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 20,
-                                      color: controller.isFileSelected.value ==
-                                              true
-                                          ? Colors.white
-                                          : themeColor,
-                                    ),
-                                  ),
-                                ]),
+                                ),
                               ),
                             ),
                           ),
@@ -476,6 +492,7 @@ class UploadScreen extends StatelessWidget {
                             if (_formKey.currentState!.validate()) {
                               if (context.mounted) {
                                 String fileUrl = '';
+                                String fileId = "";
                                 if (activityEnum == ActivityEnum.videos) {
                                   fileUrl = controller.videoLinkController.text;
                                 } else if (controller.isFileSelected.value) {
@@ -487,6 +504,7 @@ class UploadScreen extends StatelessWidget {
                                           context: context);
 
                                   if (uploadedFile != null) {
+                                    fileId = uploadedFile.$id;
                                     fileUrl = AppwriteHelpers.getFileUrl(
                                         uploadedFile.$id);
                                   } else {
@@ -496,19 +514,28 @@ class UploadScreen extends StatelessWidget {
                                     }
                                     return;
                                   }
+                                } else {
+                                  controller.animationController
+                                    ..reset()
+                                    ..forward();
                                 }
 
                                 if (fileUrl.isNotEmpty) {
                                   UserController userController = Get.find();
                                   controller.loadAsset(
-                                      fileUrl,
-                                      activityEnum,
-                                      ModuleEnum.values.firstWhere(
-                                        (element) =>
-                                            element.name ==
-                                            controller.selectedModule.value,
-                                      ),
-                                      userController.teacher.value!);
+                                    fileId,
+                                    fileUrl,
+                                    activityEnum,
+                                    ModuleEnum.values.firstWhere(
+                                      (element) =>
+                                          element.name ==
+                                          controller.selectedModule.value,
+                                    ),
+                                    userController.teacher.value!,
+                                    canHaveSolution
+                                        ? controller.fileHasSolution.value
+                                        : null,
+                                  );
 
                                   if (context.mounted) {
                                     appwrite.Document? document =
@@ -519,11 +546,7 @@ class UploadScreen extends StatelessWidget {
                                       UserController userController =
                                           Get.find();
 
-                                      AssetModel asset =
-                                          AssetModel.fromMap(document.data);
-
-                                      userController
-                                          .updateTeacherLocally(asset.teacher);
+                                      userController.incrementTeacherUploads();
 
                                       if (context.mounted) {
                                         SHelperFunctions.showAwesomeSnackBar(
@@ -540,6 +563,11 @@ class UploadScreen extends StatelessWidget {
                                   }
                                 }
                               }
+                            } else if (!controller.isFileSelected.value &&
+                                !_formKey.currentState!.validate()) {
+                              controller.animationController
+                                ..reset()
+                                ..forward();
                             }
                           },
                           child: Center(

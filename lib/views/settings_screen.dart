@@ -14,6 +14,7 @@ import 'package:myschool/utils/helpers/helper_functions.dart';
 import 'package:myschool/views/widgets/animation/auto_scrolling_text.dart';
 
 import '../generated/l10n.dart';
+import 'uploaded_file_screen.dart';
 import 'widgets/settings_options_row.dart';
 import 'widgets/settings_switch_row.dart';
 
@@ -103,92 +104,90 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Visibility(
-                    visible: userController.user.value!.role == Role.student,
-                    replacement: Column(
-                      children: [
-                        SettingsOptionsRow(
-                          icon: Icons.description_outlined,
-                          title: S.of(context).description,
-                          trailingTitle: userController
-                                  .teacher.value?.description
-                                  ?.split("\n")
-                                  .first ??
-                              S.of(context).add_description,
-                          userController: userController,
-                          onTap: () {
-                            Get.bottomSheet(
-                              BottomSheet(
-                                enableDrag: false,
-                                onClosing: () {},
-                                builder: (context) {
-                                  return Container(
-                                    decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.vertical(
-                                        top: Radius.circular(24),
-                                      ),
+                  visible: userController.user.value!.role == Role.student,
+                  replacement: Column(
+                    children: [
+                      SettingsOptionsRow(
+                        icon: Icons.description_outlined,
+                        title: S.of(context).description,
+                        trailingTitle: userController.teacher.value?.description
+                                ?.split("\n")
+                                .first ??
+                            S.of(context).add_description,
+                        userController: userController,
+                        onTap: () {
+                          Get.bottomSheet(
+                            BottomSheet(
+                              enableDrag: false,
+                              onClosing: () {},
+                              builder: (context) {
+                                return Container(
+                                  decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(24),
                                     ),
-                                    child: SingleChildScrollView(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          const SizedBox(height: 16),
-                                          Text(
-                                            S.of(context).description,
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 24),
+                                  ),
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        const SizedBox(height: 16),
+                                        Text(
+                                          S.of(context).description,
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 24),
+                                        ),
+                                        const SizedBox(height: 32),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 24.0),
+                                          child: TextFormField(
+                                            maxLines: 5,
+                                            minLines: 1,
+                                            controller: descriptionController,
+                                            decoration: InputDecoration(
+                                                hintText: S
+                                                    .of(context)
+                                                    .add_description),
                                           ),
-                                          const SizedBox(height: 32),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 24.0),
-                                            child: TextFormField(
-                                              maxLines: 5,
-                                              minLines: 1,
-                                              controller: descriptionController,
-                                              decoration: InputDecoration(
-                                                  hintText: S
-                                                      .of(context)
-                                                      .add_description),
+                                        ),
+                                        const SizedBox(height: 32),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 24.0),
+                                          child: ElevatedButton(
+                                            onPressed: () async {
+                                              await userController
+                                                  .updateTeacherInfo(
+                                                      context: context,
+                                                      description:
+                                                          descriptionController
+                                                              .text);
+                                            },
+                                            child: Center(
+                                              child: Text(S
+                                                  .of(context)
+                                                  .update_description),
                                             ),
                                           ),
-                                          const SizedBox(height: 32),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 24.0),
-                                            child: ElevatedButton(
-                                              onPressed: () async {
-                                                await userController
-                                                    .updateTeacherInfo(
-                                                        context: context,
-                                                        description:
-                                                            descriptionController
-                                                                .text);
-                                              },
-                                              child: Center(
-                                                child: Text(
-                                                  S
-                                                      .of(context)
-                                                      .update_description,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(height: 16),
-                                        ],
-                                      ),
+                                        ),
+                                        const SizedBox(height: 16),
+                                      ],
                                     ),
-                                  );
-                                },
-                              ),
-                            );
-                          },
-                          isRtl: isRtl,
-                          screenWidth: screenWidth,
-                        ),
-                        const SizedBox(height: 16),
-                        Obx(
-                          () => SettingsOptionsRow(
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        },
+                        isRtl: isRtl,
+                        screenWidth: screenWidth,
+                      ),
+                      const SizedBox(height: 16),
+                      GetBuilder<UserController>(
+                        builder: (_) {
+                          return SettingsOptionsRow(
                             icon: Icons.history,
                             title: S.of(context).my_uploads,
                             trailingTitle: userController
@@ -197,125 +196,129 @@ class SettingsScreen extends StatelessWidget {
                                 ? "${userController.teacher.value!.uploadsCount} ${S.of(context).upload}"
                                 : "${userController.teacher.value!.uploadsCount} ${S.of(context).uploads}",
                             userController: userController,
-                            onTap: () {},
+                            onTap: () {
+                              Get.to(() => const UploadedFileScreen(),
+                                  transition: isRtl
+                                      ? Transition.leftToRight
+                                      : Transition.rightToLeft);
+                            },
                             isRtl: isRtl,
                             screenWidth: screenWidth,
-                          ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      Obx(
+                        () => SettingsOptionsRow(
+                          userController: userController,
+                          icon: Icons.bar_chart,
+                          onTap: () {
+                            Get.bottomSheet(
+                              ChangeLevelBottomSheet(
+                                  sheetTitle: S.of(context).pick_a_level,
+                                  buttonTitle: S.of(context).update_level,
+                                  listOfItems: userController.levels,
+                                  onTap: (level, _) async {
+                                    if (level < 10) {
+                                      await userController.updateStudentInfo(
+                                          context: context, level: level);
+                                      Get.back();
+                                    } else {
+                                      Get.back();
+
+                                      Get.bottomSheet(
+                                        ChangeBranchBottomSheet(
+                                            sheetTitle:
+                                                S.of(context).pick_branch,
+                                            buttonTitle:
+                                                S.of(context).update_branch,
+                                            listOfItems: userController
+                                                .student.value!
+                                                .getAllUserBranches(
+                                                    context, level),
+                                            onTap: (level, branch) async {
+                                              await userController
+                                                  .updateStudentInfo(
+                                                      context: context,
+                                                      level: level,
+                                                      branch: branch);
+
+                                              Get.back();
+                                            },
+                                            userController: userController,
+                                            level: level,
+                                            scrollController:
+                                                FixedExtentScrollController(
+                                              initialItem: userController
+                                                  .student.value!
+                                                  .getBranchPosition(context),
+                                            ),
+                                            screenheight: screenheight),
+                                      );
+                                    }
+                                  },
+                                  userController: userController,
+                                  scrollController: FixedExtentScrollController(
+                                      initialItem:
+                                          userController.student.value!.level -
+                                              1),
+                                  screenheight: screenheight),
+                            );
+                          },
+                          title: S.of(context).level,
+                          trailingTitle: userController.student.value!
+                              .getUserLevel(context),
+                          isRtl: isRtl,
+                          screenWidth: screenWidth,
                         ),
-                      ],
-                    ),
-                    child: Column(
-                      children: [
-                        Obx(
-                          () => SettingsOptionsRow(
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Obx(
+                        () => Visibility(
+                          visible: userController.student.value!.branch != null,
+                          child: SettingsOptionsRow(
                             userController: userController,
-                            icon: Icons.bar_chart,
+                            icon: Icons.category,
                             onTap: () {
                               Get.bottomSheet(
-                                ChangeLevelBottomSheet(
-                                    sheetTitle: S.of(context).pick_a_level,
-                                    buttonTitle: S.of(context).update_level,
-                                    listOfItems: userController.levels,
-                                    onTap: (level, _) async {
-                                      if (level < 10) {
-                                        await userController.updateStudentInfo(
-                                            context: context, level: level);
-                                        Get.back();
-                                      } else {
-                                        Get.back();
+                                ChangeBranchBottomSheet(
+                                    sheetTitle: S.of(context).pick_branch,
+                                    buttonTitle: S.of(context).update_branch,
+                                    listOfItems: userController.student.value!
+                                        .getAllUserBranches(context, null),
+                                    onTap: (level, branch) async {
+                                      await userController.updateStudentInfo(
+                                          context: context,
+                                          level: level,
+                                          branch: branch);
 
-                                        Get.bottomSheet(
-                                          ChangeBranchBottomSheet(
-                                              sheetTitle:
-                                                  S.of(context).pick_branch,
-                                              buttonTitle:
-                                                  S.of(context).update_branch,
-                                              listOfItems: userController
-                                                  .student.value!
-                                                  .getAllUserBranches(
-                                                      context, level),
-                                              onTap: (level, branch) async {
-                                                await userController
-                                                    .updateStudentInfo(
-                                                        context: context,
-                                                        level: level,
-                                                        branch: branch);
-
-                                                Get.back();
-                                              },
-                                              userController: userController,
-                                              level: level,
-                                              scrollController:
-                                                  FixedExtentScrollController(
-                                                initialItem: userController
-                                                    .student.value!
-                                                    .getBranchPosition(context),
-                                              ),
-                                              screenheight: screenheight),
-                                        );
-                                      }
+                                      Get.back();
                                     },
                                     userController: userController,
                                     scrollController:
                                         FixedExtentScrollController(
-                                            initialItem: userController
-                                                    .student.value!.level -
-                                                1),
+                                      initialItem: userController.student.value!
+                                          .getBranchPosition(context),
+                                    ),
                                     screenheight: screenheight),
                               );
                             },
-                            title: S.of(context).level,
+                            title: S.of(context).branch,
                             trailingTitle: userController.student.value!
-                                .getUserLevel(context),
+                                .getUserBranch(context),
                             isRtl: isRtl,
                             screenWidth: screenWidth,
                           ),
                         ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        Obx(
-                          () => Visibility(
-                            visible:
-                                userController.student.value!.branch != null,
-                            child: SettingsOptionsRow(
-                              userController: userController,
-                              icon: Icons.category,
-                              onTap: () {
-                                Get.bottomSheet(
-                                  ChangeBranchBottomSheet(
-                                      sheetTitle: S.of(context).pick_branch,
-                                      buttonTitle: S.of(context).update_branch,
-                                      listOfItems: userController.student.value!
-                                          .getAllUserBranches(context, null),
-                                      onTap: (level, branch) async {
-                                        await userController.updateStudentInfo(
-                                            context: context,
-                                            level: level,
-                                            branch: branch);
-
-                                        Get.back();
-                                      },
-                                      userController: userController,
-                                      scrollController:
-                                          FixedExtentScrollController(
-                                        initialItem: userController
-                                            .student.value!
-                                            .getBranchPosition(context),
-                                      ),
-                                      screenheight: screenheight),
-                                );
-                              },
-                              title: S.of(context).branch,
-                              trailingTitle: userController.student.value!
-                                  .getUserBranch(context),
-                              isRtl: isRtl,
-                              screenWidth: screenWidth,
-                            ),
-                          ),
-                        ),
-                      ],
-                    )),
+                      ),
+                    ],
+                  ),
+                ),
                 const SizedBox(height: 32),
                 Align(
                   alignment:
@@ -591,17 +594,18 @@ class ChangeLanguageBottomSheet extends StatelessWidget {
             const SizedBox(
               height: 24,
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
+                const Icon(
                   Icons.translate,
                   size: 32,
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Text(
-                  "Language",
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
+                  S.of(context).language,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w600, fontSize: 24),
                 ),
               ],
             ),

@@ -118,6 +118,22 @@
         "update_description": "METTRE À JOUR LA DESCRIPTION",
         "my_uploads": "Mes téléchargements",
         "upload": "Télécharger",
-        "uploads": "Téléchargements"
+        "uploads": "Téléchargements",
+        "downloading": "Téléchargement en cours...",
+        "start_download": "Début du téléchargement...",
+        "already_downloaded": "DÉJÀ TÉLÉCHARGÉ",
+        "download": "TÉLÉCHARGER",
+        "no_branch": "Aucune branche",
+        "upload_date": "Date de téléversement",
+        "activity": "Activité",
+        "has_solution": "Solution incluse",
+        "delete_file": "Supprimer le fichier",
+        "delete_file_confirmation": "Êtes-vous sûr de vouloir supprimer ce fichier ?",
+        "cancel": "Annuler",
+        "delete": "Supprimer",
+        "delete_all_caps": "SUPPRIMER",
+        "view_all_caps": "VOIR",
+        "yes" : "Oui",
+        "no" : "Non"
 }
     

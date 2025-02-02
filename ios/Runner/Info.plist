@@ -47,9 +47,18 @@
 		<string>ar</string>
 		<string>fr</string>
 	</array>
+  	<key>NSDownloadsFolderUsageDescription</key>
+  	<string>Download files to your device</string>
+  	<key>NSPhotoLibraryUsageDescription</key>
+  	<string>Save files to your device</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>	
 </dict>
 </plist>

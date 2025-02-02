@@ -24,14 +24,18 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about_you": MessageLookupByLibrary.simpleMessage("À propos de vous"),
         "accounting": MessageLookupByLibrary.simpleMessage("Comptabilité"),
+        "activity": MessageLookupByLibrary.simpleMessage("Activité"),
         "add_description":
             MessageLookupByLibrary.simpleMessage("Ajouter une description"),
+        "already_downloaded":
+            MessageLookupByLibrary.simpleMessage("DÉJÀ TÉLÉCHARGÉ"),
         "ap1": MessageLookupByLibrary.simpleMessage("1ère École Primaire"),
         "ap2": MessageLookupByLibrary.simpleMessage("2ème École Primaire"),
         "ap4": MessageLookupByLibrary.simpleMessage("4ème École Primaire"),
         "ap5": MessageLookupByLibrary.simpleMessage("5ème École Primaire"),
         "arabic": MessageLookupByLibrary.simpleMessage("Arabe"),
         "branch": MessageLookupByLibrary.simpleMessage("Branche"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Annuler"),
         "cem1": MessageLookupByLibrary.simpleMessage("1ère Collège"),
         "cem2": MessageLookupByLibrary.simpleMessage("2ème Collège"),
         "cem3": MessageLookupByLibrary.simpleMessage("3ème Collège"),
@@ -44,7 +48,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "computer_science":
             MessageLookupByLibrary.simpleMessage("Informatique"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("Mode sombre"),
+        "delete": MessageLookupByLibrary.simpleMessage("Supprimer"),
+        "delete_all_caps": MessageLookupByLibrary.simpleMessage("SUPPRIMER"),
+        "delete_file":
+            MessageLookupByLibrary.simpleMessage("Supprimer le fichier"),
+        "delete_file_confirmation": MessageLookupByLibrary.simpleMessage(
+            "Êtes-vous sûr de vouloir supprimer ce fichier ?"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "download": MessageLookupByLibrary.simpleMessage("TÉLÉCHARGER"),
+        "downloading":
+            MessageLookupByLibrary.simpleMessage("Téléchargement en cours..."),
         "economy": MessageLookupByLibrary.simpleMessage("Économie"),
         "electrical_engineering":
             MessageLookupByLibrary.simpleMessage("Génie électrique"),
@@ -72,6 +85,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "geography": MessageLookupByLibrary.simpleMessage("Géographie"),
         "german": MessageLookupByLibrary.simpleMessage("Allemand"),
         "go_back": MessageLookupByLibrary.simpleMessage("RETOUR"),
+        "has_solution":
+            MessageLookupByLibrary.simpleMessage("Solution incluse"),
         "have_an_account":
             MessageLookupByLibrary.simpleMessage("Vous avez déjà un compte?"),
         "history": MessageLookupByLibrary.simpleMessage("Histoire"),
@@ -110,6 +125,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "new_here": MessageLookupByLibrary.simpleMessage("Nouveau ici?"),
         "new_user": MessageLookupByLibrary.simpleMessage("Nouvel utilisateur"),
         "next": MessageLookupByLibrary.simpleMessage("SUIVANT"),
+        "no": MessageLookupByLibrary.simpleMessage("Non"),
+        "no_branch": MessageLookupByLibrary.simpleMessage("Aucune branche"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "password": MessageLookupByLibrary.simpleMessage("Mot de passe"),
         "password_at_least_8": MessageLookupByLibrary.simpleMessage(
@@ -138,7 +155,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Veuillez entrer un titre valide"),
         "please_enter_valid_youtube_link": MessageLookupByLibrary.simpleMessage(
             "Veuillez entrer un lien YouTube valide"),
-        "prefernces": MessageLookupByLibrary.simpleMessage("Préférences"),
         "process_engineering":
             MessageLookupByLibrary.simpleMessage("Génie des procédés"),
         "profile": MessageLookupByLibrary.simpleMessage("Profil"),
@@ -156,6 +172,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "solution_included": MessageLookupByLibrary.simpleMessage(
             "La solution de ce fichier est incluse"),
         "spanish": MessageLookupByLibrary.simpleMessage("Espagnol"),
+        "start_download":
+            MessageLookupByLibrary.simpleMessage("Début du téléchargement..."),
         "start_learning":
             MessageLookupByLibrary.simpleMessage("COMMENCER À APPRENDRE !"),
         "success": MessageLookupByLibrary.simpleMessage("Succès"),
@@ -169,6 +187,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "update_level":
             MessageLookupByLibrary.simpleMessage("MISE À JOUR DU NIVEAU"),
         "upload": MessageLookupByLibrary.simpleMessage("Télécharger"),
+        "upload_date":
+            MessageLookupByLibrary.simpleMessage("Date de téléversement"),
         "upload_file":
             MessageLookupByLibrary.simpleMessage("Télécharger le fichier"),
         "upload_new_exam": MessageLookupByLibrary.simpleMessage(
@@ -185,8 +205,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "video": MessageLookupByLibrary.simpleMessage("VIDÉO"),
         "video_link": MessageLookupByLibrary.simpleMessage("Lien vidéo"),
         "videos": MessageLookupByLibrary.simpleMessage("Vidéos"),
+        "view_all_caps": MessageLookupByLibrary.simpleMessage("VOIR"),
         "welcome": MessageLookupByLibrary.simpleMessage("Bienvenue"),
         "what_are_you_sharing": MessageLookupByLibrary.simpleMessage(
-            "Que partagerez-vous aujourd\'hui ?")
+            "Que partagerez-vous aujourd\'hui ?"),
+        "yes": MessageLookupByLibrary.simpleMessage("Oui")
       };
 }

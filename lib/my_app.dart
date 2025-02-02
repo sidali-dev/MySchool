@@ -51,8 +51,11 @@ class MyApp extends StatelessWidget {
                     if (snapshot.hasError) {
                       print(snapshot.error);
 
-                      return TeacherHomeScreen(
-                          name: userController.user.value!.name);
+                      return Scaffold(
+                        body: Center(
+                          child: Text('Error: ${snapshot.error}'),
+                        ),
+                      );
                     } else {
                       return userController.user.value!.role == Role.student
                           ? StudentHomeScreen()

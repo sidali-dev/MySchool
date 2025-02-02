@@ -37,9 +37,13 @@ class SettingsOptionsRow extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 16),
-        Text(
-          title,
-          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+        SizedBox(
+          width: screenWidth * 0.35,
+          child: Text(
+            title,
+            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
         const Spacer(),
         GestureDetector(

@@ -1249,6 +1249,166 @@ class S {
       args: [],
     );
   }
+
+  /// `Downloading...`
+  String get downloading {
+    return Intl.message(
+      'Downloading...',
+      name: 'downloading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Starting download...`
+  String get start_download {
+    return Intl.message(
+      'Starting download...',
+      name: 'start_download',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ALREADY DOWNLOADED`
+  String get already_downloaded {
+    return Intl.message(
+      'ALREADY DOWNLOADED',
+      name: 'already_downloaded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DOWNLOAD`
+  String get download {
+    return Intl.message(
+      'DOWNLOAD',
+      name: 'download',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Branch`
+  String get no_branch {
+    return Intl.message(
+      'No Branch',
+      name: 'no_branch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload Date`
+  String get upload_date {
+    return Intl.message(
+      'Upload Date',
+      name: 'upload_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Activity`
+  String get activity {
+    return Intl.message(
+      'Activity',
+      name: 'activity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Solution Included`
+  String get has_solution {
+    return Intl.message(
+      'Solution Included',
+      name: 'has_solution',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete File`
+  String get delete_file {
+    return Intl.message(
+      'Delete File',
+      name: 'delete_file',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this file?`
+  String get delete_file_confirmation {
+    return Intl.message(
+      'Are you sure you want to delete this file?',
+      name: 'delete_file_confirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message(
+      'Delete',
+      name: 'delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DELETE`
+  String get delete_all_caps {
+    return Intl.message(
+      'DELETE',
+      name: 'delete_all_caps',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `VIEW`
+  String get view_all_caps {
+    return Intl.message(
+      'VIEW',
+      name: 'view_all_caps',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message(
+      'No',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

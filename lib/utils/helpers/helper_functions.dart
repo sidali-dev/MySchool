@@ -62,17 +62,6 @@ class SHelperFunctions {
     }
   }
 
-  static formatDate(String timeStamp) {
-    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(
-        int.parse(timeStamp) * 1000,
-        isUtc: false);
-
-    final dateFormatter = DateFormat('dd MMM yyyy');
-    final formattedDate = dateFormatter.format(dateTime);
-
-    return formattedDate;
-  }
-
   static bool isFirstRun() {
     final box = GetStorage();
 
@@ -133,5 +122,12 @@ class SHelperFunctions {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(snackBar);
+  }
+
+  static formateDate(DateTime date, BuildContext context) {
+    bool isRtl = Localizations.localeOf(context).languageCode == "ar";
+    return isRtl
+        ? DateFormat('yyyy/MM/dd').format(date)
+        : DateFormat('dd/MM/yyyy').format(date);
   }
 }

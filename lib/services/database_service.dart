@@ -223,7 +223,7 @@ class DatabaseService {
       document = await _databases.createDocument(
         databaseId: dotenv.get("APPWRITE_DB_ID"),
         collectionId: dotenv.get("APPWRITE_DB_ASSETS"),
-        documentId: ID.unique(),
+        documentId: asset.id!,
         data: {
           "file_link": asset.fileLink,
           "title": asset.title,
@@ -236,16 +236,59 @@ class DatabaseService {
           "teacher": asset.teacher.id,
         },
       );
-      print(document.data);
       return document;
     } catch (e) {
-      print("================================");
-      print(asset.trimester);
-      print(asset.trimester.runtimeType);
       print(e);
-      print("================================");
 
       return document;
+    }
+  }
+
+  Future<List<Document>?> getAllFilesByTeacher(String teacherId) async {
+    List<Document> documents = [];
+    try {
+      final result = await _databases.listDocuments(
+        databaseId: dotenv.get("APPWRITE_DB_ID"),
+        collectionId: dotenv.get("APPWRITE_DB_ASSETS"),
+        queries: [
+          Query.equal('teacher', teacherId),
+        ],
+      );
+      documents = result.documents;
+    } catch (e) {
+      print(e);
+      return null;
+    }
+    return documents;
+  }
+
+  Future<bool> deleteFileFromStorage(String fileId) async {
+    try {
+      final response = await _storage.deleteFile(
+        fileId: fileId,
+        bucketId: dotenv.get("APPWRITE_STORAGE_BUCKET"),
+      );
+      print(response);
+
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  Future<dynamic> deleteFileFromDatabase(String documentId) async {
+    try {
+      final response = await _databases.deleteDocument(
+        databaseId: dotenv.get("APPWRITE_DB_ID"),
+        collectionId: dotenv.get("APPWRITE_DB_ASSETS"),
+        documentId: documentId,
+      );
+      print(response);
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
     }
   }
 }

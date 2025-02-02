@@ -13,15 +13,13 @@ import 'widgets/bubble.dart';
 
 class TeacherHomeScreen extends StatelessWidget {
   final String name;
-  const TeacherHomeScreen({
-    super.key,
-    required this.name,
-  });
+  const TeacherHomeScreen({super.key, required this.name});
 
   @override
   Widget build(BuildContext context) {
     final double screenHeight = SDeviceUtils.getScreenHeight(context);
     final bool isDark = SHelperFunctions.isDarkMode(context);
+    final bool isRtl = SHelperFunctions.isRtl(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
@@ -152,7 +150,6 @@ class TeacherHomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.only(left: 24.0, top: 40, right: 24.0),
               child: Card(
@@ -162,7 +159,9 @@ class TeacherHomeScreen extends StatelessWidget {
                 elevation: 10,
                 child: InkWell(
                   onTap: () => Get.to(() => SettingsScreen(),
-                      transition: Transition.leftToRight),
+                      transition: isRtl
+                          ? Transition.rightToLeft
+                          : Transition.leftToRight),
                   borderRadius: BorderRadius.circular(100),
                   child: Container(
                     decoration: const BoxDecoration(
@@ -181,35 +180,6 @@ class TeacherHomeScreen extends StatelessWidget {
                 ),
               ),
             )
-
-            // Padding(
-            //   padding:
-            //       const EdgeInsets.only(left: 24.0, top: 40, right: 24.0),
-            //   child: Card(
-            //     shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(100),
-            //     ),
-            //     elevation: 10,
-            //     child: InkWell(
-            //       onTap: () => Get.to(() => SettingsScreen(),
-            //           transition: Transition.leftToRight),
-            //       child: Container(
-            //         decoration: const BoxDecoration(
-            //           borderRadius: BorderRadius.all(
-            //             Radius.circular(100),
-            //           ),
-            //         ),
-            //         child: const Padding(
-            //           padding: EdgeInsets.all(8.0),
-            //           child: Icon(
-            //             Iconsax.setting_2,
-            //             color: SColors.primary,
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // )
           ],
         ),
       ),

@@ -128,7 +128,7 @@ class ActivitiesScreen extends StatelessWidget {
                       final Activity activity = controller.activities[index];
                       return SquarButton(
                         image: activity.imagePath,
-                        title: controller.getActivitiesTitle(
+                        title: ActivitiesController.getActivitiesTitle(
                             context, activity.activity),
                         onTap: () {
                           Get.bottomSheet(
@@ -185,10 +185,12 @@ class ActivitiesScreen extends StatelessWidget {
                                                   module: module,
                                                   activity: activity,
                                                   trimester: 1,
-                                                  activityTitle: controller
-                                                      .getActivitiesTitle(
-                                                          context,
-                                                          activity.activity),
+                                                  activityTitle:
+                                                      ActivitiesController
+                                                          .getActivitiesTitle(
+                                                              context,
+                                                              activity
+                                                                  .activity),
                                                 );
                                               },
                                             ),
@@ -214,10 +216,12 @@ class ActivitiesScreen extends StatelessWidget {
                                                   module: module,
                                                   activity: activity,
                                                   trimester: 2,
-                                                  activityTitle: controller
-                                                      .getActivitiesTitle(
-                                                          context,
-                                                          activity.activity),
+                                                  activityTitle:
+                                                      ActivitiesController
+                                                          .getActivitiesTitle(
+                                                              context,
+                                                              activity
+                                                                  .activity),
                                                 );
                                               },
                                             ),
@@ -244,10 +248,12 @@ class ActivitiesScreen extends StatelessWidget {
                                                   module: module,
                                                   activity: activity,
                                                   trimester: 3,
-                                                  activityTitle: controller
-                                                      .getActivitiesTitle(
-                                                          context,
-                                                          activity.activity),
+                                                  activityTitle:
+                                                      ActivitiesController
+                                                          .getActivitiesTitle(
+                                                              context,
+                                                              activity
+                                                                  .activity),
                                                 );
                                               },
                                             ),

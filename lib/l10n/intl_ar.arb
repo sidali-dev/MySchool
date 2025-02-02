@@ -118,5 +118,21 @@
     "update_description": "تحديث الوصف",
     "my_uploads": "ملفاتي",
     "upload": "رفع",
-    "uploads": "ملفات مرفوعة"
+    "uploads": "ملفات مرفوعة",
+    "downloading": "جارٍ التحميل...",
+    "start_download": "بدء التحميل...",
+    "already_downloaded": "تم التحميل مسبقًا",
+    "download": "تحميل",    
+    "no_branch": "لا توجد شعبة",
+    "upload_date": "تاريخ الرفع",
+    "activity": "النشاط",
+    "has_solution": "يتضمن الحل",
+    "delete_file": "حذف الملف",
+    "delete_file_confirmation": "هل أنت متأكد أنك تريد حذف هذا الملف؟",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "delete_all_caps": "حذف",
+    "view_all_caps": "عرض",
+    "yes" : "نعم",
+    "no" : "لا"
 }

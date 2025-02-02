@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:appwrite/models.dart' as appwrite;
 import 'package:myschool/models/asset_model.dart';
@@ -10,7 +11,10 @@ import '../services/database_service.dart';
 import '../utils/constants/enums.dart';
 import '../utils/helpers/appwrite_helpers.dart';
 
-class UploadScreenController extends GetxController {
+class UploadScreenController extends GetxController
+    with GetSingleTickerProviderStateMixin {
+  late AnimationController animationController;
+
   File? file;
   AssetModel? assetModel;
 
@@ -53,8 +57,19 @@ class UploadScreenController extends GetxController {
   };
 
   @override
+  onInit() {
+    super.onInit();
+
+    animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
+  }
+
+  @override
   onClose() {
     super.onClose();
+    animationController.dispose();
     titleController.dispose();
     videoLinkController.dispose();
   }
@@ -93,16 +108,19 @@ class UploadScreenController extends GetxController {
   }
 
   void loadAsset(
+    String id,
     String fileLink,
     ActivityEnum documentType,
     ModuleEnum module,
     TeacherModel teacher,
+    bool? hasSolution,
   ) {
     assetModel = AssetModel(
+        id: id,
         fileLink: fileLink,
         title: titleController.text,
         trimester: selectedTrimester.value.toString(),
-        hasSolution: fileHasSolution.value,
+        hasSolution: hasSolution,
         documentType: documentType,
         module: module,
         level: selectedLevel.value.toString(),
