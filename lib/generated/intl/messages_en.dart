@@ -111,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maths": MessageLookupByLibrary.simpleMessage("Maths"),
         "mechanical_engineering":
             MessageLookupByLibrary.simpleMessage("Mechanical Engineering"),
+        "module": MessageLookupByLibrary.simpleMessage("Subject"),
         "my_uploads": MessageLookupByLibrary.simpleMessage("My Uploads"),
         "name_is_long":
             MessageLookupByLibrary.simpleMessage("Name is too long"),
@@ -171,6 +172,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "start_learning":
             MessageLookupByLibrary.simpleMessage("START LEARNING !"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
+        "teacher": MessageLookupByLibrary.simpleMessage("Teacher"),
         "technology": MessageLookupByLibrary.simpleMessage("Technology"),
         "title": MessageLookupByLibrary.simpleMessage("Title"),
         "trimester": MessageLookupByLibrary.simpleMessage("Trimester"),

@@ -134,5 +134,7 @@
     "delete_all_caps": "حذف",
     "view_all_caps": "عرض",
     "yes" : "نعم",
-    "no" : "لا"
+    "no" : "لا",
+    "teacher": "الأستاذ",
+    "module": "المادة"
 }

@@ -134,7 +134,9 @@
     "delete_all_caps" : "DELETE",
     "view_all_caps" : "VIEW",
     "yes" : "Yes",
-    "no" : "No"
+    "no" : "No",
+    "teacher": "Teacher",
+    "module": "Subject"
 
 
 

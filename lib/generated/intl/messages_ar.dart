@@ -106,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maths": MessageLookupByLibrary.simpleMessage("الرياضيات"),
         "mechanical_engineering":
             MessageLookupByLibrary.simpleMessage("الهندسة الميكانيكية"),
+        "module": MessageLookupByLibrary.simpleMessage("المادة"),
         "my_uploads": MessageLookupByLibrary.simpleMessage("ملفاتي"),
         "name_is_long": MessageLookupByLibrary.simpleMessage("الاسم طويل جدًا"),
         "name_is_short":
@@ -160,6 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("بدء التحميل..."),
         "start_learning": MessageLookupByLibrary.simpleMessage("ابدأ التعلم!"),
         "success": MessageLookupByLibrary.simpleMessage("نجاح"),
+        "teacher": MessageLookupByLibrary.simpleMessage("الأستاذ"),
         "technology": MessageLookupByLibrary.simpleMessage("التكنولوجيا"),
         "title": MessageLookupByLibrary.simpleMessage("عنوان"),
         "trimester": MessageLookupByLibrary.simpleMessage("الثلاثي"),

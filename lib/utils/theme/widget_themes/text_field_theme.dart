@@ -15,7 +15,7 @@ class SSextFormFieldTheme {
         fontSize: 16, color: Colors.grey, fontWeight: FontWeight.w700),
     errorStyle: const TextStyle().copyWith(fontStyle: FontStyle.normal),
     floatingLabelStyle:
-        const TextStyle().copyWith(color: SColors.black.withOpacity(0.8)),
+        const TextStyle().copyWith(color: SColors.black.withValues(alpha: 0.8)),
     border: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(16),
       borderSide: const BorderSide(width: 1, color: SColors.primary),
@@ -50,7 +50,7 @@ class SSextFormFieldTheme {
     floatingLabelStyle: const TextStyle().copyWith(
         fontSize: 16,
         fontWeight: FontWeight.w700,
-        color: SColors.white.withOpacity(0.8)),
+        color: SColors.white.withValues(alpha: 0.8)),
     border: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(16),
       borderSide: const BorderSide(width: 1, color: SColors.primary),

@@ -377,7 +377,7 @@ class SettingsScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.logout),
+                        const Icon(Icons.logout, color: Colors.white),
                         const SizedBox(width: 8),
                         Text(S.of(context).log_out),
                       ],

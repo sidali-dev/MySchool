@@ -134,6 +134,8 @@
         "delete_all_caps": "SUPPRIMER",
         "view_all_caps": "VOIR",
         "yes" : "Oui",
-        "no" : "Non"
+        "no" : "Non",
+        "teacher": "Enseignant",
+        "module": "Matière"
 }
     

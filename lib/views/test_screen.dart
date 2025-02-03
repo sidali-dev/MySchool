@@ -12,9 +12,9 @@ class TestScreen extends StatelessWidget {
             onPressed: () async {
               UploadedFileScreenController().getUploadedFiles();
             },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: const Text("get files"),
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text("get files"),
             )),
       ),
     );

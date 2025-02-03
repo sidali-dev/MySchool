@@ -1409,6 +1409,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Module`
+  String get module {
+    return Intl.message(
+      'Subject',
+      name: 'module',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Teacher`
+  String get teacher {
+    return Intl.message(
+      'Teacher',
+      name: 'teacher',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -10,7 +10,6 @@ import 'package:myschool/utils/helpers/helper_functions.dart';
 import 'package:myschool/views/pdf_preview_screen.dart';
 import 'package:myschool/views/widgets/animation/auto_scrolling_text.dart';
 import 'package:myschool/views/youtube_player_screen.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../controllers/uploaded_file_screen_controller.dart';
 import '../controllers/youtube_player_controller.dart';
@@ -337,15 +336,16 @@ class AssetInfoSheet extends StatelessWidget {
                                 final String videoId =
                                     parseVideoId(assetModel.fileLink)!;
 
-                                YoutubePlayerScreenController
-                                    youtubeController =
-                                    Get.put<YoutubePlayerScreenController>(
-                                        YoutubePlayerScreenController(videoId));
-
                                 Get.to(
                                     () => YoutubePlayerScreen(
-                                        controller: youtubeController),
-                                    transition: Transition.downToUp);
+                                          videoId: videoId,
+                                          assetModel: assetModel,
+                                        ), binding: BindingsBuilder(() {
+                                  Get.lazyPut<YoutubePlayerScreenController>(
+                                    () =>
+                                        YoutubePlayerScreenController(videoId),
+                                  );
+                                }), transition: Transition.downToUp);
                               }
                             },
                             child: Row(
@@ -367,7 +367,9 @@ class AssetInfoSheet extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     if (assetModel.documentType != ActivityEnum.videos)
-                      DownloadFileButton(assetModel: assetModel)
+                      DownloadFileButton(assetModel: assetModel),
+                    if (assetModel.documentType != ActivityEnum.videos)
+                      const SizedBox(height: 16),
                   ],
                 )
               ],
