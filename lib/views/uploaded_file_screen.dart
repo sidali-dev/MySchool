@@ -12,7 +12,7 @@ import 'package:myschool/views/widgets/animation/auto_scrolling_text.dart';
 import 'package:myschool/views/youtube_player_screen.dart';
 
 import '../controllers/uploaded_file_screen_controller.dart';
-import '../controllers/youtube_player_controller.dart';
+import '../controllers/youtube_player_screen_controller.dart';
 import '../generated/l10n.dart';
 import 'widgets/download_file_button.dart';
 
@@ -100,6 +100,9 @@ class UploadedFileScreen extends StatelessWidget {
                                       onPressed: () {
                                         Get.bottomSheet(
                                           AssetInfoSheet(
+                                            similarVideos: controller
+                                                .getTeacherUploadsByActivity(
+                                                    ActivityEnum.videos),
                                             assetModel: assetModel,
                                             screenWidth: screenWidth,
                                             isRtl: isRtl,
@@ -135,11 +138,13 @@ class AssetInfoSheet extends StatelessWidget {
     required this.isRtl,
     required this.screenWidth,
     required this.controller,
+    required this.similarVideos,
   });
 
   final AssetModel assetModel;
   final double screenWidth;
   final bool isRtl;
+  final List<AssetModel>? similarVideos;
   final UploadedFileScreenController controller;
 
   @override
@@ -333,17 +338,14 @@ class AssetInfoSheet extends StatelessWidget {
                                         assetModel: assetModel),
                                     transition: Transition.downToUp);
                               } else {
-                                final String videoId =
-                                    parseVideoId(assetModel.fileLink)!;
-
                                 Get.to(
                                     () => YoutubePlayerScreen(
-                                          videoId: videoId,
                                           assetModel: assetModel,
                                         ), binding: BindingsBuilder(() {
                                   Get.lazyPut<YoutubePlayerScreenController>(
-                                    () =>
-                                        YoutubePlayerScreenController(videoId),
+                                    () => YoutubePlayerScreenController(
+                                        otherVideos: similarVideos!.obs,
+                                        assetModel: assetModel.obs),
                                   );
                                 }), transition: Transition.downToUp);
                               }
@@ -379,15 +381,4 @@ class AssetInfoSheet extends StatelessWidget {
       },
     );
   }
-}
-
-String? parseVideoId(String url) {
-  final regex = RegExp(
-    r'^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*',
-    caseSensitive: false,
-  );
-  final match = regex.firstMatch(url);
-  return (match != null && match.group(1)!.length == 11)
-      ? match.group(1)
-      : null;
 }
