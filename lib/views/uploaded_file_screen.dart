@@ -305,8 +305,15 @@ class AssetInfoSheet extends StatelessWidget {
 
                               // If user confirms deletion, proceed
                               if (confirmDelete == true) {
-                                if (context.mounted) {
+                                if (context.mounted &&
+                                    assetModel.documentType !=
+                                        ActivityEnum.videos) {
                                   await controller.deleteFile(
+                                      context: context, id: assetModel.id!);
+                                } else if (context.mounted &&
+                                    assetModel.documentType ==
+                                        ActivityEnum.videos) {
+                                  await controller.deleteVideo(
                                       context: context, id: assetModel.id!);
                                 }
                               }

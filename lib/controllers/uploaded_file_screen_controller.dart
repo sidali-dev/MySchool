@@ -76,6 +76,48 @@ class UploadedFileScreenController extends GetxController {
     }
   }
 
+  Future deleteVideo({
+    required BuildContext context,
+    required String id,
+  }) async {
+    DatabaseService databaseService = DatabaseService();
+
+    //start loading indicator
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+
+    //delete file from database and storage
+    final bool isSuccess = await databaseService.deleteFileFromDatabase(id);
+
+    print("storage: $isSuccess");
+
+    //close loading indicator
+    Get.back();
+
+    //handle possible errors
+    if (!isSuccess) {
+      if (context.mounted) {
+        AppwriteHelpers.showSomethingWentWorng(context);
+      }
+    } else {
+      Get.back();
+      removeFileFromList(id);
+      user.decrementTeacherUploads();
+      if (context.mounted) {
+        SHelperFunctions.showAwesomeSnackBar(
+            title: "Video Deleted",
+            content: "Video has been removed successfully",
+            contentType: ContentType.success,
+            context: context);
+      }
+    }
+  }
+
   void removeFileFromList(String id) {
     uploadedFiles.removeWhere((element) => element.id == id);
 
