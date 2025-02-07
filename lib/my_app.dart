@@ -52,8 +52,18 @@ class MyApp extends StatelessWidget {
                       print(snapshot.error);
 
                       return Scaffold(
-                        body: Center(
-                          child: Text('Error: ${snapshot.error}'),
+                        body: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Error: ${snapshot.error}'),
+                            const SizedBox(height: 32),
+                            ElevatedButton(
+                                onPressed: () async {
+                                  await UserController()
+                                      .signOut(context: context);
+                                },
+                                child: const Text("DICONNECT"))
+                          ],
                         ),
                       );
                     } else {

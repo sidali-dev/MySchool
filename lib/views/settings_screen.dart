@@ -172,7 +172,7 @@ class SettingsScreen extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        const SizedBox(height: 16),
+                                        const SizedBox(height: 32),
                                       ],
                                     ),
                                   ),
@@ -372,7 +372,35 @@ class SettingsScreen extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 40),
                   child: ElevatedButton(
                     onPressed: () async {
-                      await userController.signOut(context: context);
+                      final bool? confirm = await showDialog<bool>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Confirm Logout'),
+                            content:
+                                const Text('Are you sure you want to log out?'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.of(context).pop(false),
+                                child: Text(S.of(context).cancel),
+                              ),
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.of(context).pop(true),
+                                child: Text(
+                                  S.of(context).log_out,
+                                  style: const TextStyle(color: Colors.red),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+
+                      if (confirm == true && context.mounted) {
+                        await userController.signOut(context: context);
+                      }
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -444,7 +472,7 @@ class ChangeLevelBottomSheet extends StatelessWidget {
                 style:
                     const TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 16),
               SizedBox(
                 height: screenheight * 0.2,
                 child: CupertinoPicker(
@@ -461,7 +489,7 @@ class ChangeLevelBottomSheet extends StatelessWidget {
                   ).toList(),
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 16),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: ElevatedButton(
@@ -506,7 +534,11 @@ class ChangeBranchBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late String branch;
+    BranchesEnum branchesEnum = userController.student.value!
+        .getAllUserBranches(context, level)
+        .first["value"];
+    String? branch =
+        userController.student.value!.branch?.name ?? branchesEnum.name;
     return BottomSheet(
       enableDrag: false,
       onClosing: () {},
@@ -526,7 +558,7 @@ class ChangeBranchBottomSheet extends StatelessWidget {
                 style:
                     const TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 16),
               SizedBox(
                 height: screenheight * 0.2,
                 child: CupertinoPicker(
@@ -546,7 +578,7 @@ class ChangeBranchBottomSheet extends StatelessWidget {
                   ).toList(),
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 16),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: ElevatedButton(
