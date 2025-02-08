@@ -167,16 +167,11 @@ class UploadedFileScreenController extends GetxController {
 
   List<AssetModel> getTeacherUploadsByActivity(ActivityEnum activity) {
     List<AssetModel> list = [];
-    int i = 0;
     for (AssetModel assetModel in uploadedFiles) {
-      print(assetModel.documentType);
       if (assetModel.documentType == activity) {
-        i++;
-        print(i);
         list.add(assetModel);
       }
     }
-    print(list.length);
     return list;
   }
 

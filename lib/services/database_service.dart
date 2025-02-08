@@ -262,6 +262,35 @@ class DatabaseService {
     return documents;
   }
 
+  Future<List<Document>> getFilesForMaterialsScreen({
+    required String activity,
+    required String module,
+    required String level,
+    String? branch,
+    String? trimester,
+  }) async {
+    List<Document> documents = [];
+    try {
+      final result = await _databases.listDocuments(
+        databaseId: dotenv.get("APPWRITE_DB_ID"),
+        collectionId: dotenv.get("APPWRITE_DB_ASSETS"),
+        queries: [
+          Query.equal('document_type', activity),
+          Query.equal('module', module),
+          Query.equal('level', level),
+          if (trimester != null) Query.equal('trimester', trimester),
+          if (branch != null) Query.contains('branch', branch),
+        ],
+      );
+      documents = result.documents;
+    } catch (e) {
+      print("======================================");
+      print("DATABASE SERVICE/getFilesForMaterialsScreen()");
+      print(e);
+    }
+    return documents;
+  }
+
   Future<bool> deleteFileFromStorage(String fileId) async {
     try {
       final response = await _storage.deleteFile(

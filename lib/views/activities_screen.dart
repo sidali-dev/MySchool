@@ -295,8 +295,8 @@ class ActivitiesScreen extends StatelessWidget {
             module: module,
             activity: activity,
             trimester: trimester,
-            activityTitle: activityTitle,
-            moduleTitle: moduleTitle,
+            activityTag: activityTitle,
+            moduleTag: moduleTitle,
           ),
           transition: Transition.downToUp,
           duration: const Duration(

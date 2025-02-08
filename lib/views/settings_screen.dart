@@ -367,6 +367,14 @@ class SettingsScreen extends StatelessWidget {
                   value: true,
                   onTap: () {},
                 ),
+                const SizedBox(height: 16),
+                SettingsSwitchRow(
+                  userController: userController,
+                  icon: Icons.wifi,
+                  title: "Download via WIFI only",
+                  value: false,
+                  onTap: () {},
+                ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 40),
@@ -412,13 +420,6 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ),
                 )
-                // SettingsSwitchRow(
-                //   userController: userController,
-                //   icon: Icons.wifi,
-                //   title: "Download via WIFI only",
-                //   value: false,
-                //   onTap: () {},
-                // ),
               ],
             ),
           ),
