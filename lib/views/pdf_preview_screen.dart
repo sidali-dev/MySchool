@@ -23,7 +23,8 @@ class PdfPreviewScreen extends StatelessWidget {
         iconTheme: IconThemeData(color: isDark ? Colors.white : Colors.black),
       ),
       body: FutureBuilder<Map>(
-        future: FileDownloader.isFileDownLoaded(assetModel.title),
+        future:
+            FileDownloader.isFileDownLoaded(assetModel.title, assetModel.id!),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

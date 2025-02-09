@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:myschool/services/authentication_service.dart';
+import 'package:myschool/utils/constants/enums.dart';
 import 'package:myschool/utils/helpers/appwrite_helpers.dart';
 
 class SignInController extends GetxController
@@ -83,7 +84,8 @@ class SignInController extends GetxController
   Future<bool> appWriteSignIn(
       {required BuildContext context,
       required String email,
-      required String password}) async {
+      required String password,
+      required Role role}) async {
     AuthenticationService authController = Get.find<AuthenticationService>();
 
     //start loading indicator

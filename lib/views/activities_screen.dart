@@ -5,6 +5,7 @@ import 'package:myschool/controllers/activities_controller.dart';
 import 'package:myschool/generated/l10n.dart';
 import 'package:myschool/models/activities.dart';
 import 'package:myschool/models/modules.dart';
+import 'package:myschool/utils/constants/enums.dart';
 import 'package:myschool/utils/constants/image_strings.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
 import 'package:myschool/views/materials_screen.dart';
@@ -131,142 +132,163 @@ class ActivitiesScreen extends StatelessWidget {
                         title: ActivitiesController.getActivitiesTitle(
                             context, activity.activity),
                         onTap: () {
-                          Get.bottomSheet(
-                            BottomSheet(
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(36),
-                                ),
+                          if (activity.activity == ActivityEnum.finals) {
+                            Get.to(
+                              () => MaterialsScreen(
+                                module: module,
+                                activity: activity,
+                                activityTag:
+                                    ActivitiesController.getActivitiesTitle(
+                                        context, activity.activity),
+                                moduleTag: moduleTitle,
                               ),
-                              enableDrag: false,
-                              onClosing: () {},
-                              builder: (context) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(24),
+                              transition: Transition.downToUp,
+                              duration: const Duration(
+                                milliseconds: 370,
+                              ),
+                            );
+                          } else if (activity.activity ==
+                              ActivityEnum.schoolBook) {
+                          } else {
+                            Get.bottomSheet(
+                              BottomSheet(
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(36),
                                   ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      const SizedBox(height: 8),
-                                      AutoScrollText(
-                                        text: Text(
-                                          S.of(context).pick_trimester,
-                                          style: const TextStyle(
-                                            fontSize: 32,
-                                            fontWeight: FontWeight.w500,
+                                ),
+                                enableDrag: false,
+                                onClosing: () {},
+                                builder: (context) {
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(24),
+                                    ),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        const SizedBox(height: 8),
+                                        AutoScrollText(
+                                          text: Text(
+                                            S.of(context).pick_trimester,
+                                            style: const TextStyle(
+                                              fontSize: 32,
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                           ),
+                                          width: screenWidth * 0.7,
+                                          alignment: Alignment.center,
                                         ),
-                                        width: screenWidth * 0.7,
-                                        alignment: Alignment.center,
-                                      ),
-                                      const SizedBox(height: 8),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Animate(
-                                            effects: const [
-                                              FlipEffect(
-                                                begin: 1,
-                                                end: 2,
-                                                direction: Axis.horizontal,
-                                                delay: Duration(seconds: 0),
-                                                duration:
-                                                    Duration(milliseconds: 370),
-                                              )
-                                            ],
-                                            child: NumbersCard(
-                                              imagePath: SImageString.numberOne,
-                                              screenHeight: screenHeight,
-                                              screenWidth: screenWidth,
-                                              onTap: () async {
-                                                await openMaterialsScreen(
-                                                  module: module,
-                                                  activity: activity,
-                                                  trimester: 1,
-                                                  activityTitle:
-                                                      ActivitiesController
-                                                          .getActivitiesTitle(
-                                                              context,
-                                                              activity
-                                                                  .activity),
-                                                );
-                                              },
+                                        const SizedBox(height: 8),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Animate(
+                                              effects: const [
+                                                FlipEffect(
+                                                  begin: 1,
+                                                  end: 2,
+                                                  direction: Axis.horizontal,
+                                                  delay: Duration(seconds: 0),
+                                                  duration: Duration(
+                                                      milliseconds: 370),
+                                                )
+                                              ],
+                                              child: NumbersCard(
+                                                imagePath:
+                                                    SImageString.numberOne,
+                                                screenHeight: screenHeight,
+                                                screenWidth: screenWidth,
+                                                onTap: () async {
+                                                  await openMaterialsScreen(
+                                                    module: module,
+                                                    activity: activity,
+                                                    trimester: 1,
+                                                    activityTitle:
+                                                        ActivitiesController
+                                                            .getActivitiesTitle(
+                                                                context,
+                                                                activity
+                                                                    .activity),
+                                                  );
+                                                },
+                                              ),
                                             ),
-                                          ),
-                                          Animate(
-                                            effects: const [
-                                              FlipEffect(
-                                                begin: 1,
-                                                end: 2,
-                                                direction: Axis.horizontal,
-                                                delay:
-                                                    Duration(milliseconds: 100),
-                                                duration:
-                                                    Duration(milliseconds: 370),
-                                              )
-                                            ],
-                                            child: NumbersCard(
-                                              imagePath: SImageString.numberTwo,
-                                              screenHeight: screenHeight,
-                                              screenWidth: screenWidth,
-                                              onTap: () async {
-                                                await openMaterialsScreen(
-                                                  module: module,
-                                                  activity: activity,
-                                                  trimester: 2,
-                                                  activityTitle:
-                                                      ActivitiesController
-                                                          .getActivitiesTitle(
-                                                              context,
-                                                              activity
-                                                                  .activity),
-                                                );
-                                              },
+                                            Animate(
+                                              effects: const [
+                                                FlipEffect(
+                                                  begin: 1,
+                                                  end: 2,
+                                                  direction: Axis.horizontal,
+                                                  delay: Duration(
+                                                      milliseconds: 100),
+                                                  duration: Duration(
+                                                      milliseconds: 370),
+                                                )
+                                              ],
+                                              child: NumbersCard(
+                                                imagePath:
+                                                    SImageString.numberTwo,
+                                                screenHeight: screenHeight,
+                                                screenWidth: screenWidth,
+                                                onTap: () async {
+                                                  await openMaterialsScreen(
+                                                    module: module,
+                                                    activity: activity,
+                                                    trimester: 2,
+                                                    activityTitle:
+                                                        ActivitiesController
+                                                            .getActivitiesTitle(
+                                                                context,
+                                                                activity
+                                                                    .activity),
+                                                  );
+                                                },
+                                              ),
                                             ),
-                                          ),
-                                          Animate(
-                                            effects: const [
-                                              FlipEffect(
-                                                begin: 1,
-                                                end: 2,
-                                                direction: Axis.horizontal,
-                                                delay:
-                                                    Duration(milliseconds: 200),
-                                                duration:
-                                                    Duration(milliseconds: 370),
-                                              )
-                                            ],
-                                            child: NumbersCard(
-                                              imagePath:
-                                                  SImageString.numberThree,
-                                              screenHeight: screenHeight,
-                                              screenWidth: screenWidth,
-                                              onTap: () async {
-                                                await openMaterialsScreen(
-                                                  module: module,
-                                                  activity: activity,
-                                                  trimester: 3,
-                                                  activityTitle:
-                                                      ActivitiesController
-                                                          .getActivitiesTitle(
-                                                              context,
-                                                              activity
-                                                                  .activity),
-                                                );
-                                              },
+                                            Animate(
+                                              effects: const [
+                                                FlipEffect(
+                                                  begin: 1,
+                                                  end: 2,
+                                                  direction: Axis.horizontal,
+                                                  delay: Duration(
+                                                      milliseconds: 200),
+                                                  duration: Duration(
+                                                      milliseconds: 370),
+                                                )
+                                              ],
+                                              child: NumbersCard(
+                                                imagePath:
+                                                    SImageString.numberThree,
+                                                screenHeight: screenHeight,
+                                                screenWidth: screenWidth,
+                                                onTap: () async {
+                                                  await openMaterialsScreen(
+                                                    module: module,
+                                                    activity: activity,
+                                                    trimester: 3,
+                                                    activityTitle:
+                                                        ActivitiesController
+                                                            .getActivitiesTitle(
+                                                                context,
+                                                                activity
+                                                                    .activity),
+                                                  );
+                                                },
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 16)
-                                    ],
-                                  ),
-                                );
-                              },
-                            ),
-                          );
+                                          ],
+                                        ),
+                                        const SizedBox(height: 16)
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          }
                         },
                       );
                     },

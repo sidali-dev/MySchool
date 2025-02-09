@@ -291,6 +291,31 @@ class DatabaseService {
     return documents;
   }
 
+  Future<List<Document>> getTeacherAssetsPerLevel({
+    required String level,
+    required String teacherID,
+    String? branch,
+  }) async {
+    List<Document> documents = [];
+    try {
+      final result = await _databases.listDocuments(
+        databaseId: dotenv.get("APPWRITE_DB_ID"),
+        collectionId: dotenv.get("APPWRITE_DB_ASSETS"),
+        queries: [
+          Query.equal('level', level),
+          Query.equal('teacher', teacherID),
+          if (branch != null) Query.contains('branch', branch),
+        ],
+      );
+      documents = result.documents;
+    } catch (e) {
+      print("======================================");
+      print("DATABASE SERVICE/getTeacherAssetsPerLevel()");
+      print(e);
+    }
+    return documents;
+  }
+
   Future<bool> deleteFileFromStorage(String fileId) async {
     try {
       final response = await _storage.deleteFile(

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:lottie/lottie.dart';
 import 'package:myschool/controllers/youtube_player_screen_controller.dart';
 import 'package:myschool/models/asset_model.dart';
 import 'package:myschool/utils/constants/image_strings.dart';
@@ -184,97 +185,104 @@ class YoutubePlayerScreen extends GetView<YoutubePlayerScreenController> {
                           ),
                           const SizedBox(height: 32),
                           Center(
-                              child: Image.asset(
-                            SImageString.activityVideos,
-                            width: screenWidth * 0.21,
-                          )
-                                  .animate(
-                                    onComplete: (controller) {
-                                      controller
-                                        ..reset()
-                                        ..forward();
-                                    },
-                                  )
-                                  .then(delay: const Duration(minutes: 1))
-                                  .rotate(
-                                      duration:
-                                          const Duration(milliseconds: 6000))
-                                  .slideX(
-                                      begin: 0,
-                                      end: 2,
-                                      duration:
-                                          const Duration(milliseconds: 1500))
-                                  .then()
-                                  .slideX(
-                                      begin: 0,
-                                      end: -4,
-                                      duration:
-                                          const Duration(milliseconds: 3000))
-                                  .then()
-                                  .slideX(
-                                      begin: 0,
-                                      end: 2,
-                                      duration:
-                                          const Duration(milliseconds: 1500))
-
-                              // .rotate(duration: const Duration(milliseconds: 1200))
-                              // .shimmer(duration: const Duration(milliseconds: 1800))
-                              // .scaleXY(
-                              //     begin: 1,
-                              //     end: 1.2,
-                              //     duration: const Duration(milliseconds: 600))
-                              // .then()
-                              // .scaleXY(
-                              //     begin: 1.2,
-                              //     end: 1,
-                              //     duration: const Duration(milliseconds: 600)),
-                              ),
+                            child: Image.asset(
+                              SImageString.activityVideos,
+                              width: screenWidth * 0.21,
+                            )
+                                .animate(
+                                  onComplete: (controller) {
+                                    controller
+                                      ..reset()
+                                      ..forward();
+                                  },
+                                )
+                                .then(delay: const Duration(minutes: 1))
+                                .rotate(
+                                    duration:
+                                        const Duration(milliseconds: 6000))
+                                .slideX(
+                                    begin: 0,
+                                    end: 2,
+                                    duration:
+                                        const Duration(milliseconds: 1500))
+                                .then()
+                                .slideX(
+                                    begin: 0,
+                                    end: -4,
+                                    duration:
+                                        const Duration(milliseconds: 3000))
+                                .then()
+                                .slideX(
+                                  begin: 0,
+                                  end: 2,
+                                  duration: const Duration(milliseconds: 1500),
+                                ),
+                          ),
                           const SizedBox(height: 32),
                           Text(
                               "Other videos by ${assetModel.teacher.user.name}"),
-                          CarouselSlider(
-                            carouselController:
-                                controller.carouselSliderController,
-                            options: CarouselOptions(
-                                enableInfiniteScroll: false,
-                                enlargeCenterPage: true,
-                                viewportFraction: 0.6),
-                            items: controller.otherVideos
-                                .map(
-                                  (e) => Center(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Material(
-                                          elevation: 16,
-                                          shadowColor: isDark
-                                              ? Colors.red
-                                              : Colors.black,
-                                          child: GestureDetector(
-                                            onTap: () async {
-                                              controller.playAnotherVideo(e);
-                                            },
-                                            child: YouTubeThumbnail(
-                                                videoId: controller
-                                                    .parseVideoId(e.fileLink)!),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 12),
-                                        FittedBox(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            e.title,
-                                            style: const TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                          Visibility(
+                            visible: controller.otherVideos.length > 1,
+                            replacement: Column(
+                              children: [
+                                LottieBuilder.asset(
+                                    SImageString.emptyScreenAnimation,
+                                    width: screenWidth * 0.5),
+                                const FittedBox(
+                                  child: Text(
+                                    "No other videos",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600),
                                   ),
-                                )
-                                .toList(),
+                                ),
+                              ],
+                            ),
+                            child: CarouselSlider(
+                              carouselController:
+                                  controller.carouselSliderController,
+                              options: CarouselOptions(
+                                  enableInfiniteScroll: false,
+                                  enlargeCenterPage: true,
+                                  viewportFraction: 0.6),
+                              items: controller.otherVideos
+                                  .map(
+                                    (e) => Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Material(
+                                            elevation: 16,
+                                            shadowColor: isDark
+                                                ? Colors.red
+                                                : Colors.black,
+                                            child: GestureDetector(
+                                              onTap: () async {
+                                                controller.playAnotherVideo(e);
+                                              },
+                                              child: YouTubeThumbnail(
+                                                  videoId:
+                                                      controller.parseVideoId(
+                                                          e.fileLink)!),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 12),
+                                          FittedBox(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              e.title,
+                                              style: const TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
                           ),
                           const SizedBox(height: 32)
                         ],

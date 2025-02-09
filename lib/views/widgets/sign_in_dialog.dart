@@ -175,6 +175,7 @@ class SignInDialog extends StatelessWidget {
                                     email: controller.emailController.text,
                                     password:
                                         controller.passwordController.text,
+                                    role: role,
                                   );
 
                                   if (isSucceed) {

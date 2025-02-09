@@ -11,6 +11,7 @@ import 'package:myschool/utils/constants/enums.dart';
 import 'package:myschool/utils/constants/image_strings.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
 import 'package:myschool/views/pdf_preview_screen.dart';
+import 'package:myschool/views/teacher_profile.dart';
 import 'package:myschool/views/widgets/download_file_button.dart';
 import 'package:myschool/views/youtube_player_screen.dart';
 
@@ -25,7 +26,7 @@ class MaterialsScreen extends StatelessWidget {
   MaterialsScreen({
     super.key,
     required this.activity,
-    required this.trimester,
+    this.trimester,
     required this.module,
     required this.activityTag,
     required this.moduleTag,
@@ -34,7 +35,7 @@ class MaterialsScreen extends StatelessWidget {
   final String activityTag;
   final Module module;
   final Activity activity;
-  final int trimester;
+  final int? trimester;
   final String moduleTag;
 
   final MaterialsController controller = Get.put(MaterialsController());
@@ -201,12 +202,20 @@ class MaterialsScreen extends StatelessWidget {
                                               binding: BindingsBuilder(() {
                                             Get.lazyPut<
                                                 YoutubePlayerScreenController>(
-                                              () =>
-                                                  YoutubePlayerScreenController(
-                                                      otherVideos: controller
-                                                          .uploadedFiles,
-                                                      assetModel:
-                                                          assetModel.obs),
+                                              () {
+                                                List<AssetModel>
+                                                    filteredVideos = controller
+                                                        .uploadedFiles
+                                                        .where((video) =>
+                                                            video.id !=
+                                                            assetModel.id)
+                                                        .toList();
+
+                                                return YoutubePlayerScreenController(
+                                                    otherVideos:
+                                                        filteredVideos.obs,
+                                                    assetModel: assetModel.obs);
+                                              },
                                             );
                                           }), transition: Transition.downToUp);
                                         } else {
@@ -334,6 +343,13 @@ class MaterialInfoBottomSheet extends StatelessWidget {
                   icon: const Icon(Icons.person),
                   title: "Teacher",
                   trailing: InkWell(
+                    onTap: () {
+                      Get.back();
+                      Get.to(
+                          () =>
+                              TeacherProfile(teacherModel: assetModel.teacher),
+                          transition: Transition.downToUp);
+                    },
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [

@@ -19,9 +19,9 @@ class DownloadFileButton extends StatelessWidget {
     // Initialize the controller for this specific file
     final DownloadController controller = Get.put(
       DownloadController(
-        fileName: assetModel.title,
-        fileUrl: assetModel.fileLink,
-      ),
+          fileName: assetModel.title,
+          fileUrl: assetModel.fileLink,
+          fileID: assetModel.id!),
       tag: assetModel.title, // Unique tag for each file
     );
 

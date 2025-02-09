@@ -5,6 +5,7 @@ import '../utils/device/file_downloader.dart';
 class DownloadController extends GetxController {
   final String fileName;
   final String fileUrl;
+  final String fileID;
 
   // Track download status
   RxBool isDownloaded = false.obs;
@@ -13,6 +14,7 @@ class DownloadController extends GetxController {
   DownloadController({
     required this.fileName,
     required this.fileUrl,
+    required this.fileID,
   });
 
   // Initialize: Check if the file is already downloaded
@@ -24,7 +26,7 @@ class DownloadController extends GetxController {
 
   // Check if the file exists locally
   Future<void> _checkDownloadStatus() async {
-    final response = await FileDownloader.isFileDownLoaded(fileName);
+    final response = await FileDownloader.isFileDownLoaded(fileName, fileID);
     isDownloaded.value = response["isDownloaded"];
   }
 
@@ -35,6 +37,7 @@ class DownloadController extends GetxController {
       await FileDownloader.downloadFile(
         url: fileUrl,
         fileName: fileName,
+        fileID: fileID,
         context: Get.context!,
       );
       // Re-check status after download

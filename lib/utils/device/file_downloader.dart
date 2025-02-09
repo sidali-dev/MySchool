@@ -13,11 +13,12 @@ class FileDownloader {
     required String url,
     required String fileName,
     required BuildContext context,
+    required String fileID,
   }) async {
     try {
       // Get the downloads directory path
       final directory = await getApplicationDocumentsDirectory();
-      final String savePath = '${directory.path}/$fileName';
+      final String savePath = '${directory.path}/$fileName-$fileID';
 
       // Show progress dialog
       if (context.mounted) {
@@ -107,9 +108,10 @@ class FileDownloader {
     );
   }
 
-  static Future<Map<String, dynamic>> isFileDownLoaded(String fileName) async {
+  static Future<Map<String, dynamic>> isFileDownLoaded(
+      String fileName, String fileID) async {
     final Directory directory = await getApplicationDocumentsDirectory();
-    final String savePath = '${directory.path}/$fileName';
+    final String savePath = '${directory.path}/$fileName-$fileID';
 
     final File existingFile = File(savePath);
     return {"isDownloaded": await existingFile.exists(), "path": savePath};

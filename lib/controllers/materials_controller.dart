@@ -13,7 +13,7 @@ class MaterialsController extends GetxController {
       {required String activity,
       required String module,
       String? trimester}) async {
-    DatabaseService databaseService = DatabaseService();
+    final DatabaseService databaseService = DatabaseService();
 
     List<Document> documents = await databaseService.getFilesForMaterialsScreen(
       activity: activity,
