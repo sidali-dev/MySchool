@@ -9,7 +9,7 @@ import 'package:myschool/controllers/youtube_player_screen_controller.dart';
 import 'package:myschool/models/asset_model.dart';
 import 'package:myschool/utils/constants/image_strings.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
-import 'package:myschool/views/widgets/animation/auto_scrolling_gradien_text.dart';
+import 'package:myschool/views/widgets/gradient_text.dart';
 import 'package:myschool/views/widgets/youtube_thumbnail.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -119,18 +119,16 @@ class YoutubePlayerScreen extends GetView<YoutubePlayerScreenController> {
                               shadowColor: isDark ? Colors.red : Colors.black,
                               child: player),
                           const SizedBox(height: 16),
-                          AutoScrollGradientText(
+                          GradientText(
                             colorX: isDark ? Colors.white : Colors.black,
-                            colorY: Colors.red,
-                            alignment: Alignment.center,
-                            width: screenWidth * 0.95,
+                            colorY: isDark ? Colors.red : Colors.black,
                             text: Text(
                               controller.assetModel.value.title,
                               style: TextStyle(
                                   fontSize: 24,
-                                  fontWeight: FontWeight.w700,
-                                  color:
-                                      isDark ? Colors.redAccent : Colors.black),
+                                  fontWeight: FontWeight.w900,
+                                  color: isDark ? Colors.white : Colors.black),
+                              textAlign: TextAlign.center,
                             ),
                           ),
                           const SizedBox(height: 32),
@@ -222,7 +220,7 @@ class YoutubePlayerScreen extends GetView<YoutubePlayerScreenController> {
                           Text(
                               "Other videos by ${assetModel.teacher.user.name}"),
                           Visibility(
-                            visible: controller.otherVideos.length > 1,
+                            visible: controller.otherVideos.isNotEmpty,
                             replacement: Column(
                               children: [
                                 LottieBuilder.asset(

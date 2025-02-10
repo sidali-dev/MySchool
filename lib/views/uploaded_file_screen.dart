@@ -89,12 +89,15 @@ class UploadedFileScreen extends StatelessWidget {
                                   return ListTile(
                                     leading: CircleAvatar(
                                       child: Image.asset(
-                                          controller.getActivityImage(
-                                              assetModel.documentType)),
+                                        controller.getActivityImage(
+                                            assetModel.documentType),
+                                      ),
                                     ),
                                     title: Text(assetModel.title),
-                                    subtitle: Text(SHelperFunctions.formateDate(
-                                        assetModel.createdAt!, context)),
+                                    subtitle: Text(
+                                      SHelperFunctions.formateDate(
+                                          assetModel.createdAt!, context),
+                                    ),
                                     trailing: IconButton(
                                       icon: const Icon(Iconsax.menu),
                                       onPressed: () {

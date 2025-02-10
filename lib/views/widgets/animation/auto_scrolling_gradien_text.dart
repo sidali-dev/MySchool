@@ -76,21 +76,22 @@ class _AutoScrollGradientTextState extends State<AutoScrollGradientText> {
       child: Align(
         alignment: widget.alignment,
         child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            controller: _scrollController,
-            child: ShaderMask(
-                shaderCallback: (Rect bounds) {
-                  return LinearGradient(
-                    colors: [
-                      widget.colorX,
-                      widget.colorY,
-                    ],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ).createShader(bounds);
-                },
-                blendMode: BlendMode.srcIn,
-                child: widget.text)),
+          scrollDirection: Axis.horizontal,
+          controller: _scrollController,
+          child: ShaderMask(
+              shaderCallback: (Rect bounds) {
+                return LinearGradient(
+                  colors: [
+                    widget.colorX,
+                    widget.colorY,
+                  ],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ).createShader(bounds);
+              },
+              blendMode: BlendMode.srcIn,
+              child: widget.text),
+        ),
       ),
     );
   }
