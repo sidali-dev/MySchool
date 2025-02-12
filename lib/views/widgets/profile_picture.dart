@@ -1,39 +1,55 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:myschool/controllers/user_controller.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:myschool/services/database_service.dart';
 import '../../utils/cache/profile_pic_cache_manager.dart';
 
 class ProfilePicture extends StatelessWidget {
   ProfilePicture({
-    required this.controller,
+    required this.profilePic,
     required this.screenWidth,
     super.key,
   });
-  final UserController controller;
+  final String? profilePic;
   final double screenWidth;
 
   final ProfilePictureCacheManager _cacheManager = ProfilePictureCacheManager();
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      final profilePic = controller.teacher.value!.profilePic;
+    // If profilePic is null or empty, show the fallback avatar
+    if (profilePic == null) {
+      return _buildFallbackAvatar();
+    }
+    if (profilePic!.isEmpty) {
+      return _buildFallbackAvatar();
+    }
 
-      // If profilePic is null or empty, show the fallback avatar
-      if (profilePic == null || profilePic.isEmpty) {
-        return _buildFallbackAvatar();
-      }
-
-      // If profilePic exists, fetch and display the image
-      final diameter = screenWidth / 3;
-      return FutureBuilder<File>(
-        future: _getCachedImage(profilePic),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return CircleAvatar(
+    // If profilePic exists, fetch and display the image
+    final diameter = screenWidth / 3;
+    return FutureBuilder<File>(
+      future: _getCachedImage(profilePic!),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return InkWell(
+            onTap: () => showDialog(
+              context: context,
+              builder: (context) => Center(
+                child: Animate(
+                  effects: const [FlipEffect(begin: 1.5, end: 2.0)],
+                  child: ClipOval(
+                    child: Image.file(
+                      snapshot.data!,
+                      width: diameter * 2,
+                      height: diameter * 2,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            child: CircleAvatar(
               radius: screenWidth / 6,
               backgroundColor: Colors.lightBlue.shade100,
               child: ClipOval(
@@ -44,15 +60,15 @@ class ProfilePicture extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-            );
-          }
-          if (snapshot.hasError) {
-            return _buildFallbackAvatar();
-          }
-          return _buildLoadingAvatar();
-        },
-      );
-    });
+            ),
+          );
+        }
+        if (snapshot.hasError) {
+          return _buildFallbackAvatar();
+        }
+        return _buildLoadingAvatar();
+      },
+    );
   }
 
   Future<File> _getCachedImage(String fileId) async {

@@ -70,8 +70,14 @@ class SettingsScreen extends StatelessWidget {
                 Stack(
                   clipBehavior: Clip.none,
                   children: [
-                    ProfilePicture(
-                        controller: userController, screenWidth: screenWidth),
+                    Obx(
+                      () {
+                        return ProfilePicture(
+                            profilePic:
+                                userController.teacher.value?.profilePic,
+                            screenWidth: screenWidth);
+                      },
+                    ),
                     Positioned(
                       bottom: 00,
                       right: 00,
@@ -383,14 +389,15 @@ class SettingsScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                const SizedBox(height: 16),
-                SettingsSwitchRow(
-                  userController: userController,
-                  icon: Iconsax.notification,
-                  title: S.of(context).notifications,
-                  value: true,
-                  onTap: () {},
-                ),
+                // const SizedBox(height: 16),
+                // SettingsSwitchRow(
+                //   userController: userController,
+                //   icon: Iconsax.notification,
+                //   title: S.of(context).notifications,
+                //   value: true,
+                //   onTap: () {},
+                // ),
+
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 32),
@@ -424,6 +431,10 @@ class SettingsScreen extends StatelessWidget {
 
                       if (confirm == true && context.mounted) {
                         await userController.signOut(context: context);
+
+                        await Future.delayed(const Duration(seconds: 1));
+                        userController.student.value = null;
+                        userController.teacher.value = null;
                       }
                     },
                     child: Row(
@@ -667,36 +678,36 @@ class ChangeLanguageBottomSheet extends StatelessWidget {
                   enableInfiniteScroll: true,
                   enlargeCenterPage: true,
                   viewportFraction: 0.5),
-              items: languageController.languages.map(
-                (e) {
-                  return Builder(
-                    builder: (context) {
-                      return GestureDetector(
-                        onTap: () {
-                          languageController.changeCurrentLanguage(e);
-                          Get.back();
-                        },
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              languageController.getLanguageFlag(e),
-                              height: 100,
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              languageController.getLanguageTitle(e),
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w600, fontSize: 24),
-                            )
-                          ],
-                        ),
-                      );
-                    },
-                  );
-                },
-              ).toList(),
+              items: languageController.languages
+                  .map(
+                    (e) => Builder(
+                      builder: (context) {
+                        return GestureDetector(
+                          onTap: () {
+                            languageController.changeCurrentLanguage(e);
+                            Get.back();
+                          },
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                languageController.getLanguageFlag(e),
+                                height: 100,
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                languageController.getLanguageTitle(e),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w600, fontSize: 24),
+                              )
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  )
+                  .toList(),
             )
           ],
         ),

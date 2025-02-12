@@ -7,6 +7,7 @@ import 'package:myschool/models/teacher_model.dart';
 import 'package:myschool/utils/constants/image_strings.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
 import 'package:myschool/views/materials_screen.dart';
+import 'package:myschool/views/widgets/profile_picture.dart';
 
 import '../controllers/activities_controller.dart';
 import '../controllers/home_controller.dart';
@@ -70,15 +71,9 @@ class TeacherProfile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 16),
-                CircleAvatar(
-                  backgroundColor: Colors.lightBlue.shade100,
-                  radius: screenWidth / 6,
-                  child: Icon(
-                    Icons.person,
-                    color: Colors.blue,
-                    size: screenWidth / 4,
-                  ),
-                ),
+                ProfilePicture(
+                    profilePic: teacherModel.profilePic,
+                    screenWidth: screenWidth),
                 const SizedBox(height: 16),
                 FittedBox(
                   child: Text(
@@ -153,185 +148,53 @@ class TeacherProfile extends StatelessWidget {
                               SizedBox(
                                 height: screenHeight * 0.6,
                                 child: TabBarView(
-                                  children:
-                                      controller.assetsbyModuleThanActivity
-                                          .map(
-                                            (moduleActivities) => Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 24.0),
-                                              child: GridView.builder(
-                                                physics:
-                                                    const NeverScrollableScrollPhysics(),
-                                                shrinkWrap: true,
-                                                gridDelegate:
-                                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 2,
-                                                  crossAxisSpacing: 32,
-                                                  mainAxisSpacing: 24,
-                                                ),
-                                                itemCount:
-                                                    moduleActivities.length,
-                                                itemBuilder: (context, index) {
-                                                  final Activity activity =
-                                                      controller.getActivity(
-                                                          moduleActivities[
-                                                                  index]
-                                                              .first
-                                                              .documentType);
-                                                  return SquarButton(
-                                                    image: activity.imagePath,
-                                                    title: ActivitiesController
-                                                        .getActivitiesTitle(
-                                                            context,
-                                                            activity.activity),
-                                                    onTap: () {
-                                                      Get.bottomSheet(
-                                                        Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: isDark
-                                                                ? SColors.dark
-                                                                : SColors.white,
-                                                            borderRadius:
-                                                                const BorderRadius
-                                                                    .vertical(
-                                                              top: Radius
-                                                                  .circular(
-                                                                      24.0),
-                                                            ),
-                                                          ),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .min,
-                                                            children: [
-                                                              const SizedBox(
-                                                                  height: 16),
-                                                              Text(
-                                                                ActivitiesController
-                                                                    .getActivitiesTitle(
-                                                                        context,
-                                                                        activity
-                                                                            .activity),
-                                                                style:
-                                                                    const TextStyle(
-                                                                  fontSize: 24,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700,
-                                                                ),
-                                                              ),
-                                                              const SizedBox(
-                                                                  height: 16),
-                                                              Expanded(
-                                                                child: ListView
-                                                                    .builder(
-                                                                  shrinkWrap:
-                                                                      true,
-                                                                  itemCount:
-                                                                      moduleActivities[
-                                                                              index]
-                                                                          .length,
-                                                                  itemBuilder:
-                                                                      (context,
-                                                                          index2) {
-                                                                    AssetModel
-                                                                        assetModel =
-                                                                        moduleActivities[index]
-                                                                            [
-                                                                            index2];
-                                                                    return Padding(
-                                                                      padding: const EdgeInsets
-                                                                          .symmetric(
-                                                                          horizontal:
-                                                                              16.0,
-                                                                          vertical:
-                                                                              4.0),
-                                                                      child:
-                                                                          Card(
-                                                                        shape:
-                                                                            RoundedRectangleBorder(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(16.0),
-                                                                        ),
-                                                                        child:
-                                                                            ListTile(
-                                                                          shape:
-                                                                              RoundedRectangleBorder(
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(16.0),
-                                                                          ),
-                                                                          onTap:
-                                                                              () {
-                                                                            if (assetModel.documentType ==
-                                                                                ActivityEnum.videos) {
-                                                                              Get.to(
-                                                                                  () => YoutubePlayerScreen(
-                                                                                        assetModel: assetModel,
-                                                                                      ), binding: BindingsBuilder(() {
-                                                                                Get.lazyPut<YoutubePlayerScreenController>(
-                                                                                  () {
-                                                                                    List<AssetModel> filteredVideos = moduleActivities[index].where((video) => video.id != assetModel.id).toList();
-                                                                                    return YoutubePlayerScreenController(otherVideos: filteredVideos.obs, assetModel: assetModel.obs);
-                                                                                  },
-                                                                                );
-                                                                              }), transition: Transition.downToUp);
-                                                                            } else {
-                                                                              Get.to(() => PdfPreviewScreen(assetModel: assetModel), transition: Transition.downToUp);
-                                                                            }
-                                                                          },
-                                                                          leading:
-                                                                              IconButton(
-                                                                            onPressed: () =>
-                                                                                Get.bottomSheet(
-                                                                              MaterialInfoBottomSheet(isDark: isDark, screenWidth: screenWidth, assetModel: assetModel, isRtl: isRtl),
-                                                                            ),
-                                                                            icon:
-                                                                                const Icon(
-                                                                              Icons.info_outline,
-                                                                              color: Colors.lightBlue,
-                                                                            ),
-                                                                          ),
-                                                                          title:
-                                                                              Center(
-                                                                            child:
-                                                                                AutoScrollText(
-                                                                              alignment: Alignment.center,
-                                                                              width: screenWidth * 0.7,
-                                                                              text: Text(
-                                                                                assetModel.title,
-                                                                                style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                          trailing:
-                                                                              Icon(
-                                                                            isRtl
-                                                                                ? Icons.arrow_back_ios
-                                                                                : Icons.arrow_forward_ios,
-                                                                            color:
-                                                                                Colors.lightBlue,
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                  },
-                                                                ),
-                                                              ),
-                                                              const SizedBox(
-                                                                  height: 16),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
+                                  children: controller
+                                      .assetsbyModuleThanActivity
+                                      .map(
+                                        (moduleActivities) => Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 24.0),
+                                          child: GridView.builder(
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            gridDelegate:
+                                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2,
+                                              crossAxisSpacing: 32,
+                                              mainAxisSpacing: 24,
+                                            ),
+                                            itemCount: moduleActivities.length,
+                                            itemBuilder: (context, index) {
+                                              final Activity activity =
+                                                  controller.getActivity(
+                                                      moduleActivities[index]
+                                                          .first
+                                                          .documentType);
+                                              return SquarButton(
+                                                image: activity.imagePath,
+                                                title: ActivitiesController
+                                                    .getActivitiesTitle(context,
+                                                        activity.activity),
+                                                onTap: () {
+                                                  Get.bottomSheet(
+                                                    TeacherSpecificUploadsWidget(
+                                                        assets:
+                                                            moduleActivities[
+                                                                index],
+                                                        isDark: isDark,
+                                                        activity: activity,
+                                                        screenWidth:
+                                                            screenWidth,
+                                                        isRtl: isRtl),
                                                   );
                                                 },
-                                              ),
-                                            ),
-                                          )
-                                          .toList(),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
                                 ),
                               ),
                             ],
@@ -346,6 +209,126 @@ class TeacherProfile extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class TeacherSpecificUploadsWidget extends StatelessWidget {
+  const TeacherSpecificUploadsWidget({
+    required this.isDark,
+    required this.activity,
+    required this.screenWidth,
+    required this.isRtl,
+    required this.assets,
+    super.key,
+  });
+
+  final List<AssetModel> assets;
+  final bool isDark;
+  final Activity activity;
+  final double screenWidth;
+  final bool isRtl;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: isDark ? SColors.dark : SColors.white,
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(24.0),
+        ),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(height: 16),
+          Text(
+            ActivitiesController.getActivitiesTitle(context, activity.activity),
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Expanded(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: assets.length,
+              itemBuilder: (context, index2) {
+                AssetModel assetModel = assets[index2];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 4.0),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: ListTile(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                      onTap: () {
+                        if (assetModel.documentType == ActivityEnum.videos) {
+                          Get.to(
+                              () => YoutubePlayerScreen(
+                                    assetModel: assetModel,
+                                  ), binding: BindingsBuilder(
+                            () {
+                              Get.lazyPut<YoutubePlayerScreenController>(
+                                () {
+                                  List<AssetModel> filteredVideos = assets
+                                      .where(
+                                          (video) => video.id != assetModel.id)
+                                      .toList();
+                                  return YoutubePlayerScreenController(
+                                      otherVideos: filteredVideos.obs,
+                                      assetModel: assetModel.obs);
+                                },
+                              );
+                            },
+                          ), transition: Transition.downToUp);
+                        } else {
+                          Get.to(() => PdfPreviewScreen(assetModel: assetModel),
+                              transition: Transition.downToUp);
+                        }
+                      },
+                      leading: IconButton(
+                        onPressed: () => Get.bottomSheet(
+                          MaterialInfoBottomSheet(
+                              isDark: isDark,
+                              screenWidth: screenWidth,
+                              assetModel: assetModel,
+                              isRtl: isRtl),
+                        ),
+                        icon: const Icon(
+                          Icons.info_outline,
+                          color: Colors.lightBlue,
+                        ),
+                      ),
+                      title: Center(
+                        child: AutoScrollText(
+                          alignment: Alignment.center,
+                          width: screenWidth * 0.7,
+                          text: Text(
+                            assetModel.title,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 16),
+                          ),
+                        ),
+                      ),
+                      trailing: Icon(
+                        isRtl ? Icons.arrow_back_ios : Icons.arrow_forward_ios,
+                        color: Colors.lightBlue,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 16),
+        ],
       ),
     );
   }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:myschool/models/asset_model.dart';
 import 'package:myschool/utils/device/file_downloader.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
+import 'package:myschool/views/widgets/download_file_icon.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class PdfPreviewScreen extends StatelessWidget {
@@ -21,6 +22,12 @@ class PdfPreviewScreen extends StatelessWidget {
         centerTitle: true,
         title: Text(assetModel.title),
         iconTheme: IconThemeData(color: isDark ? Colors.white : Colors.black),
+        // actions: [
+        //   Padding(
+        //     padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        //     child: DownloadFileIcon(assetModel: assetModel, isDark: isDark),
+        //   )
+        // ],
       ),
       body: FutureBuilder<Map>(
         future:

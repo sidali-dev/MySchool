@@ -28,16 +28,6 @@ class MaterialsController extends GetxController {
       uploadedFiles.value =
           documents.map((e) => AssetModel.fromMap(e.data)).toList();
 
-      Map<String, List<AssetModel>> groupedFilesMap = {};
-
-      for (AssetModel asset in uploadedFiles) {
-        if (groupedFilesMap.containsKey(asset.module.name)) {
-          groupedFilesMap[asset.module.name]!.add(asset);
-        } else {
-          groupedFilesMap[asset.module.name] = [asset];
-        }
-      }
-
       return 1; // Success
     } else if (documents.isEmpty) {
       return 0; // No files found

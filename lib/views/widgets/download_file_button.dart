@@ -25,55 +25,57 @@ class DownloadFileButton extends StatelessWidget {
       tag: assetModel.title, // Unique tag for each file
     );
 
-    return Obx(() {
-      if (controller.isDownloading.value) {
-        // Show loading state
-        return const OutlinedButton(
-          onPressed: null, // Disable button during download
-          child: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
-      } else if (controller.isDownloaded.value) {
-        // Show "Already Downloaded" state
-        return OutlinedButton(
-          style: OutlinedButton.styleFrom(
-            backgroundColor: Colors.green,
-            side: const BorderSide(color: Colors.green),
-          ),
-          onPressed: null,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Iconsax.check, color: Colors.white),
-              const SizedBox(width: 8),
-              Text(
-                S.of(context).already_downloaded,
-                style: const TextStyle(color: Colors.white),
-              ),
-            ],
-          ),
-        );
-      } else {
-        // Show "Download" button
-        return OutlinedButton(
-          style: OutlinedButton.styleFrom(
-            side: const BorderSide(color: Colors.green),
-          ),
-          onPressed: controller.downloadFile,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Iconsax.document_download, color: Colors.green),
-              const SizedBox(width: 8),
-              Text(
-                S.of(context).download,
-                style: const TextStyle(color: Colors.green),
-              ),
-            ],
-          ),
-        );
-      }
-    });
+    return Obx(
+      () {
+        if (controller.isDownloading.value) {
+          // Show loading state
+          return const OutlinedButton(
+            onPressed: null, // Disable button during download
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        } else if (controller.isDownloaded.value) {
+          // Show "Already Downloaded" state
+          return OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              backgroundColor: Colors.green,
+              side: const BorderSide(color: Colors.green),
+            ),
+            onPressed: null,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Iconsax.check, color: Colors.white),
+                const SizedBox(width: 8),
+                Text(
+                  S.of(context).already_downloaded,
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          );
+        } else {
+          // Show "Download" button
+          return OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              side: const BorderSide(color: Colors.green),
+            ),
+            onPressed: controller.downloadFile,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Iconsax.document_download, color: Colors.green),
+                const SizedBox(width: 8),
+                Text(
+                  S.of(context).download,
+                  style: const TextStyle(color: Colors.green),
+                ),
+              ],
+            ),
+          );
+        }
+      },
+    );
   }
 }
