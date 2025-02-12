@@ -1,6 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:myschool/models/asset_model.dart';
 import 'package:myschool/models/student_model.dart';
 import 'package:myschool/models/teacher_model.dart';
@@ -139,6 +142,27 @@ class DatabaseService {
     }
   }
 
+  Future<Document?> removeTeacherProfilePic() async {
+    User currentUser = await _account.get();
+
+    Document? document;
+
+    try {
+      document = await _databases.updateDocument(
+          databaseId: dotenv.get("APPWRITE_DB_ID"),
+          collectionId: dotenv.get("APPWRITE_DB_TEACHERS"),
+          documentId: currentUser.$id,
+          data: {
+            "profile_pic": null,
+          });
+
+      return document;
+    } catch (e) {
+      print(e);
+      return document;
+    }
+  }
+
   Future<Document?> updateUserData({
     required String userID,
     required String name,
@@ -214,6 +238,70 @@ class DatabaseService {
     } catch (e) {
       File? file;
       return file;
+    }
+  }
+
+  Future<Document?> uploadImage({
+    required XFile image,
+    required String teacherId,
+  }) async {
+    try {
+      // Delete existing profile picture
+      final teacherDoc = await _databases.getDocument(
+        databaseId: dotenv.get("APPWRITE_DB_ID"),
+        collectionId: dotenv.get("APPWRITE_DB_TEACHERS"),
+        documentId: teacherId,
+      );
+
+      if (teacherDoc.data['profile_pic'] != null &&
+          teacherDoc.data['profile_pic'] != "") {
+        print("PIC FOUND ERROR");
+        await _storage.deleteFile(
+          bucketId: dotenv.get("APPWRITE_STROAGE_IMAGES"),
+          fileId: teacherDoc.data['profile_pic'],
+        );
+      }
+
+      // Upload new image
+      final uploadedFile = await _storage.createFile(
+        bucketId: dotenv.get("APPWRITE_STROAGE_IMAGES"),
+        fileId: ID.unique(),
+        file: InputFile.fromPath(path: image.path),
+        permissions: [
+          Permission.write(Role.user(teacherId)),
+          Permission.delete(Role.user(teacherId))
+        ],
+      );
+      print("PHOTO UPLOADED SUCCESSFULLY");
+
+      // Update database record
+      final Document document = await _databases.updateDocument(
+        databaseId: dotenv.get("APPWRITE_DB_ID"),
+        collectionId: dotenv.get("APPWRITE_DB_TEACHERS"),
+        documentId: teacherId,
+        data: {'profile_pic': uploadedFile.$id},
+      );
+      print("RECORD UPDATED SUCCESSFULLY");
+
+      return document;
+    } catch (e) {
+      print('Upload error: $e');
+      return null;
+    }
+  }
+
+  Future<Uint8List> getImageLink({required String fileId}) async {
+    return await _storage.getFilePreview(
+        bucketId: dotenv.get("APPWRITE_STROAGE_IMAGES"), fileId: fileId);
+  }
+
+  Future deleteImage({required String fileId}) async {
+    try {
+      final result = await _storage.deleteFile(
+          bucketId: dotenv.get("APPWRITE_STROAGE_IMAGES"), fileId: fileId);
+      print(result);
+    } catch (e) {
+      print(e);
     }
   }
 

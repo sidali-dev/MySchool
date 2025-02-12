@@ -7,6 +7,7 @@ class TeacherModel {
   final String? description;
   int uploadsCount;
   final UserModel user;
+  final String? profilePic;
 
   TeacherModel({
     required this.id,
@@ -15,6 +16,7 @@ class TeacherModel {
     this.description,
     required this.uploadsCount,
     required this.user,
+    this.profilePic,
   });
 
   factory TeacherModel.fromMap(Map<String, dynamic> map) {
@@ -25,6 +27,7 @@ class TeacherModel {
       description: map['description'] as String?,
       uploadsCount: map['uploads_count'] as int,
       user: UserModel.fromJson(map['user'] as Map<String, dynamic>),
+      profilePic: map['profile_pic'] as String?,
     );
   }
 

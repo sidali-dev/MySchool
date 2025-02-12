@@ -4,14 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:myschool/controllers/language_controller.dart';
+import 'package:myschool/controllers/profile_pic_controller.dart';
 import 'package:myschool/controllers/theme_controller.dart';
 import 'package:myschool/controllers/user_controller.dart';
+import 'package:myschool/models/teacher_model.dart';
 import 'package:myschool/services/authentication_service.dart';
 import 'package:myschool/utils/constants/colors.dart';
 import 'package:myschool/utils/constants/enums.dart';
 import 'package:myschool/utils/device/device_utility.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
 import 'package:myschool/views/widgets/animation/auto_scrolling_text.dart';
+import 'package:myschool/views/widgets/profile_picture.dart';
 
 import '../generated/l10n.dart';
 import 'uploaded_file_screen.dart';
@@ -30,7 +33,10 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenWidth = SDeviceUtils.getScreenWidth(context);
     final double screenheight = SDeviceUtils.getScreenHeight(context);
+
     final bool isRtl = SHelperFunctions.isRtl(context);
+    final bool isDark = SHelperFunctions.isDarkMode(context);
+
     final TextEditingController descriptionController = TextEditingController(
         text: userController.teacher.value?.description ?? "");
     return Scaffold(
@@ -61,14 +67,32 @@ class SettingsScreen extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 32),
-                CircleAvatar(
-                  backgroundColor: Colors.lightBlue.shade100,
-                  radius: screenWidth / 6,
-                  child: Icon(
-                    Icons.person,
-                    color: Colors.blue,
-                    size: screenWidth / 4,
-                  ),
+                Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    ProfilePicture(
+                        controller: userController, screenWidth: screenWidth),
+                    Positioned(
+                      bottom: 00,
+                      right: 00,
+                      child: InkWell(
+                        onTap: () {
+                          Get.bottomSheet(
+                            ProfilePicOptionsBottomSheet(
+                              isDark: isDark,
+                              teacherModel: userController.teacher.value!,
+                            ),
+                          );
+                        },
+                        child: CircleAvatar(
+                          child: Icon(
+                            Icons.camera_alt_outlined,
+                            color: isDark ? Colors.white : Colors.lightBlue,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 16),
                 Text(
@@ -676,6 +700,92 @@ class ChangeLanguageBottomSheet extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ProfilePicOptionsBottomSheet extends StatelessWidget {
+  const ProfilePicOptionsBottomSheet({
+    required this.teacherModel,
+    required this.isDark,
+    super.key,
+  });
+  final TeacherModel teacherModel;
+  final bool isDark;
+
+  @override
+  Widget build(BuildContext context) {
+    final bool isNewUpload =
+        teacherModel.profilePic == null || teacherModel.profilePic == "";
+    return Container(
+      decoration: BoxDecoration(
+        color: isDark ? SColors.darkerGrey : Colors.white,
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(24),
+        ),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: InkWell(
+              onTap: () async {
+                ProfilePicController picController = ProfilePicController();
+
+                await picController.addProfilePicture(
+                    context: context, teacherId: teacherModel.id);
+
+                Get.back();
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(isNewUpload ? Icons.upload : Icons.edit),
+                  const SizedBox(width: 8),
+                  FittedBox(
+                    child: Text(
+                      isNewUpload
+                          ? "Add profile picture"
+                          : "Update profile picture",
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          if (!isNewUpload)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: InkWell(
+                onTap: () async {
+                  ProfilePicController picController = ProfilePicController();
+
+                  await picController.deleteProfilePicture(
+                      context: context, fileId: teacherModel.profilePic!);
+
+                  Get.back();
+                },
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.delete_outline_outlined),
+                    SizedBox(width: 8),
+                    FittedBox(
+                      child: Text(
+                        "Delete profile picture",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }
