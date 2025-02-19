@@ -6,22 +6,25 @@ import '../generated/l10n.dart';
 class StudentModel {
   final int level;
   final BranchesEnum? branch;
+  final String? avatarId;
 
   StudentModel({
     required this.level,
     this.branch,
+    this.avatarId,
   });
 
   factory StudentModel.fromJson(Map<String, dynamic> json) => StudentModel(
-        level: int.parse(json['level']),
-        branch: json['branch'] != null
-            ? BranchesEnum.values.byName(json['branch'])
-            : null,
-      );
+      level: int.parse(json['level']),
+      branch: json['branch'] != null
+          ? BranchesEnum.values.byName(json['branch'])
+          : null,
+      avatarId: json["avatar_id"] as String?);
 
   Map<String, dynamic> toJson() => {
         'level': level,
         'branch': branch?.name,
+        'avatar_id': avatarId,
       };
   String getUserLevel(BuildContext context) {
     switch (level) {

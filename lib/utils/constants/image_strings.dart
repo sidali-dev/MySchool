@@ -44,4 +44,15 @@ class SImageString {
   static const numberOne = "assets/images/numbers/one.png";
   static const numberTwo = "assets/images/numbers/two.png";
   static const numberThree = "assets/images/numbers/three.png";
+
+  //avatars images
+  static const avatarMaleOne = "assets/images/avatars/avatar1.png";
+  static const avatarMaleTwo = "assets/images/avatars/avatar2.png";
+  static const avatarMaleThree = "assets/images/avatars/avatar3.png";
+  static const avatarMaleFour = "assets/images/avatars/avatar4.png";
+
+  static const avatarFemaleOne = "assets/images/avatars/female_avatar_1.png";
+  static const avatarFemaleTwo = "assets/images/avatars/female_avatar_2.png";
+  static const avatarFemaleThree = "assets/images/avatars/female_avatar_3.png";
+  static const avatarFemaleFour = "assets/images/avatars/female_avatar_4.png";
 }

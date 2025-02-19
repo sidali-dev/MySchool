@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:myschool/models/asset_model.dart';
 
 import '../../controllers/download_file_button_controller.dart';
-import '../../generated/l10n.dart';
 
 class DownloadFileIcon extends StatelessWidget {
   final AssetModel assetModel;

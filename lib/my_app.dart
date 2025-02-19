@@ -5,12 +5,12 @@ import 'package:myschool/controllers/language_controller.dart';
 import 'package:myschool/controllers/theme_controller.dart';
 import 'package:myschool/generated/l10n.dart';
 import 'package:myschool/services/authentication_service.dart';
+import 'package:myschool/services/database_service.dart';
 import 'package:myschool/utils/constants/enums.dart';
 import 'package:myschool/views/student_home_screen.dart';
 import 'package:myschool/utils/theme/theme.dart';
 import 'package:myschool/views/intro_screen.dart';
 import 'package:myschool/views/teacher_home_screen.dart';
-
 import 'controllers/user_controller.dart';
 
 class MyApp extends StatelessWidget {
@@ -74,7 +74,9 @@ class MyApp extends StatelessWidget {
                     }
                   }
 
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
                 },
               ),
             );

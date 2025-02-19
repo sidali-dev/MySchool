@@ -266,13 +266,19 @@ class YoutubePlayerScreen extends GetView<YoutubePlayerScreenController> {
                                             ),
                                           ),
                                           const SizedBox(height: 12),
-                                          FittedBox(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              e.title,
-                                              style: const TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w600),
+                                          Expanded(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 4.0),
+                                              child: Text(
+                                                e.title,
+                                                textAlign: TextAlign.center,
+                                                style: const TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
                                             ),
                                           )
                                         ],

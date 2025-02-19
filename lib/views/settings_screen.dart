@@ -2,12 +2,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:myschool/controllers/avatar_controller.dart';
 import 'package:myschool/controllers/language_controller.dart';
 import 'package:myschool/controllers/profile_pic_controller.dart';
 import 'package:myschool/controllers/theme_controller.dart';
 import 'package:myschool/controllers/user_controller.dart';
 import 'package:myschool/models/teacher_model.dart';
+import 'package:myschool/my_app.dart';
 import 'package:myschool/services/authentication_service.dart';
 import 'package:myschool/utils/constants/colors.dart';
 import 'package:myschool/utils/constants/enums.dart';
@@ -72,10 +73,41 @@ class SettingsScreen extends StatelessWidget {
                   children: [
                     Obx(
                       () {
-                        return ProfilePicture(
-                            profilePic:
-                                userController.teacher.value?.profilePic,
-                            screenWidth: screenWidth);
+                        if (userController.teacher.value != null) {
+                          return ProfilePicture(
+                              profilePic:
+                                  userController.teacher.value?.profilePic,
+                              screenWidth: screenWidth);
+                        } else if (userController.student.value != null) {
+                          return Obx(
+                            () => userController.student.value!.avatarId == null
+                                //Display Place Holder
+                                ? CircleAvatar(
+                                    backgroundColor: Colors.lightBlue.shade100,
+                                    radius: screenWidth / 6,
+                                    child: Icon(
+                                      Icons.person,
+                                      color: Colors.blue,
+                                      size: screenWidth / 4,
+                                    ),
+                                  )
+                                //Display student's avatar
+                                : CircleAvatar(
+                                    backgroundColor: userController
+                                            .student.value!.avatarId!
+                                            .contains("female")
+                                        ? Colors.pinkAccent.shade100
+                                        : Colors.lightBlue.shade100,
+                                    radius: screenWidth / 6,
+                                    child: Image.asset(
+                                      AvatarController().getAvatarImageById(
+                                          userController
+                                              .student.value!.avatarId!),
+                                    ),
+                                  ),
+                          );
+                        }
+                        return SizedBox();
                       },
                     ),
                     Positioned(
@@ -83,12 +115,24 @@ class SettingsScreen extends StatelessWidget {
                       right: 00,
                       child: InkWell(
                         onTap: () {
-                          Get.bottomSheet(
-                            ProfilePicOptionsBottomSheet(
-                              isDark: isDark,
-                              teacherModel: userController.teacher.value!,
-                            ),
-                          );
+                          if (userController.teacher.value != null) {
+                            Get.bottomSheet(
+                              ProfilePicOptionsBottomSheet(
+                                isDark: isDark,
+                                teacherModel: userController.teacher.value!,
+                              ),
+                            );
+                          } else if (userController.student.value != null) {
+                            Get.bottomSheet(
+                              StudentAvatarsBottomSheet(
+                                isDark: isDark,
+                                level: userController.student.value!.level,
+                                userId: userController.user.value!.id,
+                                branch:
+                                    userController.student.value?.branch?.name,
+                              ),
+                            );
+                          }
                         },
                         child: CircleAvatar(
                           child: Icon(
@@ -254,7 +298,10 @@ class SettingsScreen extends StatelessWidget {
                                   onTap: (level, _) async {
                                     if (level < 10) {
                                       await userController.updateStudentInfo(
-                                          context: context, level: level);
+                                          context: context,
+                                          level: level,
+                                          avatarId: userController
+                                              .student.value!.avatarId);
                                       Get.back();
                                     } else {
                                       Get.back();
@@ -274,7 +321,11 @@ class SettingsScreen extends StatelessWidget {
                                                   .updateStudentInfo(
                                                       context: context,
                                                       level: level,
-                                                      branch: branch);
+                                                      branch: branch,
+                                                      avatarId: userController
+                                                          .student
+                                                          .value!
+                                                          .avatarId);
 
                                               Get.back();
                                             },
@@ -325,7 +376,9 @@ class SettingsScreen extends StatelessWidget {
                                       await userController.updateStudentInfo(
                                           context: context,
                                           level: level,
-                                          branch: branch);
+                                          branch: branch,
+                                          avatarId: userController
+                                              .student.value!.avatarId);
 
                                       Get.back();
                                     },
@@ -444,6 +497,22 @@ class SettingsScreen extends StatelessWidget {
                         const SizedBox(width: 8),
                         Text(S.of(context).log_out),
                       ],
+                    ),
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      await userController.deleteUser(context);
+                      userController.clearUserData();
+                      AuthenticationService authenticationService = Get.find();
+                      authenticationService.clearAuthStatus();
+                      Get.back();
+                    },
+                    child: const Center(
+                      child: Text("DELETE ACCOUNT"),
                     ),
                   ),
                 )
@@ -796,6 +865,108 @@ class ProfilePicOptionsBottomSheet extends StatelessWidget {
                 ),
               ),
             ),
+        ],
+      ),
+    );
+  }
+}
+
+class StudentAvatarsBottomSheet extends StatelessWidget {
+  final bool isDark;
+  final String userId;
+  final int level;
+  final String? branch;
+
+  const StudentAvatarsBottomSheet({
+    super.key,
+    required this.isDark,
+    required this.userId,
+    required this.level,
+    this.branch,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    AvatarController avatarController = AvatarController();
+    return Container(
+      decoration: BoxDecoration(
+        color: isDark ? SColors.darkerGrey : Colors.white,
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(24),
+        ),
+      ),
+      child: Column(
+        children: [
+          const SizedBox(height: 16.0),
+          const Text(
+            "Pick Your Avatar",
+            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(height: 32),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: GridView.builder(
+                shrinkWrap: true,
+                itemCount: avatarController.avatars.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                ),
+                itemBuilder: (context, index) {
+                  return Obx(
+                    () {
+                      bool isSelected =
+                          avatarController.selectedAvatar.value?.id ==
+                              avatarController.avatars[index].id;
+
+                      return Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(24.0),
+                            border: Border.all(
+                                color: isSelected
+                                    ? Colors.blue
+                                    : Colors.transparent),
+                            color: isSelected
+                                ? Colors.lightBlue.withAlpha(100)
+                                : Colors.transparent),
+                        child: InkWell(
+                          onTap: () {
+                            avatarController
+                                .selectAvatar(avatarController.avatars[index]);
+                            print(avatarController.selectedAvatar.value);
+                          },
+                          child: Image.asset(
+                            avatarController.avatars[index].image,
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+            child: ElevatedButton(
+              onPressed: () async {
+                await avatarController.updateAvatar(
+                    avatarId: avatarController.selectedAvatar.value!.id,
+                    context: context,
+                    userID: userId,
+                    level: level,
+                    branch: branch);
+
+                Get.back();
+              },
+              child: const Center(
+                child: Text("UPDATE AVATAR"),
+              ),
+            ),
+          ),
         ],
       ),
     );

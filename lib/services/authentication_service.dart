@@ -7,12 +7,10 @@ enum AuthStatus {
   uninitialized,
   unauthenticated,
   authenticated,
+  emailVerified,
 }
 
 class AuthenticationService extends GetxController {
-  // static authenticationServiceConstructor() {
-  //   init();
-  // }
   Client client = Client();
   late final Account account;
 
@@ -46,8 +44,13 @@ class AuthenticationService extends GetxController {
   void loadUser() async {
     try {
       final user = await account.get();
-      _status = AuthStatus.authenticated;
-      _currentUser = user;
+      if (user.emailVerification) {
+        _status = AuthStatus.emailVerified;
+        _currentUser = user;
+      } else {
+        _status = AuthStatus.authenticated;
+        _currentUser = user;
+      }
     } catch (e) {
       _status = AuthStatus.unauthenticated;
     } finally {
@@ -101,5 +104,10 @@ class AuthenticationService extends GetxController {
     } finally {
       update();
     }
+  }
+
+  clearAuthStatus() {
+    _status = AuthStatus.unauthenticated;
+    update();
   }
 }

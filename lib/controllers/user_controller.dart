@@ -29,6 +29,12 @@ class UserController extends GetxController {
     }
   }
 
+  clearUserData() {
+    user = Rx<UserModel?>(null);
+    student = Rx<StudentModel?>(null);
+    teacher = Rx<TeacherModel?>(null);
+  }
+
   Future<void> _getUser() async {
     DatabaseService databaseService = DatabaseService();
 
@@ -46,7 +52,8 @@ class UserController extends GetxController {
   Future<bool> updateStudentInfo(
       {required BuildContext context,
       required int level,
-      String? branch}) async {
+      String? branch,
+      String? avatarId}) async {
     //start loading indicator
     showDialog(
       barrierDismissible: false,
@@ -59,7 +66,11 @@ class UserController extends GetxController {
     //update the user
     DatabaseService databaseService = DatabaseService();
     final response = await databaseService.updateStudentData(
-        userID: user.value!.id, level: level, branch: branch);
+      userID: user.value!.id,
+      level: level,
+      branch: branch,
+      avatarId: avatarId,
+    );
 
     //close loading indicator
     Get.back();
@@ -119,6 +130,36 @@ class UserController extends GetxController {
     print("DECREMENTED");
 
     update();
+  }
+
+  deleteUser(BuildContext context) async {
+    DatabaseService databaseService = DatabaseService();
+
+    //start loading indicator
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => const Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(height: 16.0),
+              Text("DELETING ACCOUNT..."),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    final response = await databaseService.deleteUserWithAllRelatedData();
+
+    Get.back();
+
+    print("==================");
+    print(response);
+    print("==================");
   }
 
 // SIGN OUT

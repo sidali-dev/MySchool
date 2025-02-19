@@ -16,6 +16,7 @@ class DatabaseService {
   late final Account _account;
   late final Databases _databases;
   late final Storage _storage;
+  late final Functions _functions;
 
   final AuthenticationService auth = AuthenticationService();
 
@@ -28,6 +29,7 @@ class DatabaseService {
     _account = Account(client);
     _databases = Databases(client);
     _storage = Storage(client);
+    _functions = Functions(client);
   }
 
   Future<Document?> addUser({
@@ -98,6 +100,7 @@ class DatabaseService {
     required userID,
     required int level,
     String? branch,
+    String? avatarId,
   }) async {
     User currentUser = await _account.get();
 
@@ -108,7 +111,12 @@ class DatabaseService {
           databaseId: dotenv.get("APPWRITE_DB_ID"),
           collectionId: dotenv.get("APPWRITE_DB_STUDENTS"),
           documentId: currentUser.$id,
-          data: {"user": userID, "level": level.toString(), "branch": branch});
+          data: {
+            "user": userID,
+            "level": level.toString(),
+            "branch": branch,
+            "avatar_id": avatarId,
+          });
       return document;
     } catch (e) {
       return document;
@@ -186,6 +194,8 @@ class DatabaseService {
 
   Future<UserModel> getUser() async {
     User currentUser = await _account.get();
+    print(currentUser.name);
+    print(currentUser.$id);
     late final UserModel userModel;
 
     final response = await _databases.getDocument(
@@ -416,6 +426,16 @@ class DatabaseService {
     } catch (e) {
       print(e);
       return false;
+    }
+  }
+
+  Future deleteUserWithAllRelatedData() async {
+    try {
+      final response = await _functions.createExecution(
+          functionId: dotenv.get("APPWRITE_FUNCTION_DELETE_ACCOUNT"));
+      print(response);
+    } catch (e) {
+      print(e);
     }
   }
 

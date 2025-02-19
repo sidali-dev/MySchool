@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:myschool/models/asset_model.dart';
 import 'package:myschool/utils/device/file_downloader.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
-import 'package:myschool/views/widgets/download_file_icon.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class PdfPreviewScreen extends StatelessWidget {
@@ -42,7 +41,6 @@ class PdfPreviewScreen extends StatelessWidget {
               print('downloaded');
               return SfPdfViewer.file(
                 File(snapshot.data!["path"]),
-                //Consider changing this to true in the future.
                 enableTextSelection: false,
                 onDocumentLoadFailed: (PdfDocumentLoadFailedDetails details) =>
                     SHelperFunctions.showAwesomeSnackBar(
@@ -61,7 +59,6 @@ class PdfPreviewScreen extends StatelessWidget {
             } else {
               print('online');
               return SfPdfViewer.network(
-                //Consider changing this to true in the future.
                 enableTextSelection: false,
                 assetModel.fileLink,
                 onDocumentLoadFailed: (PdfDocumentLoadFailedDetails details) =>
@@ -70,13 +67,6 @@ class PdfPreviewScreen extends StatelessWidget {
                         content: "Check your internet connection and try again",
                         contentType: ContentType.failure,
                         context: context),
-
-                //FOR TESTING ONLY!!! REMOVE LATER.
-                // onTap: (details) => SHelperFunctions.showAwesomeSnackBar(
-                //     title: "Failed to load file",
-                //     content: "Check your internet connection and try again",
-                //     contentType: ContentType.failure,
-                //     context: context),
               );
             }
           }
