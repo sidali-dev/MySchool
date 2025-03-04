@@ -15,15 +15,18 @@ class MaterialsController extends GetxController {
       String? trimester}) async {
     final DatabaseService databaseService = DatabaseService();
 
-    List<Document> documents = await databaseService.getFilesForMaterialsScreen(
+    List<Document>? documents =
+        await databaseService.getFilesForMaterialsScreen(
       activity: activity,
       module: module,
       trimester: trimester,
       level: userController.student.value!.level.toString(),
       branch: userController.student.value!.branch?.name,
     );
+    if (documents == null) {
+      return -1;
+    }
 
-    print("TRIGGERED");
     if (documents.isNotEmpty) {
       uploadedFiles.value =
           documents.map((e) => AssetModel.fromMap(e.data)).toList();

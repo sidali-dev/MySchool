@@ -190,6 +190,49 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcome": MessageLookupByLibrary.simpleMessage("مرحبًا"),
         "what_are_you_sharing":
             MessageLookupByLibrary.simpleMessage("ماذا ستشارك اليوم؟"),
-        "yes": MessageLookupByLibrary.simpleMessage("نعم")
+        "yes": MessageLookupByLibrary.simpleMessage("نعم"),
+        "choose_material_type":
+            MessageLookupByLibrary.simpleMessage("اختر ما يناسبك بشكل أفضل"),
+        "become_teacher": MessageLookupByLibrary.simpleMessage("اصبح مدرسًا"),
+        "time_to_learn":
+            MessageLookupByLibrary.simpleMessage("حان وقتك لتتعلم، تنمو وتنجح"),
+        "failed_load_file":
+            MessageLookupByLibrary.simpleMessage("فشل في تحميل الملف"),
+        "check_internet_connection":
+            MessageLookupByLibrary.simpleMessage("تحقق من اتصالك بالإنترنت"),
+        "something_went_wrong":
+            MessageLookupByLibrary.simpleMessage("حدث خطأ ما"),
+        "delete_account": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
+        "delete_alerte_1": MessageLookupByLibrary.simpleMessage(
+            "بالمتابعة، ستقوم بحذف حسابك بشكل دائم وجميع البيانات المرتبطة به، بما في ذلك المنشورات والسجل والتفضيلات."),
+        "delete_alerte_2": MessageLookupByLibrary.simpleMessage(
+            "هذا الإجراء لا يمكن التراجع عنه، ولا يمكن استرداد بياناتك بمجرد حذفها."),
+        "delete_alerte_3":
+            MessageLookupByLibrary.simpleMessage("يرجى تأكيد قرارك بعناية."),
+        "delete_account_caps":
+            MessageLookupByLibrary.simpleMessage("حذف الحساب"),
+        "confirm_logout":
+            MessageLookupByLibrary.simpleMessage("تأكيد تسجيل الخروج"),
+        "sure_log_out": MessageLookupByLibrary.simpleMessage(
+            "هل أنت متأكد أنك تريد الخروج؟"),
+        "add_profile_pic":
+            MessageLookupByLibrary.simpleMessage("إضافة صورة الملف الشخصي"),
+        "delete_profile_pic":
+            MessageLookupByLibrary.simpleMessage("حذف صورة الملف الشخصي"),
+        "update_profile_pic":
+            MessageLookupByLibrary.simpleMessage("تحديث صورة الملف الشخصي"),
+        "pick_avatar":
+            MessageLookupByLibrary.simpleMessage("اختر صورتك الرمزية"),
+        "update_avatar_caps":
+            MessageLookupByLibrary.simpleMessage("تحديث الصورة الرمزية"),
+        "teacher_profile": MessageLookupByLibrary.simpleMessage("حساب المعلم"),
+        "other_videos":
+            MessageLookupByLibrary.simpleMessage("فيديوهات أخرى من"),
+        "no_other_videos":
+            MessageLookupByLibrary.simpleMessage("لا توجد فيديوهات أخرى"),
+        "feels_empty":
+            MessageLookupByLibrary.simpleMessage("هذا المكان يبدو فارغًا"),
+        "try_again_caps": MessageLookupByLibrary.simpleMessage("حاول مرة أخرى"),
+        "prefernces": MessageLookupByLibrary.simpleMessage("التفضيلات"),
       };
 }

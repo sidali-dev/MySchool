@@ -49,6 +49,7 @@ class YoutubePlayerScreenController extends GetxController {
   Future playAnotherVideo(AssetModel newAssetModel) async {
     //Refreshes the list of "other videos"
     otherVideos.add(assetModel.value);
+
     otherVideos.removeWhere((element) => element.id == newAssetModel.id);
 
     //Adds the new video to the stack of played video
@@ -58,12 +59,17 @@ class YoutubePlayerScreenController extends GetxController {
     assetModel.value = newAssetModel;
 
     //Play the new Asset
-    await youtubeController.loadVideoById(
-        videoId: parseVideoId(assetModel.value.fileLink)!);
+    try {
+      await youtubeController
+          .loadVideoById(videoId: parseVideoId(assetModel.value.fileLink)!)
+          .timeout(const Duration(seconds: 0));
 
-    _scrollToTop();
-
-    update();
+      _scrollToTop();
+      update();
+    } catch (e) {
+      _scrollToTop();
+      update();
+    }
   }
 
   Future playPreviousVideo() async {
@@ -79,12 +85,18 @@ class YoutubePlayerScreenController extends GetxController {
       assetModel.value = videosPlayed.last;
 
       //Play the new Asset
-      await youtubeController.loadVideoById(
-          videoId: parseVideoId(assetModel.value.fileLink)!);
-      _scrollToTop();
+      try {
+        await youtubeController
+            .loadVideoById(videoId: parseVideoId(assetModel.value.fileLink)!)
+            .timeout(const Duration(seconds: 0));
+
+        _scrollToTop();
+        update();
+      } catch (e) {
+        _scrollToTop();
+        update();
+      }
     }
-    if (videosPlayed.length == 2) {}
-    update();
   }
 
   String? parseVideoId(String url) {

@@ -262,9 +262,9 @@ class UploadScreen extends StatelessWidget {
                           ],
                         ),
                       const SizedBox(height: 32),
-                      const Text(
-                        "Module",
-                        style: TextStyle(
+                      Text(
+                        S.of(context).module,
+                        style: const TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 24),
                       ),
                       const SizedBox(height: 16),
@@ -406,9 +406,23 @@ class UploadScreen extends StatelessWidget {
                                   await FilePicker.platform.pickFiles();
 
                               if (result != null) {
-                                controller.file =
-                                    File(result.files.single.path!);
-                                controller.fileIsSelected();
+                                if (result.files.single.path!.split(".").last ==
+                                    "pdf") {
+                                  // The file type is PDF.
+
+                                  controller.file =
+                                      File(result.files.single.path!);
+                                  controller.fileIsSelected(true);
+                                } else {
+                                  // The file type isnt PDF.
+
+                                  controller.file = null;
+                                  controller.fileIsSelected(false);
+
+                                  controller.animationController
+                                    ..reset()
+                                    ..forward();
+                                }
                               } else {
                                 // User canceled the picker
                               }

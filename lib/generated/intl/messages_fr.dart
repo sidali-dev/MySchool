@@ -168,7 +168,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Veuillez sélectionner un niveau"),
         "settings": MessageLookupByLibrary.simpleMessage("Paramètres"),
         "shariaa": MessageLookupByLibrary.simpleMessage("Charia"),
-        "sign_in": MessageLookupByLibrary.simpleMessage("SE CONNECTER"),
+        "sign_in": MessageLookupByLibrary.simpleMessage("CONNECTER"),
         "sign_up": MessageLookupByLibrary.simpleMessage("S\'inscrire"),
         "solution_included": MessageLookupByLibrary.simpleMessage(
             "La solution de ce fichier est incluse"),
@@ -211,6 +211,53 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcome": MessageLookupByLibrary.simpleMessage("Bienvenue"),
         "what_are_you_sharing": MessageLookupByLibrary.simpleMessage(
             "Que partagerez-vous aujourd\'hui ?"),
-        "yes": MessageLookupByLibrary.simpleMessage("Oui")
+        "yes": MessageLookupByLibrary.simpleMessage("Oui"),
+        "choose_material_type": MessageLookupByLibrary.simpleMessage(
+            "Choisissez le type de matériau qui vous convient le mieux"),
+        "become_teacher":
+            MessageLookupByLibrary.simpleMessage("Devenez un enseignant"),
+        "time_to_learn": MessageLookupByLibrary.simpleMessage(
+            "Il est temps pour vous d'apprendre, de grandir et de réussir"),
+        "failed_load_file": MessageLookupByLibrary.simpleMessage(
+            "Échec du chargement du fichier"),
+        "check_internet_connection": MessageLookupByLibrary.simpleMessage(
+            "Vérifiez votre connexion Internet"),
+        "something_went_wrong": MessageLookupByLibrary.simpleMessage(
+            "Quelque chose s'est mal passé"),
+        "delete_account":
+            MessageLookupByLibrary.simpleMessage("Supprimer le compte"),
+        "delete_alerte_1": MessageLookupByLibrary.simpleMessage(
+            "En continuant, vous supprimerez définitivement votre compte et toutes les données associées, y compris les publications, l'historique et les préférences."),
+        "delete_alerte_2": MessageLookupByLibrary.simpleMessage(
+            "Cette action est irréversible, et vos données ne pourront pas être récupérées une fois supprimées."),
+        "delete_alerte_3": MessageLookupByLibrary.simpleMessage(
+            "Veuillez confirmer votre décision avec soin."),
+        "delete_account_caps":
+            MessageLookupByLibrary.simpleMessage("SUPPRIMER LE COMPTE"),
+        "confirm_logout":
+            MessageLookupByLibrary.simpleMessage("Confirmer la déconnexion"),
+        "sure_log_out": MessageLookupByLibrary.simpleMessage(
+            "Êtes-vous sûr de déconnecter ?"),
+        "add_profile_pic":
+            MessageLookupByLibrary.simpleMessage("Ajouter une photo de profil"),
+        "delete_profile_pic": MessageLookupByLibrary.simpleMessage(
+            "Supprimer la photo de profil"),
+        "update_profile_pic": MessageLookupByLibrary.simpleMessage(
+            "Mettre à jour la photo de profil"),
+        "pick_avatar":
+            MessageLookupByLibrary.simpleMessage("Choisissez votre avatar"),
+        "update_avatar_caps":
+            MessageLookupByLibrary.simpleMessage("METTRE À JOUR L'AVATAR"),
+        "teacher_profile":
+            MessageLookupByLibrary.simpleMessage("Profil de l'enseignant"),
+        "other_videos":
+            MessageLookupByLibrary.simpleMessage("Autres vidéos de"),
+        "no_other_videos":
+            MessageLookupByLibrary.simpleMessage("Aucune autre vidéo"),
+        "feels_empty":
+            MessageLookupByLibrary.simpleMessage("Cet endroit semble vide"),
+        "try_again_caps":
+            MessageLookupByLibrary.simpleMessage("ESSAYEZ À NOUVEAU"),
+        "prefernces": MessageLookupByLibrary.simpleMessage("Préférences"),
       };
 }

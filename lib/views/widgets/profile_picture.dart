@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:myschool/services/database_service.dart';
+import 'package:myschool/views/widgets/spinning_logo.dart';
 import '../../utils/cache/profile_pic_cache_manager.dart';
 
 class ProfilePicture extends StatelessWidget {
@@ -110,7 +111,7 @@ class ProfilePicture extends StatelessWidget {
     return CircleAvatar(
       radius: screenWidth / 6,
       backgroundColor: Colors.lightBlue.shade100,
-      child: const CircularProgressIndicator(),
+      child: const SpinningLogo(),
     );
   }
 }

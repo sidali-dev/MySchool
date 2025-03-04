@@ -13,14 +13,18 @@ class TeacherProfileController {
   List<List<AssetModel>> assetsByModule = [];
   List<List<List<AssetModel>>> assetsbyModuleThanActivity = [];
 
-  Future<void> getTeacherAssets(
+  Future<int> getTeacherAssets(
       {required String level,
       required String teacherID,
       String? branch}) async {
     final DatabaseService database = DatabaseService();
 
-    List<Document> list = await database.getTeacherAssetsPerLevel(
+    List<Document>? list = await database.getTeacherAssetsPerLevel(
         level: level, teacherID: teacherID, branch: branch);
+
+    if (list == null) {
+      return -1;
+    }
 
     if (list.isNotEmpty) {
       assets = list.map((e) => AssetModel.fromMap(e.data)).toList();
@@ -32,7 +36,6 @@ class TeacherProfileController {
           groupedFilesByModuleMap[asset.module.name]!.add(asset);
         } else {
           groupedFilesByModuleMap[asset.module.name] = [asset];
-          // activities.add(asset.documentType);
         }
       }
       assetsByModule = groupedFilesByModuleMap.values.toList();
@@ -49,6 +52,9 @@ class TeacherProfileController {
         assetsbyModuleThanActivity
             .add(groupedFilesByActivityMap.values.toList());
       }
+      return 1;
+    } else {
+      return 0;
     }
   }
 

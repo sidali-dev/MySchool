@@ -136,5 +136,30 @@
     "yes" : "نعم",
     "no" : "لا",
     "teacher": "الأستاذ",
-    "module": "المادة"
+    "module": "المادة",
+    "choose_material_type" : "اختر ما يناسبك بشكل أفضل",
+    "become_teacher" : "اصبح مدرسًا",
+    "time_to_learn" : "حان وقتك لتتعلم، تنمو وتنجح",
+    "failed_load_file" : "فشل في تحميل الملف",
+    "check_internet_connection" : "تحقق من اتصالك بالإنترنت",
+    "something_went_wrong" : "حدث خطأ ما",
+    "delete_account": "حذف الحساب",
+    "delete_alerte_1": "بالمتابعة، ستقوم بحذف حسابك بشكل دائم وجميع البيانات المرتبطة به، بما في ذلك المنشورات والسجل والتفضيلات.",
+    "delete_alerte_2": "هذا الإجراء لا يمكن التراجع عنه، ولا يمكن استرداد بياناتك بمجرد حذفها.",
+    "delete_alerte_3": "يرجى تأكيد قرارك بعناية.",
+    "delete_account_caps": "حذف الحساب",
+    "confirm_logout": "تأكيد تسجيل الخروج",
+    "sure_log_out": "هل أنت متأكد أنك تريد الخروج؟",
+    "add_profile_pic": "إضافة صورة الملف الشخصي",
+    "delete_profile_pic": "حذف صورة الملف الشخصي",
+    "update_profile_pic": "تحديث صورة الملف الشخصي",
+    "pick_avatar": "اختر صورتك الرمزية",
+    "update_avatar_caps": "تحديث الصورة الرمزية",
+    "teacher_profile": "حساب المعلم",
+    "other_videos": "فيديوهات أخرى من",
+    "no_other_videos": "لا توجد فيديوهات أخرى",
+    "feels_empty": "هذا المكان يبدو فارغًا",
+    "try_again_caps": "حاول مرة أخرى"
+
+
 }

@@ -9,6 +9,7 @@ import 'package:myschool/services/database_service.dart';
 import 'package:myschool/utils/constants/image_strings.dart';
 import 'package:myschool/utils/helpers/appwrite_helpers.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
+import 'package:myschool/views/widgets/spinning_logo.dart';
 
 import '../utils/constants/enums.dart';
 
@@ -35,7 +36,7 @@ class UploadedFileScreenController extends GetxController {
       barrierDismissible: false,
       context: context,
       builder: (context) => const Center(
-        child: CircularProgressIndicator(),
+        child: SpinningLogo(),
       ),
     );
 
@@ -87,7 +88,7 @@ class UploadedFileScreenController extends GetxController {
       barrierDismissible: false,
       context: context,
       builder: (context) => const Center(
-        child: CircularProgressIndicator(),
+        child: SpinningLogo(),
       ),
     );
 

@@ -12,12 +12,13 @@ import '../../generated/l10n.dart';
 import '../../utils/constants/colors.dart';
 
 class SignInDialog extends StatelessWidget {
-  SignInDialog({
+  const SignInDialog({
     super.key,
     required this.role,
   });
-  final Role role;
-  final _formKey = GlobalKey<FormState>();
+  final RoleEnum role;
+
+  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,6 @@ class SignInDialog extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             width: width * 0.8,
-            height: height * 0.55,
             child: SingleChildScrollView(
               child: Stack(
                 children: [
@@ -69,17 +69,20 @@ class SignInDialog extends StatelessWidget {
                         SizedBox(height: height * 0.01),
                         Center(
                           child: AnimatedChangingText(
-                              value: controller.isSigningUp.value,
-                              duration: const Duration(milliseconds: 500),
-                              text1: S.of(context).sign_up,
-                              text2: S.of(context).sign_in,
-                              textStyle: const TextStyle(
-                                  fontWeight: FontWeight.w600, fontSize: 40.0)),
+                            value: controller.isSigningUp.value,
+                            duration: const Duration(milliseconds: 500),
+                            text1: S.of(context).sign_up,
+                            text2: S.of(context).sign_in,
+                            textStyle: const TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 40.0),
+                          ),
                         ),
                         SizedBox(height: height * 0.02),
-                        Text(S.of(context).email,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 16)),
+                        Text(
+                          S.of(context).email,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 16),
+                        ),
                         SizedBox(height: height * 0.01),
                         TextFormField(
                           controller: controller.emailController,
@@ -148,7 +151,7 @@ class SignInDialog extends StatelessWidget {
                                   ).then((value) => Get.back());
 
                                   if (context.mounted) {
-                                    if (role == Role.student) {
+                                    if (role == RoleEnum.student) {
                                       showDialog(
                                         context: context,
                                         builder: (context) => LevelDialog(
@@ -157,7 +160,7 @@ class SignInDialog extends StatelessWidget {
                                             password: controller
                                                 .passwordController.text),
                                       );
-                                    } else if (role == Role.teacher) {
+                                    } else if (role == RoleEnum.teacher) {
                                       showDialog(
                                         context: context,
                                         builder: (context) => TeacherInfoDialog(

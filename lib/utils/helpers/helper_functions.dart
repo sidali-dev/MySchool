@@ -5,10 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:myschool/views/widgets/check_dialog.dart';
-import 'package:myschool/utils/constants/colors.dart';
 import 'package:myschool/utils/constants/get_keys.dart';
-import 'package:myschool/utils/constants/image_strings.dart';
 
 class SHelperFunctions {
   static bool isDarkMode(BuildContext context) {
@@ -46,19 +43,6 @@ class SHelperFunctions {
       return response.statusCode == 200;
     } catch (e) {
       return false;
-    }
-  }
-
-  static Future checkInternetConnection(BuildContext context) async {
-    if (!await isInternetConnected()) {
-      if (context.mounted) {
-        showDialog(
-            context: context,
-            builder: (context) => const CheckDialog(
-                title: "NO INTERNET CONNECTION",
-                imagePath: SImageString.noInternetAnimation,
-                color: SColors.primary));
-      }
     }
   }
 

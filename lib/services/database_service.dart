@@ -34,7 +34,7 @@ class DatabaseService {
 
   Future<Document?> addUser({
     required String name,
-    required enums.Role role,
+    required enums.RoleEnum role,
   }) async {
     User currentUser = await _account.get();
 
@@ -48,9 +48,13 @@ class DatabaseService {
           data: {
             "name": name,
             "role": role.name,
-          });
+          },
+          permissions: [
+            Permission.update(Role.user(currentUser.$id)),
+          ]);
+
       return document;
-    } catch (_) {
+    } catch (e) {
       return document;
     }
   }
@@ -69,7 +73,15 @@ class DatabaseService {
           databaseId: dotenv.get("APPWRITE_DB_ID"),
           collectionId: dotenv.get("APPWRITE_DB_STUDENTS"),
           documentId: currentUser.$id,
-          data: {"user": userID, "level": level.toString(), "branch": branch});
+          data: {
+            "user": userID,
+            "level": level.toString(),
+            "branch": branch
+          },
+          permissions: [
+            Permission.read(Role.user(currentUser.$id)),
+            Permission.update(Role.user(currentUser.$id)),
+          ]);
       return document;
     } catch (e) {
       return document;
@@ -89,7 +101,14 @@ class DatabaseService {
           databaseId: dotenv.get("APPWRITE_DB_ID"),
           collectionId: dotenv.get("APPWRITE_DB_TEACHERS"),
           documentId: currentUser.$id,
-          data: {"user": userID, "description": description});
+          data: {
+            "user": userID,
+            "description": description
+          },
+          permissions: [
+            Permission.update(
+                Role.user(currentUser.$id)), // Only this user can update
+          ]);
       return document;
     } catch (e) {
       return document;
@@ -126,7 +145,6 @@ class DatabaseService {
   Future<Document?> updateTeacherData({
     required userID,
     String? description,
-    int? uploadsCount,
   }) async {
     User currentUser = await _account.get();
 
@@ -140,7 +158,6 @@ class DatabaseService {
           data: {
             "user": userID,
             "description": description?.trim(),
-            "uploads_count": uploadsCount,
           });
 
       return document;
@@ -174,7 +191,7 @@ class DatabaseService {
   Future<Document?> updateUserData({
     required String userID,
     required String name,
-    required enums.Role role,
+    required enums.RoleEnum role,
   }) async {
     User currentUser = await _account.get();
 
@@ -192,48 +209,57 @@ class DatabaseService {
     }
   }
 
-  Future<UserModel> getUser() async {
+  Future<UserModel?> getUser() async {
     User currentUser = await _account.get();
-    print(currentUser.name);
-    print(currentUser.$id);
-    late final UserModel userModel;
 
-    final response = await _databases.getDocument(
-        databaseId: dotenv.get("APPWRITE_DB_ID"),
-        collectionId: dotenv.get("APPWRITE_DB_USERS"),
-        documentId: currentUser.$id);
+    try {
+      final response = await _databases.getDocument(
+          databaseId: dotenv.get("APPWRITE_DB_ID"),
+          collectionId: dotenv.get("APPWRITE_DB_USERS"),
+          documentId: currentUser.$id);
 
-    userModel = UserModel.fromJson(response.data);
+      final UserModel userModel = UserModel.fromJson(response.data);
 
-    return userModel;
+      return userModel;
+    } catch (e) {
+      return null;
+    }
   }
 
-  Future<StudentModel> geStudent() async {
+  Future<StudentModel?> geStudent() async {
     User currentUser = await _account.get();
-    late final StudentModel studentModel;
+    final StudentModel? studentModel;
 
-    final response = await _databases.getDocument(
-        databaseId: dotenv.get("APPWRITE_DB_ID"),
-        collectionId: dotenv.get("APPWRITE_DB_STUDENTS"),
-        documentId: currentUser.$id);
+    try {
+      final response = await _databases.getDocument(
+          databaseId: dotenv.get("APPWRITE_DB_ID"),
+          collectionId: dotenv.get("APPWRITE_DB_STUDENTS"),
+          documentId: currentUser.$id);
+      print(response.data);
 
-    studentModel = StudentModel.fromJson(response.data);
-
-    return studentModel;
+      studentModel = StudentModel.fromJson(response.data);
+      return studentModel;
+    } catch (e) {
+      return null;
+    }
   }
 
-  Future<TeacherModel> getTeacher() async {
+  Future<TeacherModel?> getTeacher() async {
     User currentUser = await _account.get();
-    late final TeacherModel teacherModel;
+    final TeacherModel? teacherModel;
 
-    final response = await _databases.getDocument(
-        databaseId: dotenv.get("APPWRITE_DB_ID"),
-        collectionId: dotenv.get("APPWRITE_DB_TEACHERS"),
-        documentId: currentUser.$id);
+    try {
+      final response = await _databases.getDocument(
+          databaseId: dotenv.get("APPWRITE_DB_ID"),
+          collectionId: dotenv.get("APPWRITE_DB_TEACHERS"),
+          documentId: currentUser.$id);
 
-    teacherModel = TeacherModel.fromMap(response.data);
+      teacherModel = TeacherModel.fromMap(response.data);
 
-    return teacherModel;
+      return teacherModel;
+    } catch (e) {
+      return null;
+    }
   }
 
   Future<File?> uploadFile(
@@ -319,21 +345,23 @@ class DatabaseService {
     Document? document;
     try {
       document = await _databases.createDocument(
-        databaseId: dotenv.get("APPWRITE_DB_ID"),
-        collectionId: dotenv.get("APPWRITE_DB_ASSETS"),
-        documentId: asset.id!,
-        data: {
-          "file_link": asset.fileLink,
-          "title": asset.title,
-          "trimester": asset.trimester,
-          "has_solution": asset.hasSolution,
-          "document_type": asset.documentType.name,
-          "module": asset.module.name,
-          "level": asset.level,
-          "branch": asset.branch?.map((e) => e.name).toList(),
-          "teacher": asset.teacher.id,
-        },
-      );
+          databaseId: dotenv.get("APPWRITE_DB_ID"),
+          collectionId: dotenv.get("APPWRITE_DB_ASSETS"),
+          documentId: asset.id!,
+          data: {
+            "file_link": asset.fileLink,
+            "title": asset.title,
+            "trimester": asset.trimester,
+            "has_solution": asset.hasSolution,
+            "document_type": asset.documentType.name,
+            "module": asset.module.name,
+            "level": asset.level,
+            "branch": asset.branch?.map((e) => e.name).toList(),
+            "teacher": asset.teacher.id,
+          },
+          permissions: [
+            Permission.delete(Role.user(asset.teacher.id))
+          ]);
       return document;
     } catch (e) {
       print(e);
@@ -360,7 +388,7 @@ class DatabaseService {
     return documents;
   }
 
-  Future<List<Document>> getFilesForMaterialsScreen({
+  Future<List<Document>?> getFilesForMaterialsScreen({
     required String activity,
     required String module,
     required String level,
@@ -381,15 +409,16 @@ class DatabaseService {
         ],
       );
       documents = result.documents;
+      return documents;
     } catch (e) {
       print("======================================");
       print("DATABASE SERVICE/getFilesForMaterialsScreen()");
       print(e);
+      return null;
     }
-    return documents;
   }
 
-  Future<List<Document>> getTeacherAssetsPerLevel({
+  Future<List<Document>?> getTeacherAssetsPerLevel({
     required String level,
     required String teacherID,
     String? branch,
@@ -406,12 +435,13 @@ class DatabaseService {
         ],
       );
       documents = result.documents;
+      return documents;
     } catch (e) {
       print("======================================");
       print("DATABASE SERVICE/getTeacherAssetsPerLevel()");
       print(e);
+      return null;
     }
-    return documents;
   }
 
   Future<bool> deleteFileFromStorage(String fileId) async {
@@ -429,13 +459,14 @@ class DatabaseService {
     }
   }
 
-  Future deleteUserWithAllRelatedData() async {
+  Future<String> deleteUserWithAllRelatedData() async {
     try {
-      final response = await _functions.createExecution(
+      final Execution response = await _functions.createExecution(
           functionId: dotenv.get("APPWRITE_FUNCTION_DELETE_ACCOUNT"));
-      print(response);
+
+      return response.status;
     } catch (e) {
-      print(e);
+      return "failed";
     }
   }
 

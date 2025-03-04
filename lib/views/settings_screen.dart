@@ -2,13 +2,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:myschool/controllers/avatar_controller.dart';
 import 'package:myschool/controllers/language_controller.dart';
 import 'package:myschool/controllers/profile_pic_controller.dart';
 import 'package:myschool/controllers/theme_controller.dart';
 import 'package:myschool/controllers/user_controller.dart';
 import 'package:myschool/models/teacher_model.dart';
-import 'package:myschool/my_app.dart';
 import 'package:myschool/services/authentication_service.dart';
 import 'package:myschool/utils/constants/colors.dart';
 import 'package:myschool/utils/constants/enums.dart';
@@ -107,7 +107,7 @@ class SettingsScreen extends StatelessWidget {
                                   ),
                           );
                         }
-                        return SizedBox();
+                        return const SizedBox();
                       },
                     ),
                     Positioned(
@@ -178,85 +178,33 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Visibility(
-                  visible: userController.user.value!.role == Role.student,
+                  visible: userController.user.value!.role == RoleEnum.student,
                   replacement: Column(
                     children: [
-                      SettingsOptionsRow(
-                        icon: Icons.description_outlined,
-                        title: S.of(context).description,
-                        trailingTitle: userController.teacher.value?.description
-                                ?.split("\n")
-                                .first ??
-                            S.of(context).add_description,
-                        userController: userController,
-                        onTap: () {
-                          Get.bottomSheet(
-                            BottomSheet(
-                              enableDrag: false,
-                              onClosing: () {},
-                              builder: (context) {
-                                return Container(
-                                  decoration: const BoxDecoration(
-                                    borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(24),
-                                    ),
-                                  ),
-                                  child: SingleChildScrollView(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        const SizedBox(height: 16),
-                                        Text(
-                                          S.of(context).description,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 24),
-                                        ),
-                                        const SizedBox(height: 32),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 24.0),
-                                          child: TextFormField(
-                                            maxLines: 5,
-                                            minLines: 1,
-                                            controller: descriptionController,
-                                            decoration: InputDecoration(
-                                                hintText: S
-                                                    .of(context)
-                                                    .add_description),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 32),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 24.0),
-                                          child: ElevatedButton(
-                                            onPressed: () async {
-                                              await userController
-                                                  .updateTeacherInfo(
-                                                      context: context,
-                                                      description:
-                                                          descriptionController
-                                                              .text);
-                                            },
-                                            child: Center(
-                                              child: Text(S
-                                                  .of(context)
-                                                  .update_description),
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 32),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          );
-                        },
-                        isRtl: isRtl,
-                        screenWidth: screenWidth,
+                      GetBuilder<UserController>(
+                        builder: (controller) => SettingsOptionsRow(
+                          icon: Icons.description_outlined,
+                          title: S.of(context).description,
+                          trailingTitle: userController
+                                  .teacher.value?.description
+                                  ?.split("\n")
+                                  .first ??
+                              S.of(context).add_description,
+                          userController: userController,
+                          onTap: () {
+                            descriptionController.text =
+                                userController.teacher.value?.description ?? '';
+
+                            Get.bottomSheet(
+                              UpdateDescriptionBottomSheet(
+                                  isDark: isDark,
+                                  descriptionController: descriptionController,
+                                  userController: userController),
+                            );
+                          },
+                          isRtl: isRtl,
+                          screenWidth: screenWidth,
+                        ),
                       ),
                       const SizedBox(height: 16),
                       GetBuilder<UserController>(
@@ -356,8 +304,11 @@ class SettingsScreen extends StatelessWidget {
                           screenWidth: screenWidth,
                         ),
                       ),
-                      const SizedBox(
-                        height: 16,
+                      Obx(
+                        () => Visibility(
+                          visible: userController.student.value!.branch != null,
+                          child: const SizedBox(height: 16),
+                        ),
                       ),
                       Obx(
                         () => Visibility(
@@ -402,6 +353,72 @@ class SettingsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                const SizedBox(height: 16),
+                SettingsOptionsRow(
+                    userController: userController,
+                    icon: Iconsax.profile_delete,
+                    title: S.of(context).delete_account,
+                    trailingTitle: S.of(context).delete,
+                    onTap: () {
+                      Get.bottomSheet(
+                        Container(
+                          decoration: BoxDecoration(
+                            color: isDark ? SColors.darkerGrey : Colors.white,
+                            borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(24),
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const SizedBox(height: 16.0),
+                              Text(
+                                S.of(context).delete_account,
+                                style: const TextStyle(
+                                    fontSize: 24.0,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(S.of(context).delete_alerte_1,
+                                        textAlign: TextAlign.center),
+                                    const Text("\n"),
+                                    Text(S.of(context).delete_alerte_2,
+                                        textAlign: TextAlign.center),
+                                    const Text("\n"),
+                                    Text(S.of(context).delete_alerte_3,
+                                        textAlign: TextAlign.center),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0),
+                                child: ElevatedButton(
+                                  onPressed: () async {
+                                    await userController.deleteUser(context);
+                                    //close the bottom sheet.
+                                    Get.back();
+                                    //close the settings screen.
+                                    Get.back();
+                                  },
+                                  child: Center(
+                                    child:
+                                        Text(S.of(context).delete_account_caps),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 16.0),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    isRtl: isRtl,
+                    screenWidth: screenWidth),
                 const SizedBox(height: 32),
                 Align(
                   alignment:
@@ -460,9 +477,8 @@ class SettingsScreen extends StatelessWidget {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: const Text('Confirm Logout'),
-                            content:
-                                const Text('Are you sure you want to log out?'),
+                            title: Text(S.of(context).confirm_logout),
+                            content: Text(S.of(context).sure_log_out),
                             actions: <Widget>[
                               TextButton(
                                 onPressed: () =>
@@ -483,11 +499,14 @@ class SettingsScreen extends StatelessWidget {
                       );
 
                       if (confirm == true && context.mounted) {
-                        await userController.signOut(context: context);
+                        int response =
+                            await userController.signOut(context: context);
 
-                        await Future.delayed(const Duration(seconds: 1));
-                        userController.student.value = null;
-                        userController.teacher.value = null;
+                        if (response == 200) {
+                          await Future.delayed(const Duration(seconds: 1));
+                          userController.student.value = null;
+                          userController.teacher.value = null;
+                        }
                       }
                     },
                     child: Row(
@@ -500,25 +519,83 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      await userController.deleteUser(context);
-                      userController.clearUserData();
-                      AuthenticationService authenticationService = Get.find();
-                      authenticationService.clearAuthStatus();
-                      Get.back();
-                    },
-                    child: const Center(
-                      child: Text("DELETE ACCOUNT"),
-                    ),
-                  ),
-                )
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class UpdateDescriptionBottomSheet extends StatelessWidget {
+  const UpdateDescriptionBottomSheet({
+    super.key,
+    required this.descriptionController,
+    required this.userController,
+    required this.isDark,
+  });
+
+  final TextEditingController descriptionController;
+  final UserController userController;
+  final bool isDark;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(24),
+        ),
+        color: isDark ? SColors.darkerGrey : Colors.white,
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: 16),
+            Text(
+              S.of(context).description,
+              style: const TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 24,
+              ),
+            ),
+            const SizedBox(height: 32),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: TextFormField(
+                maxLines: 5,
+                minLines: 1,
+                controller: descriptionController,
+                decoration: InputDecoration(
+                  hintText: S.of(context).add_description,
+                ),
+              ),
+            ),
+            const SizedBox(height: 32),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: ElevatedButton(
+                onPressed: () async {
+                  await userController.updateTeacherInfo(
+                      context: context,
+                      description: descriptionController.text);
+
+                  descriptionController.text =
+                      userController.teacher.value!.description!;
+
+                  userController.update();
+
+                  Get.back();
+                },
+                child: Center(
+                  child: Text(S.of(context).update_description),
+                ),
+              ),
+            ),
+            const SizedBox(height: 32),
+          ],
         ),
       ),
     );
@@ -827,8 +904,8 @@ class ProfilePicOptionsBottomSheet extends StatelessWidget {
                   FittedBox(
                     child: Text(
                       isNewUpload
-                          ? "Add profile picture"
-                          : "Update profile picture",
+                          ? S.of(context).add_profile_pic
+                          : S.of(context).update_profile_pic,
                       style: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.w600),
                     ),
@@ -849,15 +926,15 @@ class ProfilePicOptionsBottomSheet extends StatelessWidget {
 
                   Get.back();
                 },
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.delete_outline_outlined),
-                    SizedBox(width: 8),
+                    const Icon(Icons.delete_outline_outlined),
+                    const SizedBox(width: 8),
                     FittedBox(
                       child: Text(
-                        "Delete profile picture",
-                        style: TextStyle(
+                        S.of(context).delete_profile_pic,
+                        style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w600),
                       ),
                     ),
@@ -898,9 +975,9 @@ class StudentAvatarsBottomSheet extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 16.0),
-          const Text(
-            "Pick Your Avatar",
-            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w700),
+          Text(
+            S.of(context).pick_avatar,
+            style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 32),
           Expanded(
@@ -962,8 +1039,8 @@ class StudentAvatarsBottomSheet extends StatelessWidget {
 
                 Get.back();
               },
-              child: const Center(
-                child: Text("UPDATE AVATAR"),
+              child: Center(
+                child: Text(S.of(context).update_avatar_caps),
               ),
             ),
           ),

@@ -5,13 +5,15 @@ import 'package:myschool/controllers/language_controller.dart';
 import 'package:myschool/controllers/theme_controller.dart';
 import 'package:myschool/generated/l10n.dart';
 import 'package:myschool/services/authentication_service.dart';
-import 'package:myschool/services/database_service.dart';
 import 'package:myschool/utils/constants/enums.dart';
+import 'package:myschool/utils/helpers/helper_functions.dart';
 import 'package:myschool/views/student_home_screen.dart';
 import 'package:myschool/utils/theme/theme.dart';
 import 'package:myschool/views/intro_screen.dart';
 import 'package:myschool/views/teacher_home_screen.dart';
+import 'package:myschool/views/widgets/spinning_logo.dart';
 import 'controllers/user_controller.dart';
+import 'views/widgets/error_screen.dart';
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
@@ -46,36 +48,34 @@ class MyApp extends StatelessWidget {
                 future: userController.loadUpUser(context),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Scaffold(
+                      body: Center(
+                        child: SpinningLogo(),
+                      ),
+                    );
                   } else if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasError) {
-                      print(snapshot.error);
-
+                      final isDark = SHelperFunctions.isDarkMode(context);
                       return Scaffold(
-                        body: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Error: ${snapshot.error}'),
-                            const SizedBox(height: 32),
-                            ElevatedButton(
-                                onPressed: () async {
-                                  await UserController()
-                                      .signOut(context: context);
-                                },
-                                child: const Text("DICONNECT"))
-                          ],
+                        body: ErrorScreen(
+                          isDark: isDark,
+                          showLogo: true,
+                          onTap: () {
+                            controller.update();
+                          },
                         ),
                       );
                     } else {
-                      return userController.user.value!.role == Role.student
+                      return userController.user.value!.role == RoleEnum.student
                           ? StudentHomeScreen()
                           : TeacherHomeScreen(
                               name: userController.user.value!.name);
                     }
                   }
-
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                  return const Scaffold(
+                    body: Center(
+                      child: SpinningLogo(),
+                    ),
                   );
                 },
               ),
@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
           } else {
             return const Scaffold(
               body: Center(
-                child: CircularProgressIndicator(),
+                child: SpinningLogo(),
               ),
             );
           }

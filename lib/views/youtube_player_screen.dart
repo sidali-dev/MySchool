@@ -60,7 +60,12 @@ class YoutubePlayerScreen extends GetView<YoutubePlayerScreenController> {
             return Scaffold(
               appBar: AppBar(
                 centerTitle: true,
-                title: const Text('APP NAME'),
+                title: Image.asset(
+                  isDark
+                      ? SImageString.bannerLogoImageDark
+                      : SImageString.bannerLogoImage,
+                  height: 36,
+                ),
                 iconTheme:
                     IconThemeData(color: isDark ? Colors.white : Colors.black),
                 leading: IconButton(
@@ -71,7 +76,10 @@ class YoutubePlayerScreen extends GetView<YoutubePlayerScreenController> {
                       await controller.playPreviousVideo();
                     }
                   },
-                  icon: const Icon(Icons.arrow_back_ios_new),
+                  icon: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: isDark ? Colors.white : const Color(0xFF0075FF),
+                  ),
                 ),
               ),
               body: SingleChildScrollView(
@@ -218,7 +226,7 @@ class YoutubePlayerScreen extends GetView<YoutubePlayerScreenController> {
                           ),
                           const SizedBox(height: 32),
                           Text(
-                              "Other videos by ${assetModel.teacher.user.name}"),
+                              "${S.of(context).other_videos} ${assetModel.teacher.user.name}"),
                           Visibility(
                             visible: controller.otherVideos.isNotEmpty,
                             replacement: Column(
@@ -226,10 +234,10 @@ class YoutubePlayerScreen extends GetView<YoutubePlayerScreenController> {
                                 LottieBuilder.asset(
                                     SImageString.emptyScreenAnimation,
                                     width: screenWidth * 0.5),
-                                const FittedBox(
+                                FittedBox(
                                   child: Text(
-                                    "No other videos",
-                                    style: TextStyle(
+                                    S.of(context).no_other_videos,
+                                    style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w600),
                                   ),
@@ -260,6 +268,7 @@ class YoutubePlayerScreen extends GetView<YoutubePlayerScreenController> {
                                                 controller.playAnotherVideo(e);
                                               },
                                               child: YouTubeThumbnail(
+                                                  isDark: isDark,
                                                   videoId:
                                                       controller.parseVideoId(
                                                           e.fileLink)!),

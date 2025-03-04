@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:myschool/models/asset_model.dart';
 import 'package:myschool/utils/device/file_downloader.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
+import 'package:myschool/views/widgets/spinning_logo.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+
+import '../generated/l10n.dart';
 
 class PdfPreviewScreen extends StatelessWidget {
   final AssetModel assetModel;
@@ -21,12 +24,6 @@ class PdfPreviewScreen extends StatelessWidget {
         centerTitle: true,
         title: Text(assetModel.title),
         iconTheme: IconThemeData(color: isDark ? Colors.white : Colors.black),
-        // actions: [
-        //   Padding(
-        //     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        //     child: DownloadFileIcon(assetModel: assetModel, isDark: isDark),
-        //   )
-        // ],
       ),
       body: FutureBuilder<Map>(
         future:
@@ -34,37 +31,28 @@ class PdfPreviewScreen extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: SpinningLogo(),
             );
           } else {
             if (snapshot.data!["isDownloaded"]!) {
-              print('downloaded');
               return SfPdfViewer.file(
                 File(snapshot.data!["path"]),
                 enableTextSelection: false,
                 onDocumentLoadFailed: (PdfDocumentLoadFailedDetails details) =>
                     SHelperFunctions.showAwesomeSnackBar(
-                        title: "Failed to load file",
-                        content: "Check your internet connection and try again",
+                        title: S.of(context).failed_load_file,
+                        content: S.of(context).something_went_wrong,
                         contentType: ContentType.failure,
                         context: context),
-
-                //FOR TESTING ONLY!!! REMOVE LATER.
-                // onTap: (details) => SHelperFunctions.showAwesomeSnackBar(
-                //     title: "Failed to load file",
-                //     content: "Check your internet connection and try again",
-                //     contentType: ContentType.failure,
-                //     context: context),
               );
             } else {
-              print('online');
               return SfPdfViewer.network(
                 enableTextSelection: false,
                 assetModel.fileLink,
                 onDocumentLoadFailed: (PdfDocumentLoadFailedDetails details) =>
                     SHelperFunctions.showAwesomeSnackBar(
-                        title: "Failed to load file",
-                        content: "Check your internet connection and try again",
+                        title: S.of(context).failed_load_file,
+                        content: S.of(context).check_internet_connection,
                         contentType: ContentType.failure,
                         context: context),
               );

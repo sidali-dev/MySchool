@@ -4,7 +4,7 @@ enum Languages {
   ar,
 }
 
-enum Role {
+enum RoleEnum {
   teacher,
   student,
 }

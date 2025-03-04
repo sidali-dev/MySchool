@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myschool/models/asset_model.dart';
+import 'package:myschool/views/widgets/spinning_logo.dart';
 
 import '../../controllers/download_file_button_controller.dart';
 
@@ -30,7 +31,7 @@ class DownloadFileIcon extends StatelessWidget {
         if (controller.isDownloading.value) {
           // Show loading state
           return const Center(
-            child: CircularProgressIndicator(),
+            child: SpinningLogo(),
           );
         } else if (controller.isDownloaded.value) {
           // Show "Already Downloaded" state

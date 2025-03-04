@@ -1429,6 +1429,236 @@ class S {
       args: [],
     );
   }
+
+  /// `Choose type of material that suits you best`
+  String get choose_material_type {
+    return Intl.message(
+      'Choose type of material that suits you best',
+      name: 'choose_material_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Become a teacher`
+  String get become_teacher {
+    return Intl.message(
+      'Become a teacher',
+      name: 'become_teacher',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time for you to learn, grow and succeed`
+  String get time_to_learn {
+    return Intl.message(
+      'Time for you to learn, grow and succeed',
+      name: 'time_to_learn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load file`
+  String get failed_load_file {
+    return Intl.message(
+      'Failed to load file',
+      name: 'failed_load_file',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check your internet connection`
+  String get check_internet_connection {
+    return Intl.message(
+      'Check your internet connection',
+      name: 'check_internet_connection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong`
+  String get something_went_wrong {
+    return Intl.message(
+      'Something went wrong',
+      name: 'something_went_wrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Account`
+  String get delete_account {
+    return Intl.message(
+      'Delete Account',
+      name: 'delete_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By proceeding, you will permanently delete your account and all associated data, including posts, history, and preferences.`
+  String get delete_alerte_1 {
+    return Intl.message(
+      'By proceeding, you will permanently delete your account and all associated data, including posts, history, and preferences.',
+      name: 'delete_alerte_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This action is irreversible, and your data cannot be recovered once deleted.`
+  String get delete_alerte_2 {
+    return Intl.message(
+      'This action is irreversible, and your data cannot be recovered once deleted.',
+      name: 'delete_alerte_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please confirm your decision carefully.`
+  String get delete_alerte_3 {
+    return Intl.message(
+      'Please confirm your decision carefully.',
+      name: 'delete_alerte_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DELETE ACCOUNT`
+  String get delete_account_caps {
+    return Intl.message(
+      'DELETE ACCOUNT',
+      name: 'delete_account_caps',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Logout`
+  String get confirm_logout {
+    return Intl.message(
+      'Confirm Logout',
+      name: 'confirm_logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to log out?`
+  String get sure_log_out {
+    return Intl.message(
+      'Are you sure you want to log out?',
+      name: 'sure_log_out',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add profile picture`
+  String get add_profile_pic {
+    return Intl.message(
+      'Add profile picture',
+      name: 'add_profile_pic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete profile picture`
+  String get delete_profile_pic {
+    return Intl.message(
+      'Delete profile picture',
+      name: 'delete_profile_pic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update profile picture`
+  String get update_profile_pic {
+    return Intl.message(
+      'Update profile picture',
+      name: 'update_profile_pic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick Your Avatar`
+  String get pick_avatar {
+    return Intl.message(
+      'Pick Your Avatar',
+      name: 'pick_avatar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `UPDATE AVATAR`
+  String get update_avatar_caps {
+    return Intl.message(
+      'UPDATE AVATAR',
+      name: 'update_avatar_caps',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Teacher's profile`
+  String get teacher_profile {
+    return Intl.message(
+      "Teacher's profile",
+      name: 'teacher_profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other videos by`
+  String get other_videos {
+    return Intl.message(
+      'Other videos by',
+      name: 'other_videos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No other videos`
+  String get no_other_videos {
+    return Intl.message(
+      'No other videos',
+      name: 'no_other_videos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This Place feels empty`
+  String get feels_empty {
+    return Intl.message(
+      'This Place feels empty',
+      name: 'feels_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TRY AGAIN`
+  String get try_again_caps {
+    return Intl.message(
+      'TRY AGAIN',
+      name: 'try_again_caps',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

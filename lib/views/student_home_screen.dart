@@ -10,6 +10,7 @@ import 'package:myschool/utils/helpers/helper_functions.dart';
 import 'package:myschool/views/activities_screen.dart';
 import 'package:myschool/views/settings_screen.dart';
 import 'package:myschool/views/widgets/bubble.dart';
+import 'package:myschool/views/widgets/spinning_logo.dart';
 import 'package:myschool/views/widgets/squar_button.dart';
 
 import '../utils/constants/colors.dart';
@@ -29,7 +30,7 @@ class StudentHomeScreen extends StatelessWidget {
       body: Obx(
         () {
           if (userController.user.value == null) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: SpinningLogo());
           }
 
           homeController.updateUserModules(

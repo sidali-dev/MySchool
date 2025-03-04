@@ -17,7 +17,7 @@
         "pick_your_level" : "Choisissez votre niveau",
         "next" : "SUIVANT",
         "have_an_account" : "Vous avez déjà un compte?",
-        "sign_in" : "SE CONNECTER",
+        "sign_in" : "CONNECTER",
         "email" : "Email",
         "enter_email" : "Veuillez entrer votre email",
         "valid_email" : "Veuillez entrer un email valide",
@@ -136,6 +136,32 @@
         "yes" : "Oui",
         "no" : "Non",
         "teacher": "Enseignant",
-        "module": "Matière"
+        "module": "Matière",
+        "choose_material_type" : "Choisissez le type de matériau qui vous convient le mieux",
+        "become_teacher" : "Devenez un enseignant",
+        "time_to_learn" : "Il est temps pour vous d'apprendre, de grandir et de réussir",
+        "failed_load_file" : "Échec du chargement du fichier",
+        "check_internet_connection" : "Vérifiez votre connexion Internet",
+        "something_went_wrong" : "Quelque chose s'est mal passé",
+        "delete_account": "Supprimer le compte",
+        "delete_alerte_1": "En continuant, vous supprimerez définitivement votre compte et toutes les données associées, y compris les publications, l'historique et les préférences.",
+        "delete_alerte_2": "Cette action est irréversible, et vos données ne pourront pas être récupérées une fois supprimées.",
+        "delete_alerte_3": "Veuillez confirmer votre décision avec soin.",
+        "delete_account_caps": "SUPPRIMER LE COMPTE",
+        "confirm_logout": "Confirmer la déconnexion",
+        "sure_log_out": "Êtes-vous sûr de déconnecter ?",
+        "add_profile_pic": "Ajouter une photo de profil",
+        "delete_profile_pic": "Supprimer la photo de profil",
+        "update_profile_pic": "Mettre à jour la photo de profil",
+        "pick_avatar": "Choisissez votre avatar",
+        "update_avatar_caps": "METTRE À JOUR L'AVATAR",
+        "teacher_profile": "Profil de l'enseignant",
+        "other_videos": "Autres vidéos de",
+        "no_other_videos": "Aucune autre vidéo",
+        "feels_empty": "Cet endroit semble vide",
+        "try_again_caps": "ESSAYEZ À NOUVEAU"
+
+
+
 }
     

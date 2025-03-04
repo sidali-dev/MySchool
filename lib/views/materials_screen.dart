@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:lottie/lottie.dart';
 import 'package:myschool/controllers/materials_controller.dart';
 import 'package:myschool/models/activities.dart';
 import 'package:myschool/models/asset_model.dart';
 import 'package:myschool/models/modules.dart';
 import 'package:myschool/utils/constants/enums.dart';
-import 'package:myschool/utils/constants/image_strings.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
 import 'package:myschool/views/pdf_preview_screen.dart';
 import 'package:myschool/views/teacher_profile.dart';
 import 'package:myschool/views/widgets/download_file_button.dart';
+import 'package:myschool/views/widgets/error_screen.dart';
+import 'package:myschool/views/widgets/spinning_logo.dart';
 import 'package:myschool/views/youtube_player_screen.dart';
 
 import '../controllers/youtube_player_screen_controller.dart';
@@ -21,6 +21,7 @@ import '../utils/constants/colors.dart';
 import '../utils/device/device_utility.dart';
 import 'widgets/animation/auto_scrolling_text.dart';
 import 'widgets/bubble.dart';
+import 'widgets/empty_screen.dart';
 
 class MaterialsScreen extends StatelessWidget {
   MaterialsScreen({
@@ -145,12 +146,12 @@ class MaterialsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 32.0),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 32.0),
                     child: Text(
-                      "Get the best marks by training with our 100+ exams",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 22),
+                      S.of(context).time_to_learn,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w600, fontSize: 22),
                     ),
                   ),
                   FutureBuilder(
@@ -159,13 +160,14 @@ class MaterialsScreen extends StatelessWidget {
                         module: module.module.name,
                         trimester: trimester.toString()),
                     builder: (context, snapshot) {
+                      print(snapshot.data);
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             SizedBox(height: 168),
-                            Center(child: CircularProgressIndicator()),
+                            Center(child: SpinningLogo()),
                           ],
                         );
                       }
@@ -250,10 +252,8 @@ class MaterialsScreen extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      trailing: Icon(
-                                        isRtl
-                                            ? Icons.arrow_back_ios
-                                            : Icons.arrow_forward_ios,
+                                      trailing: const Icon(
+                                        Icons.arrow_forward_ios,
                                         color: Colors.lightBlue,
                                       ),
                                     ),
@@ -263,26 +263,10 @@ class MaterialsScreen extends StatelessWidget {
                             ),
                           );
                         } else if (snapshot.data == 0) {
-                          return Center(
-                            child: Column(
-                              children: [
-                                LottieBuilder.asset(
-                                    SImageString.emptyScreenAnimation),
-                                const FittedBox(
-                                  child: Text(
-                                    "This Place feels empty",
-                                    style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
+                          return const EmptyScreen();
                         } else {
-                          return const Center(
-                            child: Text("ERROR"),
-                          );
+                          return ErrorScreen(
+                              isDark: isDark, showLogo: false, onTap: null);
                         }
                       }
                       return const SizedBox();
@@ -341,7 +325,7 @@ class MaterialInfoBottomSheet extends StatelessWidget {
               const SizedBox(height: 32),
               MaterialInfo(
                   icon: const Icon(Icons.person),
-                  title: "Teacher",
+                  title: S.of(context).teacher,
                   trailing: InkWell(
                     onTap: () {
                       Get.back();
@@ -359,16 +343,14 @@ class MaterialInfoBottomSheet extends StatelessWidget {
                             style: const TextStyle(fontSize: 16.0),
                           ),
                         ),
-                        Icon(isRtl
-                            ? Icons.arrow_back_ios
-                            : Icons.arrow_forward_ios),
+                        const Icon(Icons.arrow_forward_ios),
                       ],
                     ),
                   ),
                   isRtl: isRtl),
               MaterialInfo(
                   icon: const Icon(Iconsax.calendar_1),
-                  title: "Upload Date",
+                  title: S.of(context).upload_date,
                   trailing: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12.0),
                     child: FittedBox(

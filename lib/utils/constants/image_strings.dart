@@ -2,8 +2,8 @@ class SImageString {
   SImageString._();
 
   //lottie animations
-  static const noInternetAnimation = "assets/lottie/no_internet.json";
   static const emptyScreenAnimation = "assets/lottie/empty.json";
+  static const errorAnimation = "assets/lottie/error.json";
 
   //modules images
   static const moduleGerman = "assets/images/modules/allmend.png";
@@ -55,4 +55,9 @@ class SImageString {
   static const avatarFemaleTwo = "assets/images/avatars/female_avatar_2.png";
   static const avatarFemaleThree = "assets/images/avatars/female_avatar_3.png";
   static const avatarFemaleFour = "assets/images/avatars/female_avatar_4.png";
+
+  //logo images
+  static const bannerLogoImage = "assets/images/logo/banner_logo.png";
+  static const bannerLogoImageDark = "assets/images/logo/banner_logo_dark.png";
+  static const introBanner = "assets/images/logo/intro_banner.png";
 }

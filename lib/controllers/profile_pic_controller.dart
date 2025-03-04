@@ -8,6 +8,7 @@ import 'package:myschool/models/teacher_model.dart';
 import 'package:myschool/services/database_service.dart';
 import 'package:myschool/utils/cache/profile_pic_cache_manager.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
+import 'package:myschool/views/widgets/spinning_logo.dart';
 
 class ProfilePicController {
   Future addProfilePicture({
@@ -41,7 +42,7 @@ class ProfilePicController {
         barrierDismissible: false,
         context: context,
         builder: (context) => const Center(
-          child: CircularProgressIndicator(),
+          child: SpinningLogo(),
         ),
       );
     }
@@ -85,7 +86,7 @@ class ProfilePicController {
           barrierDismissible: false,
           context: context,
           builder: (context) => const Center(
-            child: CircularProgressIndicator(),
+            child: SpinningLogo(),
           ),
         );
       }

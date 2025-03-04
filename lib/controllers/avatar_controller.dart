@@ -6,6 +6,7 @@ import 'package:myschool/models/avatar.dart';
 import 'package:myschool/models/student_model.dart';
 import 'package:myschool/utils/constants/image_strings.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
+import 'package:myschool/views/widgets/spinning_logo.dart';
 
 import '../services/database_service.dart';
 
@@ -58,27 +59,39 @@ class AvatarController extends GetxController {
       barrierDismissible: false,
       context: context,
       builder: (context) => const Center(
-        child: CircularProgressIndicator(),
+        child: SpinningLogo(),
       ),
     );
 
-    final response = await databaseService.updateStudentData(
-        userID: userID, level: level, branch: branch, avatarId: avatarId);
+    try {
+      final response = await databaseService.updateStudentData(
+          userID: userID, level: level, branch: branch, avatarId: avatarId);
 
-    //close the progress indicator.
-    Get.back();
+      //close the progress indicator.
+      Get.back();
 
-    if (response != null && context.mounted) {
-      final StudentModel student = StudentModel.fromJson(response.data);
-      UserController userController = Get.find();
-      userController.student.value = student;
+      if (response != null && context.mounted) {
+        final StudentModel student = StudentModel.fromJson(response.data);
+        UserController userController = Get.find();
+        userController.student.value = student;
 
-      SHelperFunctions.showAwesomeSnackBar(
-          title: "SUCCESS",
-          content: "Profile avatar updated",
-          contentType: ContentType.success,
-          context: context);
-    } else {
+        SHelperFunctions.showAwesomeSnackBar(
+            title: "SUCCESS",
+            content: "Profile avatar updated",
+            contentType: ContentType.success,
+            context: context);
+      } else {
+        if (context.mounted) {
+          SHelperFunctions.showAwesomeSnackBar(
+              title: "ERROR",
+              content: "Something went wrong",
+              contentType: ContentType.failure,
+              context: context);
+        }
+      }
+    } catch (e) {
+      //close the progress indicator.
+      Get.back();
       if (context.mounted) {
         SHelperFunctions.showAwesomeSnackBar(
             title: "ERROR",

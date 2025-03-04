@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:myschool/services/database_service.dart';
 import 'package:myschool/utils/constants/enums.dart';
+import 'package:myschool/views/widgets/spinning_logo.dart';
 
 import '../utils/helpers/appwrite_helpers.dart';
 
@@ -104,14 +105,14 @@ class BranchDialogController extends GetxController
       barrierDismissible: false,
       context: context,
       builder: (context) => const Center(
-        child: CircularProgressIndicator(),
+        child: SpinningLogo(),
       ),
     );
 
     //add user data to database
     DatabaseService databaseService = DatabaseService();
     Document? document = await databaseService
-        .addUser(name: name.trim(), role: Role.student)
+        .addUser(name: name.trim(), role: RoleEnum.student)
         .then(
           (value) async => await databaseService.addStudentData(
             userID: value?.$id,

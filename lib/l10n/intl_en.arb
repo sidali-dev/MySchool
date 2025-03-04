@@ -136,9 +136,30 @@
     "yes" : "Yes",
     "no" : "No",
     "teacher": "Teacher",
-    "module": "Subject"
-
-
+    "module": "Subject",
+    "choose_material_type" : "Choose type of material that suits you best",
+    "become_teacher" : "Become a teacher",
+    "time_to_learn" : "Time for you to learn, grow and succeed",
+    "failed_load_file" : "Failed to load file",
+    "check_internet_connection" : "Check your internet connection",
+    "something_went_wrong" : "Something went wrong",
+    "delete_account" : "Delete Account",
+    "delete_alerte_1" : "By proceeding, you will permanently delete your account and all associated data, including posts, history, and preferences.",
+    "delete_alerte_2" : "This action is irreversible, and your data cannot be recovered once deleted.",
+    "delete_alerte_3" : "Please confirm your decision carefully.",
+    "delete_account_caps" : "DELETE ACCOUNT",
+    "confirm_logout" : "Confirm Logout",
+    "sure_log_out" : "Are you sure you want to log out?",
+    "add_profile_pic" : "Add profile picture",
+    "delete_profile_pic" : "Delete profile picture",
+    "update_profile_pic" : "Update profile picture",
+    "pick_avatar" : "Pick Your Avatar",
+    "update_avatar_caps" : "UPDATE AVATAR",
+    "teacher_profile" : "Teacher's profile",
+    "other_videos" : "Other videos by",
+    "no_other_videos" : "No other videos",
+    "feels_empty" : "This Place feels empty",
+    "try_again_caps" : "TRY AGAIN"
 
 
 

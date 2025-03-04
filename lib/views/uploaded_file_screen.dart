@@ -9,12 +9,15 @@ import 'package:myschool/utils/constants/enums.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
 import 'package:myschool/views/pdf_preview_screen.dart';
 import 'package:myschool/views/widgets/animation/auto_scrolling_text.dart';
+import 'package:myschool/views/widgets/spinning_logo.dart';
 import 'package:myschool/views/youtube_player_screen.dart';
 
 import '../controllers/uploaded_file_screen_controller.dart';
 import '../controllers/youtube_player_screen_controller.dart';
 import '../generated/l10n.dart';
 import 'widgets/download_file_button.dart';
+import 'widgets/empty_screen.dart';
+import 'widgets/error_screen.dart';
 
 class UploadedFileScreen extends StatelessWidget {
   const UploadedFileScreen({super.key});
@@ -44,13 +47,15 @@ class UploadedFileScreen extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: SpinningLogo(),
               );
             } else if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text('Error: ${snapshot.error}'),
-                );
+              if (snapshot.hasError || snapshot.data == -1) {
+                return ErrorScreen(
+                    isDark: isDark, showLogo: false, onTap: null);
+              }
+              if (snapshot.data == 0) {
+                return const EmptyScreen();
               }
 
               return DefaultTabController(
@@ -58,6 +63,7 @@ class UploadedFileScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     TabBar(
+                      tabAlignment: TabAlignment.center,
                       isScrollable: true,
                       labelColor: isDark ? Colors.white : Colors.black,
                       unselectedLabelColor: Colors.grey,

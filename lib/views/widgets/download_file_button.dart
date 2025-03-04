@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:myschool/models/asset_model.dart';
+import 'package:myschool/views/widgets/spinning_logo.dart';
 
 import '../../controllers/download_file_button_controller.dart';
 import '../../generated/l10n.dart';
@@ -32,7 +33,7 @@ class DownloadFileButton extends StatelessWidget {
           return const OutlinedButton(
             onPressed: null, // Disable button during download
             child: Center(
-              child: CircularProgressIndicator(),
+              child: SpinningLogo(),
             ),
           );
         } else if (controller.isDownloaded.value) {

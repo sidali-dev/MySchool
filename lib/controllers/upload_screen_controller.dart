@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:appwrite/models.dart' as appwrite;
 import 'package:myschool/models/asset_model.dart';
+import 'package:myschool/views/widgets/spinning_logo.dart';
 
 import '../models/teacher_model.dart';
 import '../services/database_service.dart';
@@ -139,7 +140,7 @@ class UploadScreenController extends GetxController
       barrierDismissible: false,
       context: context,
       builder: (context) => const Center(
-        child: CircularProgressIndicator(),
+        child: SpinningLogo(),
       ),
     );
 
@@ -168,7 +169,7 @@ class UploadScreenController extends GetxController
       barrierDismissible: false,
       context: context,
       builder: (context) => const Center(
-        child: CircularProgressIndicator(),
+        child: SpinningLogo(),
       ),
     );
 
@@ -188,8 +189,8 @@ class UploadScreenController extends GetxController
     }
   }
 
-  fileIsSelected() {
-    isFileSelected.value = true;
+  fileIsSelected(bool value) {
+    isFileSelected.value = value;
     update();
   }
 

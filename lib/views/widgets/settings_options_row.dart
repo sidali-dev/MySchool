@@ -39,10 +39,14 @@ class SettingsOptionsRow extends StatelessWidget {
         const SizedBox(width: 16),
         SizedBox(
           width: screenWidth * 0.35,
-          child: Text(
-            title,
-            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
-            overflow: TextOverflow.ellipsis,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: isRtl ? Alignment.centerRight : Alignment.centerLeft,
+            child: Text(
+              title,
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ),
         const Spacer(),

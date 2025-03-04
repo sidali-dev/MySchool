@@ -3,7 +3,7 @@ import 'package:myschool/utils/constants/enums.dart';
 class UserModel {
   final String id;
   final String name;
-  final Role role;
+  final RoleEnum role;
 
   UserModel({
     required this.id,
@@ -15,7 +15,7 @@ class UserModel {
     return UserModel(
       id: json['\$id'],
       name: json['name'],
-      role: Role.values.byName(json['role']),
+      role: RoleEnum.values.byName(json['role']),
     );
   }
 

@@ -201,6 +201,49 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
         "what_are_you_sharing": MessageLookupByLibrary.simpleMessage(
             "What will you be sharing today?"),
-        "yes": MessageLookupByLibrary.simpleMessage("Yes")
+        "yes": MessageLookupByLibrary.simpleMessage("Yes"),
+        "choose_material_type": MessageLookupByLibrary.simpleMessage(
+            "Choose type of material that suits you best"),
+        "become_teacher":
+            MessageLookupByLibrary.simpleMessage("Become a teacher"),
+        "time_to_learn": MessageLookupByLibrary.simpleMessage(
+            "Time for you to learn, grow and succeed"),
+        "failed_load_file":
+            MessageLookupByLibrary.simpleMessage("Failed to load file"),
+        "check_internet_connection": MessageLookupByLibrary.simpleMessage(
+            "Check your internet connection"),
+        "something_went_wrong":
+            MessageLookupByLibrary.simpleMessage("Something went wrong"),
+        "delete_account":
+            MessageLookupByLibrary.simpleMessage("Delete Account"),
+        "delete_alerte_1": MessageLookupByLibrary.simpleMessage(
+            "By proceeding, you will permanently delete your account and all associated data, including posts, history, and preferences."),
+        "delete_alerte_2": MessageLookupByLibrary.simpleMessage(
+            "This action is irreversible, and your data cannot be recovered once deleted."),
+        "delete_alerte_3": MessageLookupByLibrary.simpleMessage(
+            "Please confirm your decision carefully."),
+        "delete_account_caps":
+            MessageLookupByLibrary.simpleMessage("DELETE ACCOUNT"),
+        "confirm_logout":
+            MessageLookupByLibrary.simpleMessage("Confirm Logout"),
+        "sure_log_out": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to log out?"),
+        "add_profile_pic":
+            MessageLookupByLibrary.simpleMessage("Add profile picture"),
+        "delete_profile_pic":
+            MessageLookupByLibrary.simpleMessage("Delete profile picture"),
+        "update_profile_pic":
+            MessageLookupByLibrary.simpleMessage("Update profile picture"),
+        "pick_avatar": MessageLookupByLibrary.simpleMessage("Pick Your Avatar"),
+        "update_avatar_caps":
+            MessageLookupByLibrary.simpleMessage("UPDATE AVATAR"),
+        "teacher_profile":
+            MessageLookupByLibrary.simpleMessage("Teacher's profile"),
+        "other_videos": MessageLookupByLibrary.simpleMessage("Other videos by"),
+        "no_other_videos":
+            MessageLookupByLibrary.simpleMessage("No other videos"),
+        "feels_empty":
+            MessageLookupByLibrary.simpleMessage("This Place feels empty"),
+        "try_again_caps": MessageLookupByLibrary.simpleMessage("TRY AGAIN"),
       };
 }

@@ -1,3 +1,4 @@
+import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myschool/models/student_model.dart';
@@ -5,6 +6,7 @@ import 'package:myschool/models/teacher_model.dart';
 import 'package:myschool/models/user_model.dart';
 import 'package:myschool/services/database_service.dart';
 import 'package:myschool/utils/constants/enums.dart';
+import 'package:myschool/views/widgets/spinning_logo.dart';
 
 import '../services/authentication_service.dart';
 import '../utils/helpers/appwrite_helpers.dart';
@@ -15,14 +17,9 @@ class UserController extends GetxController {
   Rx<TeacherModel?> teacher = Rx<TeacherModel?>(null);
   late List<String> levels;
 
-  @override
-  Future onInit() async {
-    super.onInit();
-  }
-
   Future<void> loadUpUser(BuildContext context) async {
     await _getUser();
-    if (context.mounted && user.value!.role == Role.student) {
+    if (context.mounted && user.value!.role == RoleEnum.student) {
       levels = student.value!.getAllUserLevels(context);
 
       student.value!.getAllUserBranches(context, null);
@@ -38,14 +35,21 @@ class UserController extends GetxController {
   Future<void> _getUser() async {
     DatabaseService databaseService = DatabaseService();
 
-    await Future.delayed(1.seconds);
+    do {
+      user.value = await databaseService.getUser();
+      if (user.value == null) Future.delayed(1.seconds);
+    } while (user.value == null);
 
-    user.value = await databaseService.getUser();
-
-    if (user.value!.role == Role.student) {
-      student.value = await databaseService.geStudent();
-    } else if (user.value!.role == Role.teacher) {
-      teacher.value = await databaseService.getTeacher();
+    if (user.value!.role == RoleEnum.student) {
+      do {
+        student.value = await databaseService.geStudent();
+        if (student.value == null) Future.delayed(1.seconds);
+      } while (student.value == null);
+    } else if (user.value!.role == RoleEnum.teacher) {
+      do {
+        teacher.value = await databaseService.getTeacher();
+        if (teacher.value == null) Future.delayed(1.seconds);
+      } while (teacher.value == null);
     }
   }
 
@@ -59,33 +63,43 @@ class UserController extends GetxController {
       barrierDismissible: false,
       context: context,
       builder: (context) => const Center(
-        child: CircularProgressIndicator(),
+        child: SpinningLogo(),
       ),
     );
 
     //update the user
     DatabaseService databaseService = DatabaseService();
-    final response = await databaseService.updateStudentData(
-      userID: user.value!.id,
-      level: level,
-      branch: branch,
-      avatarId: avatarId,
-    );
+    try {
+      final response = await databaseService.updateStudentData(
+        userID: user.value!.id,
+        level: level,
+        branch: branch,
+        avatarId: avatarId,
+      );
 
-    //close loading indicator
-    Get.back();
+//close loading indicator
+      Get.back();
 
-    //handle possible errors
-    if (response == null && context.mounted) {
-      AppwriteHelpers.showSomethingWentWorng(context);
+      //handle possible errors
+      if (response == null && context.mounted) {
+        AppwriteHelpers.showSomethingWentWorng(context);
+        return false;
+      } else {
+        student.value = StudentModel.fromJson(response!.data);
+        return true;
+      }
+    } catch (e) {
+      //close loading indicator
+      Get.back();
+
+      if (context.mounted) {
+        AppwriteHelpers.showSomethingWentWorng(context);
+      }
       return false;
-    } else {
-      student.value = StudentModel.fromJson(response!.data);
-      return true;
     }
   }
 
-  Future<bool> updateTeacherInfo(
+  Future<Document?> updateTeacherInfo(
       {required BuildContext context,
       int? uploadsCount,
       String? description}) async {
@@ -94,28 +108,35 @@ class UserController extends GetxController {
       barrierDismissible: false,
       context: context,
       builder: (context) => const Center(
-        child: CircularProgressIndicator(),
+        child: SpinningLogo(),
       ),
     );
 
     //update the user
     DatabaseService databaseService = DatabaseService();
-    final response = await databaseService.updateTeacherData(
-        userID: user.value!.id,
-        description: description,
-        uploadsCount: uploadsCount);
+    Document? document;
+    try {
+      document = await databaseService.updateTeacherData(
+          userID: user.value!.id, description: description);
 
-    //close loading indicator
-    Get.back();
+      //close loading indicator
+      Get.back();
 
-    //handle possible errors
-    if (response == null && context.mounted) {
-      AppwriteHelpers.showSomethingWentWorng(context);
-      return false;
-    } else {
-      teacher.value = TeacherModel.fromMap(response!.data);
-      return true;
+      //handle possible errors
+      if (document == null && context.mounted) {
+        AppwriteHelpers.showSomethingWentWorng(context);
+        return document;
+      } else {
+        teacher.value = TeacherModel.fromMap(document!.data);
+        return document;
+      }
+    } catch (_) {
+      if (context.mounted) {
+        AppwriteHelpers.showSomethingWentWorng(context);
+        return document;
+      }
     }
+    return document;
   }
 
   incrementTeacherUploads() {
@@ -132,7 +153,7 @@ class UserController extends GetxController {
     update();
   }
 
-  deleteUser(BuildContext context) async {
+  Future<void> deleteUser(BuildContext context) async {
     DatabaseService databaseService = DatabaseService();
 
     //start loading indicator
@@ -140,11 +161,12 @@ class UserController extends GetxController {
       barrierDismissible: false,
       context: context,
       builder: (context) => const Scaffold(
+        backgroundColor: Colors.transparent,
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CircularProgressIndicator(),
+              SpinningLogo(),
               SizedBox(height: 16.0),
               Text("DELETING ACCOUNT..."),
             ],
@@ -153,13 +175,25 @@ class UserController extends GetxController {
       ),
     );
 
-    final response = await databaseService.deleteUserWithAllRelatedData();
+    try {
+      final String response =
+          await databaseService.deleteUserWithAllRelatedData();
 
-    Get.back();
+      if (response == "completed") {
+        clearUserData();
+        AuthenticationService authenticationService = Get.find();
+        authenticationService.clearAuthStatus();
+      }
 
-    print("==================");
-    print(response);
-    print("==================");
+      // close the loading indicator.
+      Get.back();
+    } catch (_) {
+      //close the loading indicator.
+      Get.back();
+      if (context.mounted) {
+        AppwriteHelpers.showSomethingWentWorng(context);
+      }
+    }
   }
 
 // SIGN OUT
@@ -171,22 +205,17 @@ class UserController extends GetxController {
       barrierDismissible: false,
       context: context,
       builder: (context) => const Center(
-        child: CircularProgressIndicator(),
+        child: SpinningLogo(),
       ),
     );
 
-    int response = await authController.signOut().then(
-      (value) {
-        if (value == 200) {
-          authController.loadUser();
-          // Get.delete<UserController>();
-          Get.back();
-          return 200;
-        } else {
-          return 401;
-        }
-      },
-    );
+    late int response;
+    try {
+      response = await authController.signOut();
+    } catch (_) {
+      response = 401;
+    }
+    print(response);
 
     //close loading indicator
     Get.back();
@@ -195,6 +224,13 @@ class UserController extends GetxController {
     if (response != 200 && context.mounted) {
       AppwriteHelpers.handleAppwriteExceptions(response, context);
     }
-    return response;
+
+    if (response == 200) {
+      authController.loadUser();
+      Get.back();
+      return 200;
+    } else {
+      return 401;
+    }
   }
 }

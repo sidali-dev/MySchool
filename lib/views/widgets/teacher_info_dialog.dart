@@ -13,13 +13,13 @@ import '../../utils/constants/colors.dart';
 class TeacherInfoDialog extends StatelessWidget {
   final String email;
   final String password;
-  TeacherInfoDialog({
+  const TeacherInfoDialog({
     super.key,
     required this.email,
     required this.password,
   });
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -248,7 +248,7 @@ class TeacherInfoDialog extends StatelessWidget {
                                     showDialog(
                                       context: context,
                                       builder: (context) => SignInDialog(
-                                        role: Role.student,
+                                        role: RoleEnum.student,
                                       ).animate().slideX(
                                           begin: -1,
                                           end: 0,

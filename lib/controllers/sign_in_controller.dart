@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:myschool/services/authentication_service.dart';
 import 'package:myschool/utils/constants/enums.dart';
 import 'package:myschool/utils/helpers/appwrite_helpers.dart';
+import 'package:myschool/views/widgets/spinning_logo.dart';
 
 class SignInController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -85,14 +86,14 @@ class SignInController extends GetxController
       {required BuildContext context,
       required String email,
       required String password,
-      required Role role}) async {
+      required RoleEnum role}) async {
     AuthenticationService authController = Get.find<AuthenticationService>();
 
     //start loading indicator
     showDialog(
       context: context,
       builder: (context) => const Center(
-        child: CircularProgressIndicator(),
+        child: SpinningLogo(),
       ),
     );
 
@@ -126,7 +127,7 @@ class SignInController extends GetxController
       barrierDismissible: false,
       context: context,
       builder: (context) => const Center(
-        child: CircularProgressIndicator(),
+        child: SpinningLogo(),
       ),
     );
 

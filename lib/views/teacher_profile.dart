@@ -8,15 +8,19 @@ import 'package:myschool/utils/constants/image_strings.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
 import 'package:myschool/views/materials_screen.dart';
 import 'package:myschool/views/widgets/profile_picture.dart';
+import 'package:myschool/views/widgets/spinning_logo.dart';
 
 import '../controllers/activities_controller.dart';
 import '../controllers/home_controller.dart';
 import '../controllers/user_controller.dart';
 import '../controllers/youtube_player_screen_controller.dart';
+import '../generated/l10n.dart';
 import '../utils/constants/colors.dart';
 import '../utils/constants/enums.dart';
 import 'pdf_preview_screen.dart';
 import 'widgets/animation/auto_scrolling_text.dart';
+import 'widgets/empty_screen.dart';
+import 'widgets/error_screen.dart';
 import 'widgets/squar_button.dart';
 import 'youtube_player_screen.dart';
 
@@ -41,9 +45,9 @@ class TeacherProfile extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Teacher's profile",
-          style: TextStyle(fontSize: 24),
+        title: Text(
+          S.of(context).teacher_profile,
+          style: const TextStyle(fontSize: 24),
         ),
         centerTitle: true,
         iconTheme: IconThemeData(color: isDark ? Colors.white : Colors.black),
@@ -63,6 +67,17 @@ class TeacherProfile extends StatelessWidget {
                 angle: 0.2,
                 child: Image.asset(
                   SImageString.activityExams,
+                  height: 100,
+                ),
+              ),
+            ),
+            Positioned(
+              top: 20,
+              left: -10,
+              child: Transform.rotate(
+                angle: -0.2,
+                child: Image.asset(
+                  SImageString.activityExercises,
                   height: 100,
                 ),
               ),
@@ -92,7 +107,7 @@ class TeacherProfile extends StatelessWidget {
                       color: Colors.grey),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 32),
+                const SizedBox(height: 24),
                 FutureBuilder(
                   future: controller.getTeacherAssets(
                     level: userController.student.value!.level.toString(),
@@ -101,27 +116,25 @@ class TeacherProfile extends StatelessWidget {
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(
-                        child: CircularProgressIndicator(),
+                        child: SpinningLogo(),
                       );
                     }
 
                     if (snapshot.connectionState == ConnectionState.done) {
-                      if (snapshot.hasError) {
-                        return Center(
-                          child: Text(snapshot.error.toString()),
-                        );
+                      if (snapshot.hasError || snapshot.data == -1) {
+                        return ErrorScreen(
+                            isDark: isDark, showLogo: false, onTap: null);
                       }
 
                       if (controller.assetsbyModuleThanActivity.isEmpty) {
-                        return const Center(
-                          child: Text("No activities found"),
-                        );
+                        return const EmptyScreen();
                       } else {
                         return DefaultTabController(
                           length: controller.assetsbyModuleThanActivity.length,
                           child: Column(
                             children: [
                               TabBar(
+                                tabAlignment: TabAlignment.center,
                                 isScrollable: true,
                                 labelColor:
                                     isDark ? Colors.white : Colors.black,
@@ -162,7 +175,7 @@ class TeacherProfile extends StatelessWidget {
                                                 const SliverGridDelegateWithFixedCrossAxisCount(
                                               crossAxisCount: 2,
                                               crossAxisSpacing: 32,
-                                              mainAxisSpacing: 24,
+                                              mainAxisSpacing: 32,
                                             ),
                                             itemCount: moduleActivities.length,
                                             itemBuilder: (context, index) {

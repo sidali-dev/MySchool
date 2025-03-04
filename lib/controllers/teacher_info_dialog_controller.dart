@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:myschool/services/database_service.dart';
 import 'package:myschool/utils/constants/enums.dart';
+import 'package:myschool/views/widgets/spinning_logo.dart';
 
 import '../utils/helpers/appwrite_helpers.dart';
 
@@ -87,18 +88,15 @@ class TeacherInfoDialogController extends GetxController
       barrierDismissible: false,
       context: context,
       builder: (context) => const Center(
-        child: CircularProgressIndicator(),
+        child: SpinningLogo(),
       ),
     );
 
     //add user data to database
     DatabaseService databaseService = DatabaseService();
     Document? document = await databaseService
-        .addUser(name: name.trim(), role: Role.teacher)
-        .then((value) async {
-      await Future.delayed(const Duration(seconds: 1));
-      return value;
-    }).then(
+        .addUser(name: name.trim(), role: RoleEnum.teacher)
+        .then(
       (value) async {
         return await databaseService.addTeacherData(
           userID: value!.$id,

@@ -15,13 +15,14 @@ import 'branch_dialog.dart';
 class LevelDialog extends StatelessWidget {
   final String email;
   final String password;
-  LevelDialog({
+
+  const LevelDialog({
     super.key,
     required this.email,
     required this.password,
   });
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -281,7 +282,7 @@ class LevelDialog extends StatelessWidget {
                                     showDialog(
                                       context: context,
                                       builder: (context) => SignInDialog(
-                                        role: Role.student,
+                                        role: RoleEnum.student,
                                       ).animate().slideX(
                                           begin: -1,
                                           end: 0,

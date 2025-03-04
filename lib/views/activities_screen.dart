@@ -111,9 +111,10 @@ class ActivitiesScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                  const Text(
-                    "Lorem ipsum some things i don't know",
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 22),
+                  Text(
+                    S.of(context).choose_material_type,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w600, fontSize: 22),
                   ),
                   GridView.builder(
                     physics: const NeverScrollableScrollPhysics(),
