@@ -510,11 +510,14 @@ class UploadScreen extends StatelessWidget {
                                 if (activityEnum == ActivityEnum.videos) {
                                   fileUrl = controller.videoLinkController.text;
                                 } else if (controller.isFileSelected.value) {
+                                  UserController userController = Get.find();
                                   appwrite.File? uploadedFile =
                                       await controller.uploadFile(
                                           filePath: controller.file!.path,
                                           fileName:
                                               controller.titleController.text,
+                                          userId:
+                                              userController.teacher.value!.id,
                                           context: context);
 
                                   if (uploadedFile != null) {

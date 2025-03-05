@@ -134,6 +134,7 @@ class UploadScreenController extends GetxController
     required String filePath,
     required String fileName,
     required BuildContext context,
+    required String userId,
   }) async {
     //start loading indicator
     showDialog(
@@ -147,7 +148,7 @@ class UploadScreenController extends GetxController
     //start uploading the file
     DatabaseService databaseService = DatabaseService();
     appwrite.File? file = await databaseService.uploadFile(
-        filePath: filePath, fileName: fileName);
+        userId: userId, filePath: filePath, fileName: fileName);
 
     //close loading indicator
     Get.back();

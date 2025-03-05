@@ -263,12 +263,15 @@ class DatabaseService {
   }
 
   Future<File?> uploadFile(
-      {required String filePath, required String fileName}) async {
+      {required String filePath,
+      required String fileName,
+      required String userId}) async {
     try {
       File result = await _storage.createFile(
         bucketId: dotenv.get("APPWRITE_STORAGE_BUCKET"),
         fileId: ID.unique(),
         file: InputFile.fromPath(path: filePath, filename: fileName),
+        permissions: [Permission.delete(Role.user(userId))],
       );
       return result;
     } catch (e) {
@@ -303,10 +306,7 @@ class DatabaseService {
         bucketId: dotenv.get("APPWRITE_STROAGE_IMAGES"),
         fileId: ID.unique(),
         file: InputFile.fromPath(path: image.path),
-        permissions: [
-          Permission.write(Role.user(teacherId)),
-          Permission.delete(Role.user(teacherId))
-        ],
+        permissions: [Permission.delete(Role.user(teacherId))],
       );
       print("PHOTO UPLOADED SUCCESSFULLY");
 
