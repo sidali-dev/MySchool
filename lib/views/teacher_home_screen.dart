@@ -146,6 +146,22 @@ class TeacherHomeScreen extends StatelessWidget {
                       child: Text(S.of(context).video),
                     ),
                   ),
+                  const SizedBox(height: 48),
+                  ElevatedButton(
+                    onPressed: () {
+                      Get.to(
+                          () => UploadScreen(
+                                activityEnum: ActivityEnum.finals,
+                                canHaveSolution: true,
+                                title: "UPLOAD NEW FINAL",
+                                themeColor: Colors.amber,
+                              ),
+                          transition: Transition.rightToLeft);
+                    },
+                    child: const Center(
+                      child: Text("BAC"),
+                    ),
+                  ),
                   const SizedBox(height: 32),
                 ],
               ),

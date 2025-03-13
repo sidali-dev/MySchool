@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         builder: (controller) {
           if (controller.authStatus == AuthStatus.unauthenticated) {
             return const IntroScreen();
-          } else if (controller.authStatus == AuthStatus.authenticated) {
+          } else {
             return Builder(
               builder: (context) => FutureBuilder(
                 future: userController.loadUpUser(context),
@@ -78,12 +78,6 @@ class MyApp extends StatelessWidget {
                     ),
                   );
                 },
-              ),
-            );
-          } else {
-            return const Scaffold(
-              body: Center(
-                child: SpinningLogo(),
               ),
             );
           }

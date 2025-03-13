@@ -11,6 +11,7 @@ import 'package:appwrite/models.dart' as appwrite;
 import 'package:myschool/controllers/home_controller.dart';
 import 'package:myschool/controllers/user_controller.dart';
 import 'package:myschool/models/modules.dart';
+import 'package:myschool/services/authentication_service.dart';
 import 'package:myschool/utils/helpers/appwrite_helpers.dart';
 
 import '../controllers/upload_screen_controller.dart';
@@ -190,13 +191,16 @@ class UploadScreen extends StatelessWidget {
                               (e) => DropdownMenuItem(
                                 value: e,
                                 child: Text(
-                                  e.toString(),
+                                  controller.getLevelTitle(e, context),
                                 ),
                               ),
                             )
                             .toList(),
                         onChanged: (value) {
-                          controller.changeLevel(value!);
+                          if (value! != controller.selectedLevel.value) {
+                            controller.selectedBranches.clear();
+                          }
+                          controller.changeLevel(value);
                         },
                       ),
                       if (controller.selectedLevel.value >= 10)
@@ -299,7 +303,8 @@ class UploadScreen extends StatelessWidget {
                                       vertical: 16,
                                     ),
                                     child: Text(
-                                      module.module.name,
+                                      HomeController().getModuleTitle(
+                                          context, module.module),
                                       style: TextStyle(
                                         color:
                                             controller.selectedModule.value ==
@@ -503,6 +508,42 @@ class UploadScreen extends StatelessWidget {
                             side: BorderSide(color: themeColor),
                           ),
                           onPressed: () async {
+                            AuthenticationService authStatusController =
+                                Get.find();
+                            if (authStatusController.authStatus !=
+                                AuthStatus.emailVerified) {
+                              if (context.mounted) {
+                                SHelperFunctions.showAwesomeSnackBar(
+                                    title: S.of(context).teacher_not_verified,
+                                    content:
+                                        S.of(context).please_wait_verification,
+                                    contentType: ContentType.failure,
+                                    context: context);
+                              }
+                              return;
+                            }
+                            if (controller.selectedModule.value == "") {
+                              if (context.mounted) {
+                                SHelperFunctions.showAwesomeSnackBar(
+                                    title: S.of(context).select_subject,
+                                    content: S.of(context).select_subject_file,
+                                    contentType: ContentType.failure,
+                                    context: context);
+                              }
+                              return;
+                            }
+                            if (controller.selectedLevel > 9 &&
+                                controller.selectedBranches.isEmpty) {
+                              if (context.mounted) {
+                                SHelperFunctions.showAwesomeSnackBar(
+                                    title: S.of(context).select_branch,
+                                    content: S.of(context).select_level_branch,
+                                    contentType: ContentType.failure,
+                                    context: context);
+                              }
+                              return;
+                            }
+
                             if (_formKey.currentState!.validate()) {
                               if (context.mounted) {
                                 String fileUrl = '';
@@ -525,6 +566,7 @@ class UploadScreen extends StatelessWidget {
                                     fileUrl = AppwriteHelpers.getFileUrl(
                                         uploadedFile.$id);
                                   } else {
+                                    print("File is null==============");
                                     if (context.mounted) {
                                       AppwriteHelpers.showSomethingWentWorng(
                                           context);

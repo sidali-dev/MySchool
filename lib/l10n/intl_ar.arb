@@ -83,7 +83,7 @@
     "pick_branch" : "اختر شعبة",
     "update_branch" : "تحديث الشعبة",
     "branch" : "الشعبة",
-    "preferences" : "التفضيلات",
+    "prefernces" : "التفضيلات",
     "language" : "اللغة",
     "dark_mode" : "الوضع الليلي",
     "notifications" : "الإشعارات",
@@ -159,7 +159,13 @@
     "other_videos": "فيديوهات أخرى من",
     "no_other_videos": "لا توجد فيديوهات أخرى",
     "feels_empty": "هذا المكان يبدو فارغًا",
-    "try_again_caps": "حاول مرة أخرى"
+    "try_again_caps": "حاول مرة أخرى",
+    "teacher_not_verified": "المعلم غير موثق",
+    "please_wait_verification": "يرجى الانتظار حتى يتم توثيق حسابك من قبل المسؤول",
+    "select_subject": "الرجاء اختيار المادة",  
+    "select_subject_file": "حدد المادة الخاصة بالملف",  
+    "select_branch": "الرجاء اختيار التخصص",  
+    "select_level_branch": "حدد تخصصات المستوى"
 
 
 }

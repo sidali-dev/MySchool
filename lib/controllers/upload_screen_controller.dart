@@ -6,6 +6,7 @@ import 'package:appwrite/models.dart' as appwrite;
 import 'package:myschool/models/asset_model.dart';
 import 'package:myschool/views/widgets/spinning_logo.dart';
 
+import '../generated/l10n.dart';
 import '../models/teacher_model.dart';
 import '../services/database_service.dart';
 import '../utils/constants/enums.dart';
@@ -104,6 +105,37 @@ class UploadScreenController extends GetxController
           .name;
     } else {
       return null;
+    }
+  }
+
+  getLevelTitle(int level, BuildContext context) {
+    switch (level) {
+      case 1:
+        return S.of(context).ap1;
+      case 2:
+        return S.of(context).ap2;
+      case 3:
+        return S.of(context).ap3;
+      case 4:
+        return S.of(context).ap4;
+      case 5:
+        return S.of(context).ap5;
+      case 6:
+        return S.of(context).cem1;
+      case 7:
+        return S.of(context).cem2;
+      case 8:
+        return S.of(context).cem3;
+      case 9:
+        return S.of(context).cem4;
+      case 10:
+        return S.of(context).lycee1;
+      case 11:
+        return S.of(context).lycee2;
+      case 12:
+        return S.of(context).lycee3;
+      default:
+        return "Niveau inconnu";
     }
   }
 

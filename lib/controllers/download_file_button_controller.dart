@@ -35,9 +35,8 @@ class DownloadController extends GetxController {
     isDownloading.value = true;
     try {
       await FileDownloader.downloadFile(
-        url: fileUrl,
         fileName: fileName,
-        fileID: fileID,
+        fileId: fileID,
         context: Get.context!,
       );
       // Re-check status after download

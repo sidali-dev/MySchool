@@ -83,7 +83,7 @@
         "pick_branch" : "Choisir une branche",
         "update_branch" : "MISE À JOUR DE LA BRANCHE",
         "branch" : "Branche",
-        "preferences" : "Préférences",
+        "prefernces" : "Préférences",
         "language" : "Langues",
         "dark_mode" : "Mode sombre",
         "notifications" : "Notifications",
@@ -159,9 +159,12 @@
         "other_videos": "Autres vidéos de",
         "no_other_videos": "Aucune autre vidéo",
         "feels_empty": "Cet endroit semble vide",
-        "try_again_caps": "ESSAYEZ À NOUVEAU"
-
-
-
+        "try_again_caps": "ESSAYEZ À NOUVEAU",        
+        "teacher_not_verified": "Enseignant non vérifié",
+        "please_wait_verification": "Veuillez patienter jusqu'à ce que votre compte soit vérifié par l'administrateur",
+        "select_subject": "Veuillez sélectionner une matière",  
+        "select_subject_file": "Sélectionnez le sujet du fichier",  
+        "select_branch": "Veuillez sélectionner une branche",  
+        "select_level_branch": "Sélectionnez les branches du niveau"
 }
     

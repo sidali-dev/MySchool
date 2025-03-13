@@ -44,6 +44,7 @@ class AuthenticationService extends GetxController {
   void loadUser() async {
     try {
       final user = await account.get();
+      print(user.emailVerification);
       if (user.emailVerification) {
         _status = AuthStatus.emailVerified;
         _currentUser = user;
@@ -85,7 +86,11 @@ class AuthenticationService extends GetxController {
       await account.createEmailPasswordSession(
           email: email, password: password);
       _currentUser = await account.get();
-      _status = AuthStatus.authenticated;
+      if (_currentUser.emailVerification) {
+        _status = AuthStatus.emailVerified;
+      } else {
+        _status = AuthStatus.authenticated;
+      }
       return 200;
     } on AppwriteException catch (e) {
       return e.code!;

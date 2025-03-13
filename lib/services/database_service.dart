@@ -267,14 +267,21 @@ class DatabaseService {
       required String fileName,
       required String userId}) async {
     try {
+      String fileExtension = filePath.split('.').last;
       File result = await _storage.createFile(
         bucketId: dotenv.get("APPWRITE_STORAGE_BUCKET"),
         fileId: ID.unique(),
-        file: InputFile.fromPath(path: filePath, filename: fileName),
+        file: InputFile.fromPath(
+            path: filePath, filename: "$fileName.$fileExtension"),
         permissions: [Permission.delete(Role.user(userId))],
       );
       return result;
     } catch (e) {
+      print("======================================");
+      print(e);
+      print(filePath);
+      print(fileName);
+      print("======================================");
       File? file;
       return file;
     }
@@ -347,7 +354,7 @@ class DatabaseService {
       document = await _databases.createDocument(
           databaseId: dotenv.get("APPWRITE_DB_ID"),
           collectionId: dotenv.get("APPWRITE_DB_ASSETS"),
-          documentId: asset.id!,
+          documentId: asset.id == "" ? ID.unique() : asset.id!,
           data: {
             "file_link": asset.fileLink,
             "title": asset.title,
@@ -483,5 +490,23 @@ class DatabaseService {
       print(e);
       return false;
     }
+  }
+
+  Future<Uint8List> getFilePreview(String fileId) async {
+    final response = await Storage(client).getFileView(
+      bucketId: dotenv.get("APPWRITE_STORAGE_BUCKET"),
+      fileId: fileId,
+    );
+
+    return response;
+  }
+
+  Future<Uint8List> downloadFilePreview(String fileId) async {
+    final response = await Storage(client).getFileDownload(
+      bucketId: dotenv.get("APPWRITE_STORAGE_BUCKET"),
+      fileId: fileId,
+    );
+
+    return response;
   }
 }

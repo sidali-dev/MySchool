@@ -29,7 +29,6 @@ dependencies:
   carousel_slider: ^5.0.0
   file_picker: ^8.1.4
   syncfusion_flutter_pdfviewer: ^27.2.5
-  dio: ^5.8.0+1
   path_provider: ^2.1.4
   permission_handler: ^11.3.1
   youtube_player_iframe: ^5.2.1
@@ -55,6 +54,7 @@ flutter_launcher_icons:
 flutter:
 
   uses-material-design: true
+  generate: true
 
   #------------- LOCAL ASSETS -------------#
   assets:

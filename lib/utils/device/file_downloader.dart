@@ -1,26 +1,24 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:typed_data';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myschool/services/database_service.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../generated/l10n.dart';
 
 class FileDownloader {
   static Future<void> downloadFile({
-    required String url,
-    required String fileName,
     required BuildContext context,
-    required String fileID,
+    required String fileId,
+    required String fileName,
   }) async {
     try {
-      // Get the downloads directory path
       final directory = await getApplicationDocumentsDirectory();
-      final String savePath = '${directory.path}/$fileName-$fileID';
+      final String savePath = '${directory.path}/$fileName-$fileId';
 
-      // Show progress dialog
       if (context.mounted) {
         showDialog(
           context: context,
@@ -36,83 +34,36 @@ class FileDownloader {
                   ),
                 ),
                 const SizedBox(height: 16),
-                StreamBuilder<double>(
-                  stream: _downloadProgressStream(url, savePath),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
-                    }
-                    if (!snapshot.hasData) {
-                      return Text(S.of(context).start_download);
-                    }
-                    final progress = snapshot.data ?? 0.0;
-                    return Text('${(progress * 100).toStringAsFixed(1)}%');
-                  },
-                ),
+                Text(S.of(context).downloading),
               ],
             ),
           ),
         );
       }
+      DatabaseService databaseService = DatabaseService();
 
-      // Wait for the download to complete
-      await _downloadFileWithProgress(url, savePath);
+      // Get file data from Appwrite
+      final Uint8List fileData = await databaseService.downloadFilePreview(
+        fileId,
+      );
 
-      // Close the dialog
+      // Save to local file
+      final File file = File(savePath);
+      await file.writeAsBytes(fileData);
+
       Get.back();
     } catch (e) {
-      print("===FILE: FILE_DOWNLOADER===");
+      print("===FILE DOWNLOAD ERROR===");
       print(e);
+      Get.back();
+      // Add error handling snackbar/notification here
     }
-  }
-
-  static Stream<double> _downloadProgressStream(
-    String url,
-    String savePath,
-  ) async* {
-    final Dio dio = Dio();
-    final StreamController<double> controller =
-        StreamController<double>.broadcast();
-
-    final cancelToken = CancelToken();
-    dio.download(
-      url,
-      savePath,
-      cancelToken: cancelToken,
-      onReceiveProgress: (received, total) {
-        if (total != -1) {
-          final progress = received / total;
-          controller.add(progress);
-        }
-      },
-    ).whenComplete(() => controller.close());
-
-    await for (final progress in controller.stream) {
-      yield progress;
-    }
-  }
-
-  static Future<void> _downloadFileWithProgress(
-    String url,
-    String savePath,
-  ) async {
-    final Dio dio = Dio();
-    await dio.download(
-      url,
-      savePath,
-      onReceiveProgress: (received, total) {
-        if (total != -1) {
-          print('Progress: ${(received / total * 100).toStringAsFixed(1)}%');
-        }
-      },
-    );
   }
 
   static Future<Map<String, dynamic>> isFileDownLoaded(
-      String fileName, String fileID) async {
+      String fileName, String fileId) async {
     final Directory directory = await getApplicationDocumentsDirectory();
-    final String savePath = '${directory.path}/$fileName-$fileID';
-
+    final String savePath = '${directory.path}/$fileName-$fileId';
     final File existingFile = File(savePath);
     return {"isDownloaded": await existingFile.exists(), "path": savePath};
   }

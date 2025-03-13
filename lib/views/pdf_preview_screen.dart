@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:myschool/models/asset_model.dart';
+import 'package:myschool/services/database_service.dart';
 import 'package:myschool/utils/device/file_downloader.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
 import 'package:myschool/views/widgets/spinning_logo.dart';
@@ -46,15 +48,34 @@ class PdfPreviewScreen extends StatelessWidget {
                         context: context),
               );
             } else {
-              return SfPdfViewer.network(
-                enableTextSelection: false,
-                assetModel.fileLink,
-                onDocumentLoadFailed: (PdfDocumentLoadFailedDetails details) =>
-                    SHelperFunctions.showAwesomeSnackBar(
+              DatabaseService databaseService = DatabaseService();
+              return FutureBuilder<Uint8List>(
+                future: databaseService.getFilePreview(assetModel.id!),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: SpinningLogo(),
+                    );
+                  }
+                  if (snapshot.hasData && snapshot.data!.isEmpty) {
+                    return SHelperFunctions.showAwesomeSnackBar(
                         title: S.of(context).failed_load_file,
-                        content: S.of(context).check_internet_connection,
+                        content: S.of(context).something_went_wrong,
                         contentType: ContentType.failure,
-                        context: context),
+                        context: context);
+                  }
+                  return SfPdfViewer.memory(
+                    snapshot.data!,
+                    enableTextSelection: false,
+                    onDocumentLoadFailed:
+                        (PdfDocumentLoadFailedDetails details) =>
+                            SHelperFunctions.showAwesomeSnackBar(
+                                title: S.of(context).failed_load_file,
+                                content: S.of(context).something_went_wrong,
+                                contentType: ContentType.failure,
+                                context: context),
+                  );
+                },
               );
             }
           }
