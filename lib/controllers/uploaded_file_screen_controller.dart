@@ -44,7 +44,6 @@ class UploadedFileScreenController extends GetxController {
     final bool isSuccess =
         await databaseService.deleteFileFromDatabase(id).then(
       (value) async {
-        print("database: $value");
         if (value == true) {
           return await databaseService.deleteFileFromStorage(id);
         } else {
@@ -52,8 +51,6 @@ class UploadedFileScreenController extends GetxController {
         }
       },
     );
-
-    print("storage: $isSuccess");
 
     //close loading indicator
     Get.back();
@@ -94,8 +91,6 @@ class UploadedFileScreenController extends GetxController {
 
     //delete file from database and storage
     final bool isSuccess = await databaseService.deleteFileFromDatabase(id);
-
-    print("storage: $isSuccess");
 
     //close loading indicator
     Get.back();

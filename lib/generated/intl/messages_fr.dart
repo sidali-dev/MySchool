@@ -31,6 +31,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_profile_pic": MessageLookupByLibrary.simpleMessage(
       "Ajouter une photo de profil",
     ),
+    "adding_content_soon": MessageLookupByLibrary.simpleMessage(
+      "Ne vous inquiétez pas, nous travaillons dur pour ajouter plus de contenu bientôt !",
+    ),
     "already_downloaded": MessageLookupByLibrary.simpleMessage(
       "DÉJÀ TÉLÉCHARGÉ",
     ),
@@ -41,6 +44,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "arabic": MessageLookupByLibrary.simpleMessage("Arabe"),
     "become_teacher": MessageLookupByLibrary.simpleMessage(
       "Devenez un enseignant",
+    ),
+    "book_not_added": MessageLookupByLibrary.simpleMessage(
+      "LIVRE PAS ENCORE AJOUTÉ",
     ),
     "branch": MessageLookupByLibrary.simpleMessage("Branche"),
     "cancel": MessageLookupByLibrary.simpleMessage("Annuler"),
@@ -174,6 +180,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "next": MessageLookupByLibrary.simpleMessage("SUIVANT"),
     "no": MessageLookupByLibrary.simpleMessage("Non"),
     "no_branch": MessageLookupByLibrary.simpleMessage("Aucune branche"),
+    "no_content_available": MessageLookupByLibrary.simpleMessage(
+      "Aucun contenu disponible",
+    ),
     "no_other_videos": MessageLookupByLibrary.simpleMessage(
       "Aucune autre vidéo",
     ),
@@ -279,6 +288,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "title": MessageLookupByLibrary.simpleMessage("Titre"),
     "trimester": MessageLookupByLibrary.simpleMessage("Trimestre"),
     "try_again_caps": MessageLookupByLibrary.simpleMessage("ESSAYEZ À NOUVEAU"),
+    "try_again_later": MessageLookupByLibrary.simpleMessage(
+      "Réessayez plus tard",
+    ),
     "update_avatar_caps": MessageLookupByLibrary.simpleMessage(
       "METTRE À JOUR L\'AVATAR",
     ),
@@ -324,6 +336,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "welcome": MessageLookupByLibrary.simpleMessage("Bienvenue"),
     "what_are_you_sharing": MessageLookupByLibrary.simpleMessage(
       "Que partagerez-vous aujourd\'hui ?",
+    ),
+    "working_on_adding_it": MessageLookupByLibrary.simpleMessage(
+      "Nous travaillons dur pour l\'ajouter bientôt",
     ),
     "yes": MessageLookupByLibrary.simpleMessage("Oui"),
   };

@@ -566,7 +566,6 @@ class UploadScreen extends StatelessWidget {
                                     fileUrl = AppwriteHelpers.getFileUrl(
                                         uploadedFile.$id);
                                   } else {
-                                    print("File is null==============");
                                     if (context.mounted) {
                                       AppwriteHelpers.showSomethingWentWorng(
                                           context);

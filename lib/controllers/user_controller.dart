@@ -141,14 +141,12 @@ class UserController extends GetxController {
 
   incrementTeacherUploads() {
     teacher.value!.uploadsCount++;
-    print("INCREMENTED");
 
     update();
   }
 
   decrementTeacherUploads() {
     teacher.value!.uploadsCount--;
-    print("DECREMENTED");
 
     update();
   }
@@ -215,7 +213,6 @@ class UserController extends GetxController {
     } catch (_) {
       response = 401;
     }
-    print(response);
 
     //close loading indicator
     Get.back();

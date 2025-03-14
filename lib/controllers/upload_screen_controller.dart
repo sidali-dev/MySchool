@@ -151,7 +151,10 @@ class UploadScreenController extends GetxController
         id: id,
         fileLink: fileLink,
         title: titleController.text,
-        trimester: selectedTrimester.value.toString(),
+        trimester: documentType == ActivityEnum.schoolBook ||
+                documentType == ActivityEnum.finals
+            ? null
+            : selectedTrimester.value.toString(),
         hasSolution: hasSolution,
         documentType: documentType,
         module: module,

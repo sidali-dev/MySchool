@@ -53,8 +53,6 @@ class FileDownloader {
 
       Get.back();
     } catch (e) {
-      print("===FILE DOWNLOAD ERROR===");
-      print(e);
       Get.back();
       // Add error handling snackbar/notification here
     }

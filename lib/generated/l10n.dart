@@ -1289,6 +1289,56 @@ class S {
       args: [],
     );
   }
+
+  /// `No content available`
+  String get no_content_available {
+    return Intl.message(
+      'No content available',
+      name: 'no_content_available',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don’t worry, we’re working hard to add more content soon!`
+  String get adding_content_soon {
+    return Intl.message(
+      'Don’t worry, we’re working hard to add more content soon!',
+      name: 'adding_content_soon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Try again later`
+  String get try_again_later {
+    return Intl.message(
+      'Try again later',
+      name: 'try_again_later',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `BOOK NOT ADDED YET`
+  String get book_not_added {
+    return Intl.message(
+      'BOOK NOT ADDED YET',
+      name: 'book_not_added',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Were working hard to add it soon`
+  String get working_on_adding_it {
+    return Intl.message(
+      'Were working hard to add it soon',
+      name: 'working_on_adding_it',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

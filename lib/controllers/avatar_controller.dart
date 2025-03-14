@@ -30,9 +30,6 @@ class AvatarController extends GetxController {
     if (userController.student.value!.avatarId != null) {
       selectedAvatar.value = avatars.firstWhere(
           (element) => element.id == userController.student.value!.avatarId);
-
-      print("===================");
-      print(selectedAvatar.value!.id);
     }
   }
 

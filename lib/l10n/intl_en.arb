@@ -165,7 +165,12 @@
     "select_subject" : "Please Select Subject",
     "select_subject_file" : "Select the Subject of the file",
     "select_branch" : "Please Select Branch",
-    "select_level_branch" : "Select the branches of the level"
+    "select_level_branch" : "Select the branches of the level",
+    "no_content_available" : "No content available",
+    "adding_content_soon" : "Don’t worry, we’re working hard to add more content soon!",
+    "try_again_later" : "Try again later",
+    "book_not_added" : "BOOK NOT ADDED YET",
+    "working_on_adding_it" : "Were working hard to add it soon"
 
 
 

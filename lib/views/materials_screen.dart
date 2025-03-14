@@ -12,6 +12,7 @@ import 'package:myschool/views/pdf_preview_screen.dart';
 import 'package:myschool/views/teacher_profile.dart';
 import 'package:myschool/views/widgets/download_file_button.dart';
 import 'package:myschool/views/widgets/error_screen.dart';
+import 'package:myschool/views/widgets/no_materials_screen.dart';
 import 'package:myschool/views/widgets/spinning_logo.dart';
 import 'package:myschool/views/youtube_player_screen.dart';
 
@@ -21,7 +22,6 @@ import '../utils/constants/colors.dart';
 import '../utils/device/device_utility.dart';
 import 'widgets/animation/auto_scrolling_text.dart';
 import 'widgets/bubble.dart';
-import 'widgets/empty_screen.dart';
 
 class MaterialsScreen extends StatelessWidget {
   MaterialsScreen({
@@ -160,7 +160,6 @@ class MaterialsScreen extends StatelessWidget {
                         module: module.module.name,
                         trimester: trimester.toString()),
                     builder: (context, snapshot) {
-                      print(snapshot.data);
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -263,7 +262,7 @@ class MaterialsScreen extends StatelessWidget {
                             ),
                           );
                         } else if (snapshot.data == 0) {
-                          return const EmptyScreen();
+                          return const NoMaterialsScreen();
                         } else {
                           return ErrorScreen(
                               isDark: isDark, showLogo: false, onTap: null);

@@ -151,14 +151,19 @@ class LevelDialog extends StatelessWidget {
                                       .then(
                                     (bool isSuccess) async {
                                       if (isSuccess) {
-                                        final response =
-                                            await controller.addCredentials(
-                                          context: context,
-                                          name: controller.nameController.text,
-                                          level:
-                                              controller.selectedLevel['level'],
-                                        );
-                                        return response;
+                                        if (context.mounted) {
+                                          final response =
+                                              await controller.addCredentials(
+                                            context: context,
+                                            name:
+                                                controller.nameController.text,
+                                            level: controller
+                                                .selectedLevel['level'],
+                                          );
+                                          return response;
+                                        } else {
+                                          return false;
+                                        }
                                       } else {
                                         controller.errorDialogAnimtion();
                                         controller.animationController
@@ -281,7 +286,7 @@ class LevelDialog extends StatelessWidget {
                                   if (context.mounted) {
                                     showDialog(
                                       context: context,
-                                      builder: (context) => SignInDialog(
+                                      builder: (context) => const SignInDialog(
                                         role: RoleEnum.student,
                                       ).animate().slideX(
                                           begin: -1,

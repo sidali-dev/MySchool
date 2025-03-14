@@ -4,6 +4,7 @@ class SImageString {
   //lottie animations
   static const emptyScreenAnimation = "assets/lottie/empty.json";
   static const errorAnimation = "assets/lottie/error.json";
+  static const booksAnimation = "assets/lottie/books.json";
 
   //modules images
   static const moduleGerman = "assets/images/modules/allmend.png";

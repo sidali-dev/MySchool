@@ -165,7 +165,13 @@
     "select_subject": "الرجاء اختيار المادة",  
     "select_subject_file": "حدد المادة الخاصة بالملف",  
     "select_branch": "الرجاء اختيار التخصص",  
-    "select_level_branch": "حدد تخصصات المستوى"
+    "select_level_branch": "حدد تخصصات المستوى",
+    "no_content_available": "لا يوجد محتوى متاح",
+    "adding_content_soon": "لا تقلق، نحن نعمل بجد لإضافة المزيد من المحتوى قريبًا!",
+    "try_again_later" : "حاول مرة أخرى لاحقًا",
+    "book_not_added": "الكتاب غير مضاف بعد",
+    "working_on_adding_it": "نحن نعمل بجد لإضافته قريبًا"
+
 
 
 }

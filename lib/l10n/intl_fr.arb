@@ -165,6 +165,12 @@
         "select_subject": "Veuillez sélectionner une matière",  
         "select_subject_file": "Sélectionnez le sujet du fichier",  
         "select_branch": "Veuillez sélectionner une branche",  
-        "select_level_branch": "Sélectionnez les branches du niveau"
+        "select_level_branch": "Sélectionnez les branches du niveau",
+        "no_content_available": "Aucun contenu disponible",
+        "adding_content_soon": "Ne vous inquiétez pas, nous travaillons dur pour ajouter plus de contenu bientôt !",
+        "try_again_later" : "Réessayez plus tard",
+        "book_not_added": "LIVRE PAS ENCORE AJOUTÉ",
+        "working_on_adding_it": "Nous travaillons dur pour l'ajouter bientôt"
+
 }
     

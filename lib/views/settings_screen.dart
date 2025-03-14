@@ -1012,7 +1012,6 @@ class StudentAvatarsBottomSheet extends StatelessWidget {
                           onTap: () {
                             avatarController
                                 .selectAvatar(avatarController.avatars[index]);
-                            print(avatarController.selectedAvatar.value);
                           },
                           child: Image.asset(
                             avatarController.avatars[index].image,

@@ -147,21 +147,37 @@ class TeacherHomeScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 48),
-                  ElevatedButton(
-                    onPressed: () {
-                      Get.to(
-                          () => UploadScreen(
-                                activityEnum: ActivityEnum.finals,
-                                canHaveSolution: true,
-                                title: "UPLOAD NEW FINAL",
-                                themeColor: Colors.amber,
-                              ),
-                          transition: Transition.rightToLeft);
-                    },
-                    child: const Center(
-                      child: Text("BAC"),
-                    ),
-                  ),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     Get.to(
+                  //         () => UploadScreen(
+                  //               activityEnum: ActivityEnum.schoolBook,
+                  //               canHaveSolution: false,
+                  //               title: "UPLOAD SCHOOL BOOK",
+                  //               themeColor: Colors.indigo,
+                  //             ),
+                  //         transition: Transition.rightToLeft);
+                  //   },
+                  //   child: Center(
+                  //     child: Text(S.of(context).school_book),
+                  //   ),
+                  // ),
+                  // const SizedBox(height: 48),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     Get.to(
+                  //         () => UploadScreen(
+                  //               activityEnum: ActivityEnum.finals,
+                  //               canHaveSolution: true,
+                  //               title: "UPLOAD NEW FINAL",
+                  //               themeColor: Colors.amber,
+                  //             ),
+                  //         transition: Transition.rightToLeft);
+                  //   },
+                  //   child: const Center(
+                  //     child: Text("BAC"),
+                  //   ),
+                  // ),
                   const SizedBox(height: 32),
                 ],
               ),

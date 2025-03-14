@@ -116,15 +116,19 @@ class BranchDialog extends StatelessWidget {
                                     .then(
                                   (bool value) async {
                                     if (value) {
-                                      bool isSuccess =
-                                          await controller.addCredentials(
-                                        context: context,
-                                        name: name,
-                                        level: level,
-                                        branch:
-                                            controller.selectedBranch['branch'],
-                                      );
-                                      return isSuccess;
+                                      if (context.mounted) {
+                                        bool isSuccess =
+                                            await controller.addCredentials(
+                                          context: context,
+                                          name: name,
+                                          level: level,
+                                          branch: controller
+                                              .selectedBranch['branch'],
+                                        );
+                                        return isSuccess;
+                                      } else {
+                                        return false;
+                                      }
                                     } else {
                                       return false;
                                     }

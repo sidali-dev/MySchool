@@ -31,6 +31,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_profile_pic": MessageLookupByLibrary.simpleMessage(
       "Add profile picture",
     ),
+    "adding_content_soon": MessageLookupByLibrary.simpleMessage(
+      "Don’t worry, we’re working hard to add more content soon!",
+    ),
     "already_downloaded": MessageLookupByLibrary.simpleMessage(
       "ALREADY DOWNLOADED",
     ),
@@ -41,6 +44,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "ap5": MessageLookupByLibrary.simpleMessage("5 Primary School"),
     "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
     "become_teacher": MessageLookupByLibrary.simpleMessage("Become a teacher"),
+    "book_not_added": MessageLookupByLibrary.simpleMessage(
+      "BOOK NOT ADDED YET",
+    ),
     "branch": MessageLookupByLibrary.simpleMessage("Branch"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cem1": MessageLookupByLibrary.simpleMessage("1 Middle School"),
@@ -169,6 +175,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "next": MessageLookupByLibrary.simpleMessage("NEXT"),
     "no": MessageLookupByLibrary.simpleMessage("No"),
     "no_branch": MessageLookupByLibrary.simpleMessage("No Branch"),
+    "no_content_available": MessageLookupByLibrary.simpleMessage(
+      "No content available",
+    ),
     "no_other_videos": MessageLookupByLibrary.simpleMessage("No other videos"),
     "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
     "other_videos": MessageLookupByLibrary.simpleMessage("Other videos by"),
@@ -264,6 +273,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "title": MessageLookupByLibrary.simpleMessage("Title"),
     "trimester": MessageLookupByLibrary.simpleMessage("Trimester"),
     "try_again_caps": MessageLookupByLibrary.simpleMessage("TRY AGAIN"),
+    "try_again_later": MessageLookupByLibrary.simpleMessage("Try again later"),
     "update_avatar_caps": MessageLookupByLibrary.simpleMessage("UPDATE AVATAR"),
     "update_branch": MessageLookupByLibrary.simpleMessage("UPDATE BRANCH"),
     "update_description": MessageLookupByLibrary.simpleMessage(
@@ -299,6 +309,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
     "what_are_you_sharing": MessageLookupByLibrary.simpleMessage(
       "What will you be sharing today?",
+    ),
+    "working_on_adding_it": MessageLookupByLibrary.simpleMessage(
+      "Were working hard to add it soon",
     ),
     "yes": MessageLookupByLibrary.simpleMessage("Yes"),
   };

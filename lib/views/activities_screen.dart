@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,7 @@ import 'package:myschool/utils/constants/enums.dart';
 import 'package:myschool/utils/constants/image_strings.dart';
 import 'package:myschool/utils/helpers/helper_functions.dart';
 import 'package:myschool/views/materials_screen.dart';
+import 'package:myschool/views/pdf_preview_screen.dart';
 import 'package:myschool/views/widgets/animation/auto_scrolling_text.dart';
 
 import '../utils/device/device_utility.dart';
@@ -132,7 +134,7 @@ class ActivitiesScreen extends StatelessWidget {
                         image: activity.imagePath,
                         title: ActivitiesController.getActivitiesTitle(
                             context, activity.activity),
-                        onTap: () {
+                        onTap: () async {
                           if (activity.activity == ActivityEnum.finals) {
                             Get.to(
                               () => MaterialsScreen(
@@ -150,6 +152,34 @@ class ActivitiesScreen extends StatelessWidget {
                             );
                           } else if (activity.activity ==
                               ActivityEnum.schoolBook) {
+                            final int code = await controller.getSchoolBook(
+                                context: context,
+                                module: module.module.name,
+                                activity: activity.activity.name);
+
+                            if (code == 0) {
+                              if (context.mounted) {
+                                SHelperFunctions.showAwesomeSnackBar(
+                                    title: S.of(context).book_not_added,
+                                    content: S.of(context).working_on_adding_it,
+                                    contentType: ContentType.help,
+                                    context: context);
+                              }
+                            } else if (code == -1) {
+                              if (context.mounted) {
+                                SHelperFunctions.showAwesomeSnackBar(
+                                    title: S.of(context).something_went_wrong,
+                                    content: S.of(context).try_again_later,
+                                    contentType: ContentType.failure,
+                                    context: context);
+                              }
+                            } else {
+                              Get.to(
+                                () => PdfPreviewScreen(
+                                    assetModel: controller.schoolBook!),
+                                transition: Transition.downToUp,
+                              );
+                            }
                           } else {
                             Get.bottomSheet(
                               BottomSheet(

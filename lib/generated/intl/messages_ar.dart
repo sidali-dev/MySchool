@@ -29,6 +29,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_profile_pic": MessageLookupByLibrary.simpleMessage(
       "إضافة صورة الملف الشخصي",
     ),
+    "adding_content_soon": MessageLookupByLibrary.simpleMessage(
+      "لا تقلق، نحن نعمل بجد لإضافة المزيد من المحتوى قريبًا!",
+    ),
     "already_downloaded": MessageLookupByLibrary.simpleMessage(
       "تم التحميل مسبقًا",
     ),
@@ -39,6 +42,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "ap5": MessageLookupByLibrary.simpleMessage("السنة الخامسة ابتدائي"),
     "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
     "become_teacher": MessageLookupByLibrary.simpleMessage("اصبح مدرسًا"),
+    "book_not_added": MessageLookupByLibrary.simpleMessage(
+      "الكتاب غير مضاف بعد",
+    ),
     "branch": MessageLookupByLibrary.simpleMessage("الشعبة"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "cem1": MessageLookupByLibrary.simpleMessage("السنة الأولى متوسط"),
@@ -159,6 +165,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
     "no": MessageLookupByLibrary.simpleMessage("لا"),
     "no_branch": MessageLookupByLibrary.simpleMessage("لا توجد شعبة"),
+    "no_content_available": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد محتوى متاح",
+    ),
     "no_other_videos": MessageLookupByLibrary.simpleMessage(
       "لا توجد فيديوهات أخرى",
     ),
@@ -248,6 +257,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "title": MessageLookupByLibrary.simpleMessage("عنوان"),
     "trimester": MessageLookupByLibrary.simpleMessage("الثلاثي"),
     "try_again_caps": MessageLookupByLibrary.simpleMessage("حاول مرة أخرى"),
+    "try_again_later": MessageLookupByLibrary.simpleMessage(
+      "حاول مرة أخرى لاحقًا",
+    ),
     "update_avatar_caps": MessageLookupByLibrary.simpleMessage(
       "تحديث الصورة الرمزية",
     ),
@@ -283,6 +295,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "welcome": MessageLookupByLibrary.simpleMessage("مرحبًا"),
     "what_are_you_sharing": MessageLookupByLibrary.simpleMessage(
       "ماذا ستشارك اليوم؟",
+    ),
+    "working_on_adding_it": MessageLookupByLibrary.simpleMessage(
+      "نحن نعمل بجد لإضافته قريبًا",
     ),
     "yes": MessageLookupByLibrary.simpleMessage("نعم"),
   };

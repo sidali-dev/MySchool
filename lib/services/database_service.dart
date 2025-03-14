@@ -162,7 +162,6 @@ class DatabaseService {
 
       return document;
     } catch (e) {
-      print(e);
       return document;
     }
   }
@@ -183,7 +182,6 @@ class DatabaseService {
 
       return document;
     } catch (e) {
-      print(e);
       return document;
     }
   }
@@ -235,7 +233,6 @@ class DatabaseService {
           databaseId: dotenv.get("APPWRITE_DB_ID"),
           collectionId: dotenv.get("APPWRITE_DB_STUDENTS"),
           documentId: currentUser.$id);
-      print(response.data);
 
       studentModel = StudentModel.fromJson(response.data);
       return studentModel;
@@ -277,11 +274,6 @@ class DatabaseService {
       );
       return result;
     } catch (e) {
-      print("======================================");
-      print(e);
-      print(filePath);
-      print(fileName);
-      print("======================================");
       File? file;
       return file;
     }
@@ -301,7 +293,6 @@ class DatabaseService {
 
       if (teacherDoc.data['profile_pic'] != null &&
           teacherDoc.data['profile_pic'] != "") {
-        print("PIC FOUND ERROR");
         await _storage.deleteFile(
           bucketId: dotenv.get("APPWRITE_STROAGE_IMAGES"),
           fileId: teacherDoc.data['profile_pic'],
@@ -315,7 +306,6 @@ class DatabaseService {
         file: InputFile.fromPath(path: image.path),
         permissions: [Permission.delete(Role.user(teacherId))],
       );
-      print("PHOTO UPLOADED SUCCESSFULLY");
 
       // Update database record
       final Document document = await _databases.updateDocument(
@@ -324,11 +314,9 @@ class DatabaseService {
         documentId: teacherId,
         data: {'profile_pic': uploadedFile.$id},
       );
-      print("RECORD UPDATED SUCCESSFULLY");
 
       return document;
     } catch (e) {
-      print('Upload error: $e');
       return null;
     }
   }
@@ -340,12 +328,9 @@ class DatabaseService {
 
   Future deleteImage({required String fileId}) async {
     try {
-      final result = await _storage.deleteFile(
+      await _storage.deleteFile(
           bucketId: dotenv.get("APPWRITE_STROAGE_IMAGES"), fileId: fileId);
-      print(result);
-    } catch (e) {
-      print(e);
-    }
+    } catch (_) {}
   }
 
   Future<Document?> addFile(AssetModel asset) async {
@@ -371,8 +356,6 @@ class DatabaseService {
           ]);
       return document;
     } catch (e) {
-      print(e);
-
       return document;
     }
   }
@@ -389,7 +372,6 @@ class DatabaseService {
       );
       documents = result.documents;
     } catch (e) {
-      print(e);
       return null;
     }
     return documents;
@@ -418,9 +400,6 @@ class DatabaseService {
       documents = result.documents;
       return documents;
     } catch (e) {
-      print("======================================");
-      print("DATABASE SERVICE/getFilesForMaterialsScreen()");
-      print(e);
       return null;
     }
   }
@@ -444,24 +423,19 @@ class DatabaseService {
       documents = result.documents;
       return documents;
     } catch (e) {
-      print("======================================");
-      print("DATABASE SERVICE/getTeacherAssetsPerLevel()");
-      print(e);
       return null;
     }
   }
 
   Future<bool> deleteFileFromStorage(String fileId) async {
     try {
-      final response = await _storage.deleteFile(
+      await _storage.deleteFile(
         fileId: fileId,
         bucketId: dotenv.get("APPWRITE_STORAGE_BUCKET"),
       );
-      print(response);
 
       return true;
     } catch (e) {
-      print(e);
       return false;
     }
   }
@@ -479,15 +453,13 @@ class DatabaseService {
 
   Future<dynamic> deleteFileFromDatabase(String documentId) async {
     try {
-      final response = await _databases.deleteDocument(
+      await _databases.deleteDocument(
         databaseId: dotenv.get("APPWRITE_DB_ID"),
         collectionId: dotenv.get("APPWRITE_DB_ASSETS"),
         documentId: documentId,
       );
-      print(response);
       return true;
     } catch (e) {
-      print(e);
       return false;
     }
   }
