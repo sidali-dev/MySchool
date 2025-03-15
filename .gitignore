@@ -11,6 +11,8 @@
 .env
 firebase.json
 migrate_working_dir/
+**/android/key.properties
+**/android/app/upload-keystore.jks
 
 # IntelliJ related
 *.iml
