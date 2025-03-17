@@ -181,8 +181,10 @@ class UploadedFileScreenController extends GetxController {
         return SImageString.activityLesson;
       case ActivityEnum.videos:
         return SImageString.activityVideos;
-      default:
-        return "";
+      case ActivityEnum.finals:
+        return SImageString.activityFinals;
+      case ActivityEnum.schoolBook:
+        return SImageString.activitySchoolBook;
     }
   }
 }

@@ -4,7 +4,7 @@ import 'package:myschool/utils/constants/colors.dart';
 import 'package:myschool/utils/constants/enums.dart';
 import 'package:myschool/utils/constants/image_strings.dart';
 import 'package:myschool/utils/device/device_utility.dart';
-import 'package:myschool/utils/helpers/helper_functions.dart';
+// import 'package:myschool/utils/helpers/helper_functions.dart';
 
 import '../generated/l10n.dart';
 import 'widgets/sign_in_dialog.dart';
@@ -16,7 +16,7 @@ class IntroScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final double height = SDeviceUtils.getScreenHeight(context);
     final double width = SDeviceUtils.getScreenWidth(context);
-    final bool isDark = SHelperFunctions.isDarkMode(context);
+    // final bool isDark = SHelperFunctions.isDarkMode(context);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -68,14 +68,14 @@ class IntroScreen extends StatelessWidget {
                   title: S.of(context).start_learning,
                   textColor: SColors.white,
                 ),
-                SizedBox(height: height * 0.05),
-                IntroButton(
-                  height: height,
-                  backgroundColor: isDark ? SColors.darkerGrey : Colors.white,
-                  role: RoleEnum.teacher,
-                  title: S.of(context).become_teacher,
-                  textColor: isDark ? Colors.white : SColors.primary,
-                ),
+                // SizedBox(height: height * 0.05),
+                // IntroButton(
+                //   height: height,
+                //   backgroundColor: isDark ? SColors.darkerGrey : Colors.white,
+                //   role: RoleEnum.teacher,
+                //   title: S.of(context).become_teacher,
+                //   textColor: isDark ? Colors.white : SColors.primary,
+                // ),
                 SizedBox(height: height * 0.03),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.0),

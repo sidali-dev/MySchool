@@ -146,7 +146,7 @@ class TeacherHomeScreen extends StatelessWidget {
                       child: Text(S.of(context).video),
                     ),
                   ),
-                  const SizedBox(height: 48),
+                  // const SizedBox(height: 48),
                   // ElevatedButton(
                   //   onPressed: () {
                   //     Get.to(

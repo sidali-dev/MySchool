@@ -158,7 +158,7 @@ class MaterialsScreen extends StatelessWidget {
                     future: controller.getUploadedFiles(
                         activity: activity.activity.name,
                         module: module.module.name,
-                        trimester: trimester.toString()),
+                        trimester: trimester?.toString()),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Column(

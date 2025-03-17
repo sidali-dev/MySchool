@@ -336,7 +336,7 @@ class UploadScreen extends StatelessWidget {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return S.of(context).please_enter_title;
-                          } else if (value.trim().length < 10) {
+                          } else if (value.trim().length < 6) {
                             return S.of(context).please_enter_valid_title;
                           }
                           return null;
@@ -616,7 +616,7 @@ class UploadScreen extends StatelessWidget {
                                             context: context);
                                       }
 
-                                      Get.back();
+                                      // Get.back();
                                     }
                                   }
                                 }

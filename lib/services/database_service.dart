@@ -368,6 +368,7 @@ class DatabaseService {
         collectionId: dotenv.get("APPWRITE_DB_ASSETS"),
         queries: [
           Query.equal('teacher', teacherId),
+          Query.limit(1000),
         ],
       );
       documents = result.documents;
